@@ -25,8 +25,6 @@ require("dotenv").config({
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       name: process.env.DATABASE_NAME,
-      synchronize: process.env.TYPEORM_SYNCHRONIZE === "true",
-      logging: process.env.TYPEORM_LOGGING === "true",
     },
     swagger: {
       route: process.env.SWAGGER_ROUTE,
@@ -34,5 +32,10 @@ require("dotenv").config({
     sentry: {
       dsn: process.env.SENTRY_DSN,
     },
+    s3:{
+      accessKey : process.env.S3_ACCESS_KEY,
+      secretKey : process.env.S3_SECRET_KEY,
+      bucketName : String(process.env.S3_BUCKET_NAME),
+    }
   };
   

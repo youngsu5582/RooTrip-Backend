@@ -1,6 +1,6 @@
-import { App } from "./app";
-import { env } from "./env";
-//import { logger } from "./utils/Logger";
+import { App } from "./loaders/app";
+import { env } from "./loaders/env";
+import { logger } from "./utils/Logger";
 
 try {
   const app = new App();
@@ -8,5 +8,5 @@ try {
 
   app.init(port);
 } catch (error) {
-  console.error(error);
+  logger.error(error);
 }

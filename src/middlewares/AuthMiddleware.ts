@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { env } from "../env";
+import { env } from "../loaders/env";
 
 
 /**

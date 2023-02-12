@@ -5,7 +5,7 @@ import { getFromContainer, MetadataStorage } from "class-validator";
 import { routingControllersToSpec } from "routing-controllers-openapi";
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { routingControllerOptions } from "./RoutingConfig";
-import { env } from "../env";
+import { env } from "../loaders/env";
 /**
  * Swagger를 사용하도록 한다.
  * @param app Express Application

@@ -7,15 +7,15 @@ import {
   useContainer as routingUseContainer,
   useExpressServer,
 } from "routing-controllers";
-import { routingControllerOptions } from "./utils/RoutingConfig";
+import { routingControllerOptions } from "../utils/RoutingConfig";
 import morgan from "morgan";
-import { logger, stream } from "./utils/Logger";
-import { useSwagger } from "./utils/Swagger";
-import { useSentry } from "./utils/Sentry";
+import { logger, stream } from "../utils/Logger";
+import { useSwagger } from "../utils/Swagger";
+import { useSentry } from "../utils/Sentry";
 
 
 import { Types } from "mongoose";
-import { useSession } from "./utils/Session";
+import { useSession } from "../utils/Session";
 
 
 declare module "express-session" {

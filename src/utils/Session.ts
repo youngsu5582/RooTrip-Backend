@@ -1,4 +1,4 @@
-import { env } from "../env";
+import { env } from "../loaders/env";
 import Session from 'express-session';
 import MongoStore from 'connect-mongo';
 import { Application } from "express";

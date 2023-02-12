@@ -1,4 +1,4 @@
-import { env } from "../env";
+import { env } from "../loaders/env";
 import fs from "fs";
 import path from 'path';
 
