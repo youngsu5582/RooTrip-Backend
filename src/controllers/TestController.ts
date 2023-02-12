@@ -27,10 +27,9 @@ export class AuthController{
         summary:"Test Function"
     })
     public async test(@QueryParam("test")test:TestDto, @Req() req:Request){
-        console.log('22');
-        console.log(test);
+        
         const result = await this.testService.testFunction(test);
-        console.log(result);
+        
         return result;
     }
 
