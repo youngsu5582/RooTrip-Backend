@@ -13,7 +13,6 @@ import {OpenAPI} from "routing-controllers-openapi";
 import { Request, Response } from 'express';
 import { TestService } from '../services/TestService';
 import { TestDto } from '../dtos/TestDto';
-import { logger } from '../utils/Logger';
 import { getFile, uploadFile } from '../loaders/s3';
 
 

@@ -1,3 +1,3 @@
-import User from './user.schema';
-
-export {User};
+import User from './UserSchema';
+import Post from './PostSchema'
+export {User,Post};

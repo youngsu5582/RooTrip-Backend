@@ -20,7 +20,7 @@ import { useSession } from "../utils/Session";
 
 declare module "express-session" {
   interface SessionData {
-    userId : Types.ObjectId
+    userId : string
   }
 }
 export class App{
