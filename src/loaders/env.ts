@@ -25,6 +25,7 @@ require("dotenv").config({
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       name: process.env.DATABASE_NAME,
+      logging : process.env.LOGGING,
     },
     swagger: {
       route: process.env.SWAGGER_ROUTE,

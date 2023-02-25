@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import express from "express";
 import bodyParser from "body-parser";
-import { sync } from "./database";
+import DataSource from "./database";
 import { Container } from "typedi";
 import {
   useContainer as routingUseContainer,
@@ -14,7 +14,8 @@ import { useSwagger } from "../utils/Swagger";
 import { useSentry } from "../utils/Sentry";
 
 
-import { Types } from "mongoose";
+
+
 import { useSession } from "../utils/Session";
 
 
@@ -26,17 +27,19 @@ declare module "express-session" {
 export class App{
     public app :express.Application;
     constructor(){
-        this.app = express();
-        
-        this.setDatabase();
-        
-        this.setMiddlewares();
+      this.setDatabase();
+      
+      this.app = express();
+      this.setMiddlewares();
     }
 
 
     private async setDatabase():Promise<void>{
         try{
-            await sync();
+            
+            
+            await DataSource.initialize();
+
         }
         catch(error){
             logger.error(error);
@@ -49,13 +52,17 @@ export class App{
       }
       public async init(port: number): Promise<void> {
         try {
-          
           routingUseContainer(Container);
+          
+          
+          
           useExpressServer(this.app,routingControllerOptions);
           
           useSession(this.app);
           useSwagger(this.app);
           useSentry(this.app);
+
+          //await sync();
             
           this.app.listen(port, () => {
             logger.info(`Server is running on http://localhost:${port}`);
@@ -65,3 +72,4 @@ export class App{
         }
       }
 }
+

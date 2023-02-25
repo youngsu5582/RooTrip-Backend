@@ -9,9 +9,10 @@ import { checkLogin } from '../middlewares/AuthMiddleware';
 
 @JsonController('/post')
 @Service()
-
 export class PostController{
     constructor(private postService :PostService){};
+    
+    
     @HttpCode(200)
     @Get("/:postId")
     @OpenAPI({
@@ -27,7 +28,8 @@ export class PostController{
         description : '게시글을 생성합니다'
     })
     public async create(@Body() createPostDto:CreatePostDto){
-        const result = await this.postService.createPost(createPostDto);
+        console.log('post');
+        const result = await this.postService.createPost(createPostDto,'550e8400-e29b-41d4-a716-446655440000');
         
         return result;
     }
@@ -36,7 +38,7 @@ export class PostController{
     @OpenAPI({
         description:'게시글 수정합니다',
         
-    })
+    })  
     @UseBefore(checkLogin)
     public async update(@SessionParam('userId')userId:string,@Param('postId')postId:string,@Body() updatePostDto:UpdatePostDto,@Res() res:Response){
         if(await this.postService.checkUser(userId,postId)){

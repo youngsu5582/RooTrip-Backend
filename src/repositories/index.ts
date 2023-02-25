@@ -1,4 +1,4 @@
-import { PostRepostiory } from "./PostRepository";
+import {PostRepository} from "./PostRepository";
 export {
-    PostRepostiory
+    PostRepository
 }
