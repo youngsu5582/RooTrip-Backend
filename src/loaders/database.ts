@@ -4,7 +4,7 @@ import { DataSource} from "typeorm";
 
 const database = env.database;
 
-console.log(database);
+
 export default new DataSource({
         
         type : 'mysql',
@@ -14,6 +14,8 @@ export default new DataSource({
         password: env.database.password,
         database: env.database.name,
         logging: "all",
+        connectTimeout:20000,
+        acquireTimeout:20000,
         entities: [__dirname+"/../entities/*{.ts,.js}"],
-        connectTimeout:5000,
+        
       })

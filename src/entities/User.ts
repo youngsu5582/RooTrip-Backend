@@ -11,9 +11,10 @@ import Post from './Post';
 
 @Entity({name:"user"})
 export default class User{
+    constructor(){};
     @PrimaryGeneratedColumn("uuid")
     id:string;
-    
+
     @Column({ length: 100 })
     email: string;
 
