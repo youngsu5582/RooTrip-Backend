@@ -18,7 +18,7 @@ import { getFile, uploadFile } from '../loaders/s3';
 
 @JsonController('/test')
 @Service()
-export class AuthController{
+export class TestController{
     constructor(private testService:TestService){};
     @HttpCode(200)
     @Get("")

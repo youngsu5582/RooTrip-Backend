@@ -10,7 +10,7 @@ import { checkLogin } from '../middlewares/AuthMiddleware';
 @JsonController('/post')
 @Service()
 export class PostController{
-    constructor(private postService :PostService){};
+     constructor(private postService :PostService){};
     
     
     @HttpCode(200)
@@ -47,6 +47,7 @@ export class PostController{
             return result;
         }
         else{
+            
             res.status(401).send({
                 status:'nok',
                 message:'로그인 유저와 게시글 작성자가 일치하지 않습니다.'

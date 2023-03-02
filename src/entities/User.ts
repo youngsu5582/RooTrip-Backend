@@ -1,6 +1,5 @@
 import {
     Entity,
-    
     Column,
     OneToMany,
     CreateDateColumn,
@@ -14,7 +13,6 @@ import Post from './Post';
 export default class User{
     @PrimaryGeneratedColumn("uuid")
     id:string;
-
     
     @Column({ length: 100 })
     email: string;

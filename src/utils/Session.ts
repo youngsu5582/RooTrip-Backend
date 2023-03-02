@@ -16,4 +16,4 @@ export function useSession(app: Application){
         saveUninitialized:false,
         store: Store
     }))
-}
+}   
