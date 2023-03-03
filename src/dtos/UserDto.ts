@@ -1,6 +1,7 @@
-import { IsDateString, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, Matches, MinLength } from "class-validator";
+import { IsDate, IsDateString, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, Matches, MinLength } from "class-validator";
 import { User } from "../entities";
-type GenderType = 'male'|'female'|'lesbian';
+import { GenderType } from "../common";
+
 
 export class CreateUserDto{
     @IsNotEmpty()
@@ -22,14 +23,20 @@ export class CreateUserDto{
     @IsPhoneNumber()
     public phoneNumber : string;
 
-    @IsDateString()
-    public date : string;
+    @IsDate()
+    public birth : Date;
     
     public gender : GenderType;
 
     public toEntity(){
-        console.log(this);
+        const {email,nickname,password,phoneNumber,birth,gender} = this;
         const user = new User();
+        user.email = email;
+        user.nickname = nickname;
+        user.password = password;
+        user.phoneNumber = phoneNumber;
+        user.birth = birth;
+        user.gender = gender;
 
         
         return user;

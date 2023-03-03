@@ -1,17 +1,18 @@
-import {Service } from "typedi";
+import Container, {Service } from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import {PostRepository} from "../repositories/PostRepository";
-
+import { Inject } from "typedi";
 
 
 @Service()
 
 export class PostService{
     
+    private postRepository:typeof PostRepository
     constructor(
-        private postRepository:typeof PostRepository
+        
          ){
-          postRepository = PostRepository;
+            this.postRepository = PostRepository;
          }
     /**
      * 테스트를 위한 Function
@@ -19,7 +20,6 @@ export class PostService{
      */
     public async createPost(createPostDto:CreatePostDto,userId:string){
        const post = createPostDto.toEntity(userId);
-        console.log(this.postRepository);
         return await this.postRepository.save(post);
     }
     public async getPostById(postId : string){

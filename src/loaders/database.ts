@@ -8,11 +8,11 @@ const database = env.database;
 export default new DataSource({
         
         type : 'mysql',
-        host: env.database.host,
-        port: env.database.port,
-        username: env.database.username,
-        password: env.database.password,
-        database: env.database.name,
+        host: database.host,
+        port: database.port,
+        username: database.username,
+        password: database.password,
+        database: database.name,
         logging: "all",
         connectTimeout:20000,
         acquireTimeout:20000,
