@@ -5,11 +5,13 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     PrimaryGeneratedColumn,
+    BeforeInsert,
 }
 from 'typeorm';
 import Post from './Post';
 import { CreateUserDto } from '../dtos/UserDto';
 import { GenderType } from '../common';
+import {hashSync,compareSync} from 'bcrypt';
 
 @Entity({name:"user"})
 export default class User{
@@ -31,7 +33,7 @@ export default class User{
     @Column()
     phoneNumber:string;
 
-    @Column({select:false})
+    @Column()
     password:string;
 
     @Column()
@@ -46,4 +48,15 @@ export default class User{
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
     
+    @BeforeInsert()
+    async hashPassword(){
+        this.password = hashSync(this.password,10);
+        
+    }
+
+    async comparePassword(unencryptedPassword: string){
+        
+        return compareSync(unencryptedPassword,this.password);
+    }
+
 }

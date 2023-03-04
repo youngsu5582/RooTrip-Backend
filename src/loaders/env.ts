@@ -17,7 +17,8 @@ require("dotenv").config({
     app: {
       port: Number(process.env.PORT) || 3000,
       apiPrefix: process.env.API_PREFIX || "/api",
-      sessionSecret : process.env.SESSION_SECRET||'Random_Secret_Hash_x*nd23',
+      jwtAccessSecret : process.env.JWT_SECRET_ACCESS_KEY||'Random_Secret_Access_x*nd23',
+      jwtRefreshSecret : process.env.JWT_SECRET_REFRESH_KEY||'Random_Secret_Refresh_!@39*SD',
     },
     database: {
       host: process.env.DATABASE_HOST,

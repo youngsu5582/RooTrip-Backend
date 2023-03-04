@@ -2,8 +2,10 @@
 import { Service } from 'typedi';
 import { AuthService } from '../services';
 import { OpenAPI } from 'routing-controllers-openapi';
-import { CreateUserDto } from '../dtos/UserDto';
-import { checkLogin } from '../middlewares/AuthMiddleware';
+import { CreateUserDto, LoginUserDto } from '../dtos/UserDto';
+
+import {Request, Response} from 'express';
+import { generateAccessToken, generateRefreshToken, generateToken } from '../utils/jwToken';
 
 
 @JsonController('/auth')
@@ -16,20 +18,41 @@ export class AuthController{
     @OpenAPI({
         description : '회원가입을 진행합니다'
     })
-    @UseBefore(checkLogin)
-    public async register(@Body()createUserDto : CreateUserDto){
+    @UseBefore()
+    public async register(@Body()createUserDto : CreateUserDto,@Res() res :Response){
         const result = await this.authService.localRegister(createUserDto);
+        if(result.status==='nok'){
+            return res.status(200).send(result.message);
+        }
+        else{
+            const user = result.user!;
+            const {accessToken,refreshToken} = generateToken(user);
+            return{
+                accessToken,
+                
+            }
+        }
         
-
-        return result;    
+        
     }
 
+    
     @HttpCode(200)
-    @Post('/login')
-    @OpenAPI({
+        @Post('/login')
+        @OpenAPI({
         description:'로그인을 진행합니다'
     })
-    public async login(){
-        
+    public async login(@Body() loginUserDto : LoginUserDto,@Res() res:Response){
+        const result = await this.authService.localLogin(loginUserDto);
+        if(result.status==='nok'){
+            return res.status(200).send(result.message);
+        }
+        const user = result.user!;
+        const accessToken = generateAccessToken(user);
+        const refreshToken = generateRefreshToken(user);    
+        return {
+            accessToken,
+            
+        }
     }
 }

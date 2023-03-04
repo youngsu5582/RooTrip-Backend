@@ -4,7 +4,8 @@ import { OpenAPI } from 'routing-controllers-openapi';
 import { PostService } from '../services';
 import { CreatePostDto, UpdatePostDto } from '../dtos/PostDto';
 import { Request, Response } from 'express';
-import { checkLogin } from '../middlewares/AuthMiddleware';
+import { checkAccessToken } from '../middlewares/AuthMiddleware';
+
 
 
 @JsonController('/post')
@@ -18,6 +19,7 @@ export class PostController{
     @OpenAPI({
         description:'해당 게시글을 조회합니다'
     })
+    
     public async getOne(@Param('postId')postId:string){
         const result = await this.postService.getPostById(postId);
         return result;   
@@ -27,8 +29,9 @@ export class PostController{
     @OpenAPI({
         description : '게시글을 생성합니다'
     })
+    @UseBefore(checkAccessToken)
     public async create(@Body() createPostDto:CreatePostDto){
-        console.log('post');
+        
         const result = await this.postService.createPost(createPostDto,'550e8400-e29b-41d4-a716-446655440000');
         
         return result;
@@ -39,8 +42,10 @@ export class PostController{
         description:'게시글 수정합니다',
         
     })  
-    @UseBefore(checkLogin)
-    public async update(@SessionParam('userId')userId:string,@Param('postId')postId:string,@Body() updatePostDto:UpdatePostDto,@Res() res:Response){
+    @UseBefore(checkAccessToken)
+    public async update(@Param('postId')postId:string,@Body() updatePostDto:UpdatePostDto,@Res() res:Response){
+        const userId = res.locals.jwtPayload;
+        
         if(await this.postService.checkUser(userId,postId)){
             const result = await this.postService.updatePost(postId,updatePostDto);
             // 수정못할시도 구현해야함.
@@ -60,7 +65,7 @@ export class PostController{
     @OpenAPI({
         description:'게시글을 삭제합니다'
     })
-    @UseBefore(checkLogin)
+    
     public async delete(@SessionParam('userId')userId : string,@Param('postId')postId:string,@Res() res:Response){
         if(await this.postService.checkUser(userId,postId)){
         const result = await this.postService.deletePost(postId);

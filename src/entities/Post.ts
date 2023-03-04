@@ -8,7 +8,7 @@ import {
 from 'typeorm';
 import User from './User';
 import { Service } from 'typedi';
-import { CreatePostDto } from '../dtos/PostDto';
+
 
 @Entity({name:"post"})
 @Service()

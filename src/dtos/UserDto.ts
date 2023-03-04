@@ -23,7 +23,7 @@ export class CreateUserDto{
     @IsPhoneNumber()
     public phoneNumber : string;
 
-    @IsDate()
+    @IsDateString()
     public birth : Date;
     
     public gender : GenderType;
@@ -36,12 +36,19 @@ export class CreateUserDto{
         user.password = password;
         user.phoneNumber = phoneNumber;
         user.birth = birth;
-        user.gender = gender;
-
-        
+        user.gender = gender;   
         return user;
     }
-    
-       
 }
     
+export class LoginUserDto{
+    @IsNotEmpty()
+    @IsEmail()
+    public email : string;
+
+    @IsNotEmpty()
+    @IsString()
+    public password : string;
+
+
+}

@@ -13,13 +13,16 @@ import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
 import { useSwagger } from "../utils/Swagger";
 import { useSentry } from "../utils/Sentry";
-import { useSession } from "../utils/Session";
 
-declare module "express-session" {
-  interface SessionData {
-    userId : string;
+declare module 'express'{
+  interface Response{
+    locals : {
+      jwtPayload:string;
+      token : string;
+    }
   }
 }
+
 export class App{
     public app :express.Application;
     constructor(){
@@ -43,8 +46,8 @@ export class App{
       public async init(port: number): Promise<void> {
         try {
           routingUseContainer(Container);
+          
           useExpressServer(this.app,routingControllerOptions);
-          useSession(this.app);
           useSwagger(this.app);
           useSentry(this.app);
           this.app.listen(port, () => {
