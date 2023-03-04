@@ -1,7 +1,7 @@
 import  { Service } from "typedi";
 import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
-
+import { ResponseType } from "../common";
 @Service()
 export class AuthService{
     private userRepository :typeof UserRepository
@@ -11,12 +11,12 @@ export class AuthService{
     public async localRegister(createUserDto : CreateUserDto){
         const entity = createUserDto.toEntity();
         const user = await this.userRepository.save(entity);
-        
+        let result:ResponseType;
         if(user)
-            return {status:'ok',message:'회원가입 성공',user};
+            result = {status:'ok',message:'회원가입 성공',user};
         else    
-            return {status:'nok',message:'회원가입에 실패했습니다.'};
-        
+            result = {status:'nok',message:'회원가입에 실패했습니다.'};
+        return result;
     }
     public async localLogin(loginUserDto : LoginUserDto){
         const {email,password} = loginUserDto;
