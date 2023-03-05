@@ -8,6 +8,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
  * @param req
  */
 export const extractAccessToken = (req: Request) => {
+  console.log(req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "Bearer"
@@ -38,7 +39,7 @@ export const checkAccessToken = (
   next: NextFunction,
 ) => {
   const token = extractAccessToken(req);
-  
+  console.log(token);
 
   try {
     const jwtPayload = jwt.verify(token!, env.app.jwtAccessSecret);

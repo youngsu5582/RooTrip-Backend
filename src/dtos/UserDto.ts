@@ -20,7 +20,7 @@ export class CreateUserDto{
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'password too weak'})
     public password: string;
 
-    @IsPhoneNumber()
+    @IsPhoneNumber("KR")
     public phoneNumber : string;
 
     @IsDateString()

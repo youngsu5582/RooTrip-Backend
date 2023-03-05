@@ -8,7 +8,7 @@ export function generateAccessToken (user : User){
         userId : user.id, userEmail : user.email
     },
     jwtAccessSecret,{
-        expiresIn:"30m"
+        expiresIn:"15m"
     }
     )
 }

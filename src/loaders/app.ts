@@ -53,7 +53,7 @@ export class App{
           useSwagger(this.app);
           useSentry(this.app);
           this.app.listen(port, () => {
-            logger.info(`Server is running on http://localhost:${port}`);
+            logger.info(`Server is running on http://localhost:${port}/api-docs`);
           });
         } catch (error) {
           logger.error(error);

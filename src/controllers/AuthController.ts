@@ -28,6 +28,7 @@ export class AuthController{
         else{
             const user = result.user!;
             const {accessToken,refreshToken} = generateToken(user);
+            await this.authService.saveRefreshToken(user.id,refreshToken);
             return{
                 accessToken,
                 refreshToken
