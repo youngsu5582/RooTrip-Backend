@@ -21,15 +21,22 @@ export class AuthService{
     public async localLogin(loginUserDto : LoginUserDto){
         const {email,password} = loginUserDto;
         const user = await this.userRepository.findOne({where:{email}});
-        
+        let result:ResponseType;
         if(user){
             if(await user.comparePassword(password))
-                return {status:'ok',user:user};
+                result = {status:'ok',user};
             else
-                return {status:'nok',message:'비밀번호가 일치하지 않습니다.'};
+                result =  {status:'nok',message:'비밀번호가 일치하지 않습니다.'};
         }
         else{
-            return {status:'nok',message:'해당 이메일이 없습니다.'}
+            result =  {status:'nok',message:'해당 이메일이 없습니다.'}
         }
+        return result;
+    }
+    public async validateUserToken(id : string,refreshToken : string){
+        return await this.userRepository.findOne({where:{id,refreshToken}});
+    }
+    public async saveRefreshToken(id:string,refreshToken : string){
+        return await this.userRepository.update({id},{refreshToken});
     }
 }

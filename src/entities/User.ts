@@ -47,15 +47,16 @@ export default class User{
   
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
+
+    @Column()
+    refreshToken : string;
     
     @BeforeInsert()
     async hashPassword(){
         this.password = hashSync(this.password,10);
-        
     }
 
     async comparePassword(unencryptedPassword: string){
-        
         return compareSync(unencryptedPassword,this.password);
     }
 

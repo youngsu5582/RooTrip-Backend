@@ -30,9 +30,9 @@ export class PostController{
         description : '게시글을 생성합니다'
     })
     @UseBefore(checkAccessToken)
-    public async create(@Body() createPostDto:CreatePostDto){
-        
-        const result = await this.postService.createPost(createPostDto,'550e8400-e29b-41d4-a716-446655440000');
+    public async create(@Body() createPostDto:CreatePostDto,@Res() res:Response){
+        const userId = res.locals.jwtPayload.userId;
+        const result = await this.postService.createPost(createPostDto,userId);
         
         return result;
     }
@@ -44,7 +44,7 @@ export class PostController{
     })  
     @UseBefore(checkAccessToken)
     public async update(@Param('postId')postId:string,@Body() updatePostDto:UpdatePostDto,@Res() res:Response){
-        const userId = res.locals.jwtPayload;
+        const userId = res.locals.jwtPayload.userId;
         
         if(await this.postService.checkUser(userId,postId)){
             const result = await this.postService.updatePost(postId,updatePostDto);
@@ -65,8 +65,9 @@ export class PostController{
     @OpenAPI({
         description:'게시글을 삭제합니다'
     })
-    
-    public async delete(@SessionParam('userId')userId : string,@Param('postId')postId:string,@Res() res:Response){
+    @UseBefore(checkAccessToken)
+    public async delete(@Param('postId')postId:string,@Res() res:Response){
+        const userId = res.locals.jwtPayload.userId;
         if(await this.postService.checkUser(userId,postId)){
         const result = await this.postService.deletePost(postId);
         // 삭제못할시도 구현해야함.

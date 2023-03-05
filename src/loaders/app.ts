@@ -13,11 +13,13 @@ import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
 import { useSwagger } from "../utils/Swagger";
 import { useSentry } from "../utils/Sentry";
+import { JwtPayloadType } from "../common";
 
 declare module 'express'{
   interface Response{
     locals : {
-      jwtPayload:string;
+      
+      jwtPayload:any;
       token : string;
     }
   }

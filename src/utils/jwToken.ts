@@ -19,7 +19,7 @@ export function generateRefreshToken (user:User){
         userId : user.id, userEmail : user.email
     },
     jwtRefreshSecret,{
-        expiresIn:"30m"
+        expiresIn:"1d"
     }
     )
 }

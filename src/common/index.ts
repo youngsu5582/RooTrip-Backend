@@ -17,5 +17,11 @@ type SuccessResponseType = {
     user?: User;
 }
 
+type JwtPayloadType = {
+    [key: string]: any;
+    userId : string;
+    userEmail : string;
+}
+
 type ResponseType = FailureResponseType|SuccessResponseType;
-export type {GenderType,ResponseType};
+export type {GenderType,ResponseType,JwtPayloadType};
