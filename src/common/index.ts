@@ -3,14 +3,14 @@ import { User } from "../entities";
 type GenderType = 'male'|'female'|'lesbian';
 
 type FailureResponseType = {
-    status:'nok';
+    status:false;
     httpCode ?: number;
     message ?: string;
     
 }
 
 type SuccessResponseType = {
-    status:'ok';
+    status:true;
     httpCode ?: number;
     message ?: string;
     data?:unknown;

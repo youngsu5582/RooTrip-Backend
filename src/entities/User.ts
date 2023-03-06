@@ -49,6 +49,7 @@ export default class User{
     updatedAt: Date;
 
     @Column()
+    
     refreshToken : string;
     
     @BeforeInsert()
@@ -57,6 +58,7 @@ export default class User{
     }
 
     async comparePassword(unencryptedPassword: string){
+        
         return compareSync(unencryptedPassword,this.password);
     }
 

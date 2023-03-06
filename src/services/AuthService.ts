@@ -13,23 +13,24 @@ export class AuthService{
         const user = await this.userRepository.save(entity);
         let result:ResponseType;
         if(user)
-            result = {status:'ok',message:'회원가입 성공',user};
+            result = {status:true,message:'회원가입 성공',user};
         else    
-            result = {status:'nok',message:'회원가입에 실패했습니다.'};
+            result = {status:false,message:'회원가입에 실패했습니다.'};
         return result;
     }
     public async localLogin(loginUserDto : LoginUserDto){
         const {email,password} = loginUserDto;
         const user = await this.userRepository.findOne({where:{email}});
+        console.log(user);
         let result:ResponseType;
         if(user){
             if(await user.comparePassword(password))
-                result = {status:'ok',user};
+                result = {status:true,user};
             else
-                result =  {status:'nok',message:'비밀번호가 일치하지 않습니다.'};
+                result =  {status:false,message:'비밀번호가 일치하지 않습니다.'};
         }
         else{
-            result =  {status:'nok',message:'해당 이메일이 없습니다.'}
+            result =  {status:false,message:'해당 이메일이 없습니다.'}
         }
         return result;
     }

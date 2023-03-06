@@ -37,6 +37,7 @@ export class CreateUserDto{
         user.phoneNumber = phoneNumber;
         user.birth = birth;
         user.gender = gender;   
+        user.refreshToken = "";
         return user;
     }
 }

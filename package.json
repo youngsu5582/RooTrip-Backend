@@ -33,6 +33,7 @@
     "routing-controllers-openapi": "^4.0.0",
     "swagger-ui-express": "^4.6.0",
     "text-encoding": "^0.7.0",
+    "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.0",
     "typedi": "^0.10.0",
     "typeorm": "^0.3.12",

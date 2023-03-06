@@ -22,7 +22,7 @@ export class AuthController{
     @UseBefore()
     public async register(@Body()createUserDto : CreateUserDto,@Res() res :Response){
         const result = await this.authService.localRegister(createUserDto);
-        if(result.status==='nok'){
+        if(result.status===false){
             return res.status(200).send(result.message);
         }
         else{
@@ -30,6 +30,7 @@ export class AuthController{
             const {accessToken,refreshToken} = generateToken(user);
             await this.authService.saveRefreshToken(user.id,refreshToken);
             return{
+                status:result.status,
                 accessToken,
                 refreshToken
             }
@@ -47,14 +48,15 @@ export class AuthController{
     @UseBefore()
     public async login(@Body() loginUserDto : LoginUserDto,@Res() res:Response){
         const result = await this.authService.localLogin(loginUserDto);
-        if(result.status==='nok'){
-            return res.status(200).send(result.message);
+        if(result.status===false){
+            return res.status(200).send(result);
         }
         const user = result.user!;
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
         await this.authService.saveRefreshToken(user.id,refreshToken);
         return {
+            status:result.status,
             accessToken,
             refreshToken,
         }
@@ -78,7 +80,7 @@ export class AuthController{
         const user = await this.authService.validateUserToken(userId, refreshToken);
         if (!user) {
             return res.status(401).send({
-                status :'nok',
+                status :false,
                 message: "유저 정보와 RefreshToken이 일치하지 않습니다.",
             });
           }
