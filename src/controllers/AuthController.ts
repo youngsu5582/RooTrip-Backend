@@ -1,12 +1,12 @@
-import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, QueryParam, Req, Res, Session, SessionParam, UseBefore} from 'routing-controllers';
+import {Body,Get,HttpCode,JsonController,Post,QueryParam,Res,UseBefore} from 'routing-controllers';
 import { Service } from 'typedi';
 import { AuthService } from '../services';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { CreateUserDto, LoginUserDto } from '../dtos/UserDto';
 
-import {Request, Response} from 'express';
+import { Response} from 'express';
 import { generateAccessToken, generateRefreshToken, generateToken } from '../utils/jwToken';
-import { checkAccessToken, checkRefreshToken } from '../middlewares/AuthMiddleware';
+import {  checkRefreshToken } from '../middlewares/AuthMiddleware';
 
 
 @JsonController('/auth')
@@ -48,6 +48,7 @@ export class AuthController{
     @UseBefore()
     public async login(@Body() loginUserDto : LoginUserDto,@Res() res:Response){
         const result = await this.authService.localLogin(loginUserDto);
+        
         if(result.status===false){
             return res.status(200).send(result);
         }
@@ -89,4 +90,13 @@ export class AuthController{
             accessToken
         }
     }
+    @HttpCode(200)
+    @Get("/checkEmail")
+    @OpenAPI({
+        description : '이메일 중복확인을 합니다.'
+    })
+    public async checkEmail(@QueryParam('email')email:string){
+        return await this.authService.checkEmail(email);
+    }
+
 }

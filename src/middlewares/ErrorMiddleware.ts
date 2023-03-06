@@ -16,8 +16,10 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
   error(errors: any, req: Request, res: Response, next: NextFunction): void {
     
     logger.error(errors);
+    
     if(errors.length!==0){
-      res.status(400).send({
+      res.status(200).send({
+        
           message : 'Missing required parameter',
           errors : errors
     })  

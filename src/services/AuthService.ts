@@ -40,4 +40,7 @@ export class AuthService{
     public async saveRefreshToken(id:string,refreshToken : string){
         return await this.userRepository.update({id},{refreshToken});
     }
+    public async checkEmail(email:string){
+        return Boolean(!await this.userRepository.findOne({where:{email}}));
+    }
 }

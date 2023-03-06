@@ -6,6 +6,7 @@ import { GenderType } from "../common";
 export class CreateUserDto{
     @IsNotEmpty()
     @IsEmail()
+    
     public email : string;
 
 
