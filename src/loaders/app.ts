@@ -48,7 +48,7 @@ export class App{
       public async init(port: number): Promise<void> {
         try {
           routingUseContainer(Container);
-          
+
           useExpressServer(this.app,routingControllerOptions);
           useSwagger(this.app);
           useSentry(this.app);
