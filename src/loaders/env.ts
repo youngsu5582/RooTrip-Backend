@@ -21,6 +21,12 @@ require("dotenv").config({
       jwtAccessSecret : process.env.JWT_SECRET_ACCESS_KEY||'Random_Secret_Access_x*nd23',
       jwtRefreshSecret : process.env.JWT_SECRET_REFRESH_KEY||'Random_Secret_Refresh_!@39*SD',
     },
+    key: {
+      kakaoRestApi: process.env.KAKAO_REST_API_KEY,
+      kakaoRedirectUri: process.env.KAKAO_REDIRECT_URI,
+      NaverClientId: process.env.NAVER_CLIENT_ID,
+      NaverClientSecret: process.env.NAVER_CLIENT_SECRET_KEY
+    },
     database: {
       host: process.env.DATABASE_HOST,
       port: Number(process.env.DATABASE_PORT) || 3306,

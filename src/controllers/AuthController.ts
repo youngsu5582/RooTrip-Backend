@@ -1,4 +1,4 @@
-import {Body,Get,HttpCode,JsonController,Post,QueryParams,Res,UseBefore} from 'routing-controllers';
+import {Body,Get,HttpCode,JsonController,Post,QueryParams,Res,UseBefore, QueryParam, Render} from 'routing-controllers';
 import { Service } from 'typedi';
 import { AuthService } from '../services';
 import { OpenAPI } from 'routing-controllers-openapi';
@@ -8,6 +8,7 @@ import { Response} from 'express';
 import { generateAccessToken, generateToken } from '../utils/jwToken';
 import { checkRefreshToken } from '../middlewares/AuthMiddleware';
 import { CheckDto } from '../dtos/AuthDto';
+import {env} from '../loaders/env';
 
 
 @JsonController('/auth')
@@ -97,6 +98,25 @@ export class AuthController{
         else
             return;
             
+    }
+
+    @HttpCode(200)
+    @Get('/kakao/callback')
+    public async kakaoLoginUser(@QueryParam ('code') code: string) {
+        console.log(code);
+        console.log(env.key.kakaoRestApi);
+        console.log(env.key.kakaoRedirectUri);
+        const kakaoInfo = await this.authService.kakaoLogin(code);
+        console.log(kakaoInfo.data.kakao_account.profile);
+        return kakaoInfo;
+    }
+
+    @HttpCode(200)
+    @Get('/naver/callback')
+    public async naverLogin(@QueryParam('code') code: string) {
+        const naverInfo = await this.authService.naverLogin(code);
+        console.log(naverInfo);
+        return naverInfo;
     }
 
 }

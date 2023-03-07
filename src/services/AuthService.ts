@@ -2,6 +2,9 @@ import  { Service } from "typedi";
 import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
 import { ResponseType } from "../common";
+import { env } from "../loaders/env";
+import axios from "axios";
+
 @Service()
 export class AuthService{
     private userRepository :typeof UserRepository
@@ -46,4 +49,39 @@ export class AuthService{
     public async checkNickname(nickname:string){
         return Boolean(!await this.userRepository.findOne({where:{nickname:nickname}}));
     }
+
+    public async kakaoLogin(code:string) {
+        const token = await axios.post('https://kauth.kakao.com/oauth/token', {}, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            params:{
+                grant_type: 'authorization_code',
+                client_id: env.key.kakaoRestApi,
+                code,
+                redirect_uri : env.key.kakaoRedirectUri
+            }
+        })
+
+        const kakaoUserInfo = await axios.post('https://kapi.kakao.com/v2/user/me',{},{
+            headers: {
+                "Content-Type" : "application/x-www-form-urlencoded;charset",
+                "Authorization" : 'Bearer ' + token.data.access_token
+            }
+        })
+        return kakaoUserInfo;
+    }
+    
+    public async naverLogin(code:string) {
+        const token = await axios.post(`https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${env.key.NaverClientId}&client_secret=${env.key.NaverClientSecret}&code=${code}&state=state`,{},{})
+        
+        const naverUserInfo = await axios.get('https://openapi.naver.com/v1/nid/me',{
+            headers:{
+                "Authorization" : `Bearer ${token.data.access_token}`
+            }
+        })
+        return naverUserInfo;
+}
+    
+
 }
