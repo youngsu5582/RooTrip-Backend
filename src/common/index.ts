@@ -1,6 +1,6 @@
 import { User } from "../entities";
 
-type GenderType = 'male'|'female'|'lesbian';
+type GenderType = 'm'|'w';
 
 type FailureResponseType = {
     status:false;

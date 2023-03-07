@@ -25,20 +25,18 @@ export class CreateUserDto{
     @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]*$/, {message: 'password too weak'})
     public password: string;
 
-    @IsPhoneNumber("KR")
-    public phoneNumber : string;
     
     public gender : GenderType;
 
     public toEntity(){
         const {email,name,
-            nickname,password,phoneNumber,gender} = this;
+            nickname,password,gender} = this;
         const user = new User();
         user.email = email;
         user.name = name;
         user.nickname = nickname;
         user.password = password;
-        user.phoneNumber = phoneNumber;
+        
         
         user.gender = gender;   
         user.refreshToken = "";

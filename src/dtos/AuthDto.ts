@@ -6,9 +6,9 @@ type checkType = 'email'|'nickname';
 export class CheckDto{
     @IsNotEmpty()
     @IsString()
-    public check : checkType;
+    public type : checkType;
 
     @IsNotEmpty()
     @IsString()
-    public value : string;
+    public data : string;
 }

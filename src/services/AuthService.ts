@@ -41,9 +41,9 @@ export class AuthService{
         return await this.userRepository.update({id},{refreshToken});
     }
     public async checkEmail(email:string){
-        return Boolean(!await this.userRepository.findOne({where:{email}}));
+        return Boolean(!await this.userRepository.findOne({where:{email:email}}));
     }
     public async checkNickname(nickname:string){
-        return Boolean(!await this.userRepository.findOne({where:{nickname}}));
+        return Boolean(!await this.userRepository.findOne({where:{nickname:nickname}}));
     }
 }

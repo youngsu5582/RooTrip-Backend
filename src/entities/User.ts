@@ -32,9 +32,6 @@ export default class User{
 
 
     @Column()
-    phoneNumber:string;
-
-    @Column()
     password:string;
 
     @Column()

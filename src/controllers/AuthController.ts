@@ -5,8 +5,8 @@ import { OpenAPI } from 'routing-controllers-openapi';
 import { CreateUserDto, LoginUserDto } from '../dtos/UserDto';
 
 import { Response} from 'express';
-import { generateAccessToken, generateRefreshToken, generateToken } from '../utils/jwToken';
-import {  checkRefreshToken } from '../middlewares/AuthMiddleware';
+import { generateAccessToken, generateToken } from '../utils/jwToken';
+import { checkRefreshToken } from '../middlewares/AuthMiddleware';
 import { CheckDto } from '../dtos/AuthDto';
 
 
@@ -88,12 +88,12 @@ export class AuthController{
     })
     public async check(@QueryParams()checkQuery:CheckDto){
 
-        const {check,value} = checkQuery;
+        const {type,data} = checkQuery;
         //Error 처리 해야함. + Refactoring
-        if(check==='email')
-            return await this.authService.checkEmail(value);
-        else if(check==='nickname')
-            return await this.authService.checkNickname(value);
+        if(type==='email')
+            return await this.authService.checkEmail(data);
+        else if(type==='nickname')
+            return await this.authService.checkNickname(data);
         else
             return;
             
