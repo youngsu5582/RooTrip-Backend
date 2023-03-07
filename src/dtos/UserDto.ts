@@ -6,37 +6,40 @@ import { GenderType } from "../common";
 export class CreateUserDto{
     @IsNotEmpty()
     @IsEmail()
-    
     public email : string;
 
 
     @IsNotEmpty()
+    @Matches(/^[가-힣]{2,}$/)
+    public name : string;
+
+    @IsNotEmpty()
     @IsString()
+    @Matches(/^[A-Za-z\dㄱ-ㅎㅏ-ㅣ가-힣].{2,}$/)
     public nickname: string;
 
     
     @IsNotEmpty()
     @IsString()
     @MinLength(8)
-    @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'password too weak'})
+    @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]*$/, {message: 'password too weak'})
     public password: string;
 
     @IsPhoneNumber("KR")
     public phoneNumber : string;
-
-    @IsDateString()
-    public birth : Date;
     
     public gender : GenderType;
 
     public toEntity(){
-        const {email,nickname,password,phoneNumber,birth,gender} = this;
+        const {email,name,
+            nickname,password,phoneNumber,gender} = this;
         const user = new User();
         user.email = email;
+        user.name = name;
         user.nickname = nickname;
         user.password = password;
         user.phoneNumber = phoneNumber;
-        user.birth = birth;
+        
         user.gender = gender;   
         user.refreshToken = "";
         return user;

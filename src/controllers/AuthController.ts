@@ -1,4 +1,4 @@
-import {Body,Get,HttpCode,JsonController,Post,QueryParam,Res,UseBefore} from 'routing-controllers';
+import {Body,Get,HttpCode,JsonController,Post,QueryParams,Res,UseBefore} from 'routing-controllers';
 import { Service } from 'typedi';
 import { AuthService } from '../services';
 import { OpenAPI } from 'routing-controllers-openapi';
@@ -7,6 +7,7 @@ import { CreateUserDto, LoginUserDto } from '../dtos/UserDto';
 import { Response} from 'express';
 import { generateAccessToken, generateRefreshToken, generateToken } from '../utils/jwToken';
 import {  checkRefreshToken } from '../middlewares/AuthMiddleware';
+import { CheckDto } from '../dtos/AuthDto';
 
 
 @JsonController('/auth')
@@ -26,17 +27,8 @@ export class AuthController{
             return res.status(200).send(result.message);
         }
         else{
-            const user = result.user!;
-            const {accessToken,refreshToken} = generateToken(user);
-            await this.authService.saveRefreshToken(user.id,refreshToken);
-            return{
-                status:result.status,
-                accessToken,
-                refreshToken
-            }
-        }
-        
-        
+            return result;
+        }   
     }
 
     
@@ -53,8 +45,7 @@ export class AuthController{
             return res.status(200).send(result);
         }
         const user = result.user!;
-        const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
+        const {accessToken,refreshToken} = generateToken(user);
         await this.authService.saveRefreshToken(user.id,refreshToken);
         return {
             status:result.status,
@@ -91,12 +82,21 @@ export class AuthController{
         }
     }
     @HttpCode(200)
-    @Get("/checkEmail")
+    @Get("/check")
     @OpenAPI({
         description : '이메일 중복확인을 합니다.'
     })
-    public async checkEmail(@QueryParam('email')email:string){
-        return await this.authService.checkEmail(email);
+    public async check(@QueryParams()checkQuery:CheckDto){
+
+        const {check,value} = checkQuery;
+        //Error 처리 해야함. + Refactoring
+        if(check==='email')
+            return await this.authService.checkEmail(value);
+        else if(check==='nickname')
+            return await this.authService.checkNickname(value);
+        else
+            return;
+            
     }
 
 }

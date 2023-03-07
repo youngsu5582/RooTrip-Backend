@@ -25,10 +25,11 @@ export default class User{
     email: string;
 
     @Column()
-    nickname:string;
+    name:string;
 
     @Column()
-    birth:Date;
+    nickname:string;
+
 
     @Column()
     phoneNumber:string;

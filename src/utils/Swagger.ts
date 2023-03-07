@@ -20,7 +20,9 @@ export function useSwagger(app: express.Application) {
 
   // Parse routing-controllers classes into OPENAPI spec:
   const storage = getMetadataArgsStorage();
-  const spec = routingControllersToSpec(storage, routingControllerOptions, {
+  console.log(storage);
+  console.log(routingControllerOptions);
+  const spec = routingControllersToSpec(storage, routingControllerOptions, { 
     
     components:{schemas:{...schemas} as any},
     info: {

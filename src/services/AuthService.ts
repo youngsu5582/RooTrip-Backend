@@ -13,13 +13,13 @@ export class AuthService{
         const user = await this.userRepository.save(entity);
         let result:ResponseType;
         if(user)
-            result = {status:true,message:'회원가입 성공',user};
+            result = {status:true,message:'회원가입 성공'};
         else    
             result = {status:false,message:'회원가입에 실패했습니다.'};
         return result;
     }
     public async localLogin(loginUserDto : LoginUserDto){
-        const {email,password} = loginUserDto;
+        const {email,password} = loginUserDto;  
         const user = await this.userRepository.findOne({where:{email}});
         console.log(user);
         let result:ResponseType;
@@ -42,5 +42,8 @@ export class AuthService{
     }
     public async checkEmail(email:string){
         return Boolean(!await this.userRepository.findOne({where:{email}}));
+    }
+    public async checkNickname(nickname:string){
+        return Boolean(!await this.userRepository.findOne({where:{nickname}}));
     }
 }
