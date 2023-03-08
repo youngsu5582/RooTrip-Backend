@@ -23,7 +23,7 @@ export async function getFile(fileName:string){
     
     try{
         const result = await client.getObject({Bucket:env.s3.bucketName,Key:fileName}).promise();
-        console.log(result);
+        
         return result;
     }
     catch(error){

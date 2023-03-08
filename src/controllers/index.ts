@@ -1,7 +1,7 @@
 import {AuthController} from'./AuthController';
 import {PostController} from './PostController';
 import {TestController} from './TestController';
-
+import { PhotoController } from './PhotoController';
 export class Controllers {
     constructor(){};
     get default(){
@@ -9,10 +9,10 @@ export class Controllers {
             AuthController,
             PostController,
             TestController,
-
+            PhotoController,
         }
     }
 }
 
 
-export {AuthController,PostController,TestController};
+export {AuthController,PostController,TestController,PhotoController};

@@ -22,6 +22,10 @@ type JwtPayloadType = {
     userId : string;
     userEmail : string;
 }
+type Coordinate = {
+    longitude : string;
+    latitude : string;
+}
 
 type ResponseType = FailureResponseType|SuccessResponseType;
-export type {GenderType,ResponseType,JwtPayloadType};
+export type {GenderType,ResponseType,JwtPayloadType,Coordinate};
