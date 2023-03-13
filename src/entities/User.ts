@@ -6,19 +6,24 @@ import {
     UpdateDateColumn,
     PrimaryGeneratedColumn,
     BeforeInsert,
+    PrimaryColumn,
 }
 from 'typeorm';
 import Post from './Post';
-import { CreateUserDto } from '../dtos/UserDto';
+
 import { GenderType } from '../common';
 import {hashSync,compareSync} from 'bcrypt';
+import {v4} from 'uuid';
 
 @Entity({name:"user"})
 export default class User{
     
+    constructor(){
+        
+    }
 
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id:string;
 
     @Column({ length: 100 })
@@ -30,8 +35,7 @@ export default class User{
     @Column()
     nickname:string;
 
-
-    @Column()
+    @Column({nullable:true})
     password:string;
 
     @Column()

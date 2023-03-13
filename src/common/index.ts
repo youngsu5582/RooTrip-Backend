@@ -1,3 +1,4 @@
+import { GoogleUserDto, KakaoUserDto, NaverUserDto } from "../dtos/UserDto";
 import { User } from "../entities";
 
 type GenderType = 'm'|'w';
@@ -27,5 +28,7 @@ type Coordinate = {
     latitude : string;
 }
 
+
 type ResponseType = FailureResponseType|SuccessResponseType;
-export type {GenderType,ResponseType,JwtPayloadType,Coordinate};
+type SocialLoginType = GoogleUserDto | KakaoUserDto | NaverUserDto;
+export type {GenderType,ResponseType,JwtPayloadType,Coordinate , SocialLoginType};

@@ -1,9 +1,13 @@
 import  { Service } from "typedi";
-import { CreateUserDto, LoginUserDto } from "../dtos/UserDto";
+import { GoogleUserDto, KakaoUserDto, CreateLocalUserDto, NaverUserDto, LoginUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
-import { ResponseType } from "../common";
+import { ResponseType, SocialLoginType } from "../common";
 import { env } from "../loaders/env";
 import axios from "axios";
+import { User } from "../entities";
+const key = env.key;
+
+
 
 @Service()
 export class AuthService{
@@ -11,10 +15,18 @@ export class AuthService{
     constructor(){
         this.userRepository = UserRepository;
     };
-    public async localRegister(createUserDto : CreateUserDto){
+    public async register(createUserDto : CreateLocalUserDto){
+        let result:ResponseType;
+        const email = createUserDto.email;
+        if(await this.userRepository.getByEmail(email)){
+            result = {
+                status:false,
+                message:'이메일이 중복입니다.'
+            }
+            return result;
+        }
         const entity = createUserDto.toEntity();
         const user = await this.userRepository.save(entity);
-        let result:ResponseType;
         if(user)
             result = {status:true,message:'회원가입 성공'};
         else    
@@ -24,7 +36,7 @@ export class AuthService{
     public async localLogin(loginUserDto : LoginUserDto){
         const {email,password} = loginUserDto;  
         const user = await this.userRepository.findOne({where:{email}});
-        console.log(user);
+        
         let result:ResponseType;
         if(user){
             if(await user.comparePassword(password))
@@ -43,15 +55,16 @@ export class AuthService{
     public async saveRefreshToken(id:string,refreshToken : string){
         return await this.userRepository.update({id},{refreshToken});
     }
-    public async checkEmail(email:string){
-        return Boolean(!await this.userRepository.findOne({where:{email:email}}));
+    public async checkDuplicateEmail(email:string){
+        return Boolean(!await this.userRepository.getByEmail(email));
     }
-    public async checkNickname(nickname:string){
+    public async checkDuplicateNickname(nickname:string){
         return Boolean(!await this.userRepository.findOne({where:{nickname:nickname}}));
     }
 
     public async kakaoLogin(code:string) {
-        const token = await axios.post('https://kauth.kakao.com/oauth/token', {}, {
+        
+        const accessToken = await axios.post('https://kauth.kakao.com/oauth/token', {}, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -62,26 +75,68 @@ export class AuthService{
                 redirect_uri : env.key.kakaoRedirectUri
             }
         })
-
-        const kakaoUserInfo = await axios.post('https://kapi.kakao.com/v2/user/me',{},{
-            headers: {
+        .then(res=>res.data.access_token)
+        .catch(()=>(null));
+        const userInfo = await axios.post('https://kapi.kakao.com/v2/user/me',{},{
+            headers: {  
                 "Content-Type" : "application/x-www-form-urlencoded;charset",
-                "Authorization" : 'Bearer ' + token.data.access_token
+                "Authorization" : 'Bearer ' + accessToken
             }
         })
-        return kakaoUserInfo;
+        .then(res=>res.data)
+        .catch(()=>(null));
+        
+        const result : KakaoUserDto= {
+            id: userInfo.id,
+            name: userInfo.properties.nickname,
+            toEntity : KakaoUserDto.prototype.toEntity,
+        }
+        return result;
     }
     
     public async naverLogin(code:string) {
-        const token = await axios.post(`https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${env.key.NaverClientId}&client_secret=${env.key.NaverClientSecret}&code=${code}&state=state`,{},{})
+        const naverTokenUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${key.NaverClientId}&client_secret=${key.NaverClientSecret}&code=${code}&state=state`;
+        const accessToken = await axios.post(naverTokenUrl,{},{})
+        .then(res=>res.data.access_token)
+        .catch(()=>(null));
         
-        const naverUserInfo = await axios.get('https://openapi.naver.com/v1/nid/me',{
+        const userInfo:any = await axios.get('https://openapi.naver.com/v1/nid/me',{
             headers:{
-                "Authorization" : `Bearer ${token.data.access_token}`
+                "Authorization" : `Bearer ${accessToken}`
             }
-        })
-        return naverUserInfo;
-}
-    
-
+        }).then(res=>(res.data.response))
+        .catch(()=>(null));
+        
+        const result :NaverUserDto = {
+            id:userInfo.id ,
+            name : userInfo.name,
+            gender : userInfo.gender,
+            email: userInfo.email,
+            toEntity : NaverUserDto.prototype.toEntity,
+        }
+        return result;
+    }
+    public async googleLogin(code:string){
+        let userInfo:any;
+        const result : GoogleUserDto = {
+            
+            id:userInfo.id ,
+            name : userInfo.name,
+            toEntity : GoogleUserDto.prototype.toEntity,
+        }
+        return result;
+    }
+    public async getUserById(id:string){
+        return await this.userRepository.getById(id);
+    }
+    public async socialRegister(createUserDto : SocialLoginType){
+        const entity = createUserDto.toEntity();
+        const user = await this.userRepository.save(entity);
+        let result:ResponseType ; 
+        if(user)
+            result = {status:true,user};
+        else    
+            result = {status:false,message:'회원가입에 실패했습니다.'};
+        return result;
+    }
 }

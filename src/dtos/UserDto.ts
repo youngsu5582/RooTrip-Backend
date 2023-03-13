@@ -2,20 +2,66 @@ import { IsDate, IsDateString, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, Mat
 import { User } from "../entities";
 import { GenderType } from "../common";
 
+class UserDto {
+    @IsString()
+    @IsNotEmpty()  
+    public id : string;
 
-export class CreateUserDto{
+    @IsString()
+    @IsNotEmpty()  
+    @Matches(/^[가-힣]{2,}$/)
+    public name : string;
+
+}
+export class NaverUserDto extends UserDto{
+    @IsEmail()
+    public email : string;
+
+    @IsString()
+    public gender : GenderType;
+    public toEntity(){
+        const {id,name,gender,email} = this;
+        const user = new User();
+        user.id = id;
+        user.name = name;
+        user.gender = gender;
+        user.email = email;
+        return user;
+
+    }
+}
+
+export class KakaoUserDto extends UserDto{
+    public toEntity(){
+        const {id,name} = this;
+        const user = new User();
+        user.id = id;
+        user.name = name;
+        return user;
+    }
+}
+export class GoogleUserDto extends UserDto{
+    public toEntity(){
+        const {id,name} = this;
+        const user = new User();
+        user.id = id;
+        user.name = name;
+        return user;
+    }
+}
+
+
+export class CreateLocalUserDto extends UserDto{
+
+
     @IsNotEmpty()
     @IsEmail()
     public email : string;
 
 
     @IsNotEmpty()
-    @Matches(/^[가-힣]{2,}$/)
-    public name : string;
-
-    @IsNotEmpty()
     @IsString()
-    @Matches(/^[A-Za-z\dㄱ-ㅎㅏ-ㅣ가-힣].{2,}$/)
+    @Matches(/^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{2,8}$/)
     public nickname: string;
 
     
@@ -31,15 +77,13 @@ export class CreateUserDto{
     public toEntity(){
         const {email,name,
             nickname,password,gender} = this;
-        const user = new User();
+        const user = new User()
         user.email = email;
         user.name = name;
         user.nickname = nickname;
         user.password = password;
-        
-        
         user.gender = gender;   
-        user.refreshToken = "";
+        
         return user;
     }
 }
@@ -52,6 +96,4 @@ export class LoginUserDto{
     @IsNotEmpty()
     @IsString()
     public password : string;
-
-
 }

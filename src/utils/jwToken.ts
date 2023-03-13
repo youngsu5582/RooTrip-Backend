@@ -5,7 +5,7 @@ const jwtAccessSecret = env.app.jwtAccessSecret;
 const jwtRefreshSecret = env.app.jwtRefreshSecret;
 export function generateAccessToken (user : User){
     return jwt.sign({
-        userId : user.id, userEmail : user.email
+        userId : user.id
     },
     jwtAccessSecret,{
         expiresIn:"15m"
@@ -16,7 +16,7 @@ export function generateAccessToken (user : User){
 
 export function generateRefreshToken (user:User){
     return jwt.sign({
-        userId : user.id, userEmail : user.email
+        userId : user.id
     },
     jwtRefreshSecret,{
         expiresIn:"1d"

@@ -13,7 +13,7 @@ import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
 import { useSwagger } from "../utils/Swagger";
 import { useSentry } from "../utils/Sentry";
-import { JwtPayloadType } from "../common";
+//import redis from 'redis';
 
 declare module 'express'{
   interface Response{
@@ -34,11 +34,17 @@ export class App{
     }
     private async setDatabase():Promise<void>{
         try{
-            DataSource.initialize().then(()=>console.log('suc')).catch(err=>console.log(err))
+            DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>console.log(err))
         }
         catch(error){
             logger.error(error);
         }
+        // try{
+        //   const redisClient = redis
+        // }
+        // catch{
+
+        // }
     }
     private setMiddlewares(): void {
         this.app.use(bodyParser.json());
