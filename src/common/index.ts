@@ -31,4 +31,9 @@ type Coordinate = {
 
 type ResponseType = FailureResponseType|SuccessResponseType;
 type SocialLoginType = GoogleUserDto | KakaoUserDto | NaverUserDto;
-export type {GenderType,ResponseType,JwtPayloadType,Coordinate , SocialLoginType};
+type CustomJwtPayload = {
+    userId:string;
+    iat:number;
+    exp:number;
+}
+export type {GenderType,ResponseType,JwtPayloadType,Coordinate , SocialLoginType,CustomJwtPayload};

@@ -1,13 +1,12 @@
 import { redisClient } from "../loaders/database";
 
-export function addBlacklist(accessToken : string,expiresIn:number){
+export async function addBlacklist(accessToken : string,expiresIn:number){
     const key = `blacklist :${accessToken}`;
-    redisClient.set(key,accessToken);
-    redisClient.expireAt(key,expiresIn);
-    console.log(`${key} Setting Complete!`);
+    await redisClient.set(key,accessToken);
+    await redisClient.expireAt(key,expiresIn);
     return;
 }
 export async function checkBlacklist(accessToken:string){
     const key = `blacklist :${accessToken}`;
-    return await redisClient.get(key);
+    return Boolean(await redisClient.get(key));
 }

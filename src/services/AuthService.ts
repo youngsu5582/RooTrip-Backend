@@ -1,10 +1,12 @@
 import  { Service } from "typedi";
 import { GoogleUserDto, KakaoUserDto, CreateLocalUserDto, NaverUserDto, LoginUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
-import { ResponseType, SocialLoginType } from "../common";
+import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
 import { env } from "../loaders/env";
 import axios from "axios";
 import { User } from "../entities";
+import { JwtPayload } from "jsonwebtoken";
+import { addBlacklist, checkBlacklist } from "../utils/Redis";
 const key = env.key;
 
 
@@ -138,5 +140,11 @@ export class AuthService{
         else    
             result = {status:false,message:'회원가입에 실패했습니다.'};
         return result;
+    }
+    public async logout(jwtPayload : CustomJwtPayload,token:string){
+        const expiresIn = jwtPayload.exp - jwtPayload.iat;
+        addBlacklist(token,expiresIn);
+        await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
+        return jwtPayload;
     }
 }

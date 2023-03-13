@@ -2,13 +2,13 @@ import { Request, Response, NextFunction } from "express";
 
 import { decodeAccessToken , decodeRefreshToken} from "../utils/jwToken";
 import jwt, { JwtPayload } from 'jsonwebtoken';
-
+import { env } from "../loaders/env";
 /**
  * 헤더에서 AccessToken을 추출한다.
  * @param req
  */
 export const extractAccessToken = (req: Request) => {
-  console.log(req.headers);
+  
   if (
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "Bearer"
@@ -40,12 +40,13 @@ export const checkAccessToken = (
 ) => {
   const token = extractAccessToken(req);
   
-
   try {
     const jwtPayload = decodeAccessToken(token!);
+    
     res.locals.jwtPayload = jwtPayload;
-    res.locals.token = token;
+    res.locals.token = token!;
   } catch (error) {
+    console.log(error);
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }
 

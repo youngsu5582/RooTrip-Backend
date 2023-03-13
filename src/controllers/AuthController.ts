@@ -54,6 +54,7 @@ export class AuthController {
   @UseBefore()
   public async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
     const result = await this.authService.localLogin(loginUserDto);
+    console.log(result);
 
     if (result.status === false) {
       return res.status(200).send(result);
@@ -159,9 +160,9 @@ export class AuthController {
     description : "로그아웃을 합니다.",
   })
   public async logout(@Res()res : Response){
-      //console.log(res.locals.jwtPayload);
-      const accessToken = res.locals.token;
-
+    
+    const result = await this.authService.logout(res.locals.jwtPayload,res.locals.token);
+      return true;
 
   }
 }

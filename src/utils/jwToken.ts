@@ -24,10 +24,10 @@ export function generateRefreshToken (user:User){
     )
 }
 export function decodeAccessToken(accessToken : string){
-    jwt.verify(accessToken, jwtAccessSecret);
+    return jwt.verify(accessToken, jwtAccessSecret);
 }
 export function decodeRefreshToken(refreshToken : string){
-    jwt.verify(refreshToken,jwtRefreshSecret);
+    return jwt.verify(refreshToken,jwtRefreshSecret);
 }
 
 
