@@ -13,7 +13,7 @@ import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
 import { useSwagger } from "../utils/Swagger";
 import { useSentry } from "../utils/Sentry";
-//import redis from 'redis';
+import {redisClient} from './database';
 
 declare module 'express'{
   interface Response{
@@ -34,7 +34,8 @@ export class App{
     }
     private async setDatabase():Promise<void>{
         try{
-            DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>console.log(err))
+            DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>logger.log(err))
+            redisClient.connect().then(()=>console.log('Redis Connect!')).catch(err=>logger.error(err))
         }
         catch(error){
             logger.error(error);

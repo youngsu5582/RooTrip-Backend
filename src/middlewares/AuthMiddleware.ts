@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { env } from "../loaders/env";
+import { decodeAccessToken , decodeRefreshToken} from "../utils/jwToken";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 /**
@@ -39,11 +39,12 @@ export const checkAccessToken = (
   next: NextFunction,
 ) => {
   const token = extractAccessToken(req);
-  console.log(token);
+  
 
   try {
-    const jwtPayload = jwt.verify(token!, env.app.jwtAccessSecret);
+    const jwtPayload = decodeAccessToken(token!);
     res.locals.jwtPayload = jwtPayload;
+    res.locals.token = token;
   } catch (error) {
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }
@@ -53,7 +54,7 @@ export const checkAccessToken = (
 
 /**
  * JWT RefreshToken을 체크한다.
- * @param req
+ * @param reqfh 
  * @param res
  * @param next
  */
@@ -64,7 +65,7 @@ export const checkRefreshToken = (
 ) => {
   const token = extractRefreshToken(req);
   try {
-    const jwtPayload = jwt.verify(token, env.app.jwtRefreshSecret);
+    const jwtPayload = decodeRefreshToken(token);
     res.locals.jwtPayload = jwtPayload;
     res.locals.token = token;
   } catch (error) {

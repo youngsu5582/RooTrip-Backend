@@ -18,7 +18,7 @@ export default class Post{
     @PrimaryGeneratedColumn("uuid")
     id:string;
 
-    @Column({ name: "user_id", length: 36 })
+    @Column({ name: "user_id" })
     userId: string;
 
     @ManyToOne(()=>User,(user)=>user.id,{

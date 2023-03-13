@@ -23,6 +23,13 @@ export function generateRefreshToken (user:User){
     }
     )
 }
+export function decodeAccessToken(accessToken : string){
+    jwt.verify(accessToken, jwtAccessSecret);
+}
+export function decodeRefreshToken(refreshToken : string){
+    jwt.verify(refreshToken,jwtRefreshSecret);
+}
+
 
 export function generateToken(user:User){
     const accessToken = generateAccessToken(user);

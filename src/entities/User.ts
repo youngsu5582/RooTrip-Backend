@@ -17,13 +17,8 @@ import {v4} from 'uuid';
 
 @Entity({name:"user"})
 export default class User{
-    
-    constructor(){
-        
-    }
 
-
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id:string;
 
     @Column({ length: 100 })

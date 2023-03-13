@@ -1,6 +1,7 @@
 
 import {env} from './env';  
 import { DataSource} from "typeorm";
+import {createClient} from 'redis';
 
 const database = env.database;
 
@@ -19,5 +20,9 @@ export default new DataSource({
         acquireTimeout:20000,
         entities: [__dirname+"/../entities/*{.ts,.js}"],
         
-      })
+})
 
+
+const redisClient = createClient();
+
+export {redisClient};

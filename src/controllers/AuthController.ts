@@ -5,6 +5,7 @@ import {
   JsonController,
   Post,
   QueryParams,
+  Req,
   Res,
   UseBefore,
 } from "routing-controllers";
@@ -12,13 +13,13 @@ import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
 import { CreateLocalUserDto, GoogleUserDto, KakaoUserDto, LoginUserDto, NaverUserDto } from "../dtos/UserDto";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
-import { checkRefreshToken } from "../middlewares/AuthMiddleware";
+import { checkAccessToken, checkRefreshToken, extractAccessToken } from "../middlewares/AuthMiddleware";
 import { CheckDto, SocialDto } from "../dtos/AuthDto";
 import { SocialLoginType } from "../common";
 import { User } from "../entities";
-
+import { addBlacklist } from "../utils/Redis";
 
 
 
@@ -153,10 +154,14 @@ export class AuthController {
 
   @HttpCode(200)
   @Post("/logout")
+  @UseBefore(checkAccessToken)
   @OpenAPI({
     description : "로그아웃을 합니다.",
   })
-  public async logout(){
+  public async logout(@Res()res : Response){
+      //console.log(res.locals.jwtPayload);
+      const accessToken = res.locals.token;
+
 
   }
 }
