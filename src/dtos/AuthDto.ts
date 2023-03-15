@@ -34,10 +34,6 @@ export class EmailVerifyDto{
     @IsNotEmpty()
     @IsString()
     public subject: string;
-
-    @IsNotEmpty()
-    @IsString()
-    public content: string;
 }
 
 export class SocialLoginDto{

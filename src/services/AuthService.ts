@@ -7,6 +7,8 @@ import axios from "axios";
 import { User } from "../entities";
 import { JwtPayload } from "jsonwebtoken";
 import { addBlacklist, checkBlacklist } from "../utils/Redis";
+import mailer from 'nodemailer';
+import { EmailVerifyDto } from "../dtos/AuthDto";
 const key = env.key;
 
 
@@ -146,5 +148,30 @@ export class AuthService{
         addBlacklist(token,expiresIn);
         await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
         return jwtPayload;
+    }
+
+    public async sendMail(emailVerifyDto:EmailVerifyDto, verifyNum:String){
+        const transporter = mailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            auth: {
+                user: 'dnwoals1011@gmail.com',
+                pass: 'qeklevigclumhwmm'
+            },
+        });
+  
+        var mailOptions = {
+            from: 'dnwoals1011@gmail.com',
+            to: emailVerifyDto.to,
+            subject: emailVerifyDto.subject,
+            html : `<h1>${verifyNum}</h1>`,
+
+        };
+  
+        transporter.sendMail(mailOptions, (err) => {
+            if(err) console.log(err);
+        })
+        return mailOptions; 
     }
 }

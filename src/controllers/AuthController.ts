@@ -169,37 +169,10 @@ export class AuthController {
 
   @HttpCode(200)
   @Post('/sendmail')
-  public async emailVerify(@Body()emailVerify: EmailVerifyDto) {
+  public async emailVerify(@Body()emailVerifyDto: EmailVerifyDto) {
       const verifyNum = Math.floor(Math.random() * 100000).toString().padStart(6,'5');
-      const transporter = mailer.createTransport({
-          service: 'gmail',
-          host: 'smtp.naver.com',
-          port: 465,
-          auth: {
-              user: '',
-              pass: ''
-          },
-      });
 
-      var subject = emailVerify.subject;
-      var to = emailVerify.to
-      var content = emailVerify.content;
-
-      var mailOptions = {
-          from: '',
-          to: to,
-          subject: subject,
-          html : `<h1>${verifyNum}</h1>`,
-
-      };
-
-      transporter.sendMail(mailOptions, (err, info) => {
-          if(err) console.log(err);
-          else {
-              console.log('content: '+ info);
-          }
-      })
-      console.log(verifyNum);
-      return mailOptions;
+      return this.authService.sendMail(emailVerifyDto, verifyNum);
+      
   }
 }
