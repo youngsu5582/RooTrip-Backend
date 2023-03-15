@@ -16,10 +16,11 @@ import { CreateLocalUserDto, GoogleUserDto, KakaoUserDto, LoginUserDto, NaverUse
 import { Request, Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken, extractAccessToken } from "../middlewares/AuthMiddleware";
-import { CheckDto, SocialDto } from "../dtos/AuthDto";
+import { CheckDto, EmailVerifyDto, SocialDto } from "../dtos/AuthDto";
 import { SocialLoginType } from "../common";
 import { User } from "../entities";
 import { addBlacklist } from "../utils/Redis";
+import mailer from "nodemailer";
 
 
 
@@ -164,5 +165,41 @@ export class AuthController {
     const result = await this.authService.logout(res.locals.jwtPayload,res.locals.token);
       return true;
 
+  }
+
+  @HttpCode(200)
+  @Post('/sendmail')
+  public async emailVerify(@Body()emailVerify: EmailVerifyDto) {
+      const verifyNum = Math.floor(Math.random() * 100000).toString().padStart(6,'5');
+      const transporter = mailer.createTransport({
+          service: 'gmail',
+          host: 'smtp.naver.com',
+          port: 465,
+          auth: {
+              user: '',
+              pass: ''
+          },
+      });
+
+      var subject = emailVerify.subject;
+      var to = emailVerify.to
+      var content = emailVerify.content;
+
+      var mailOptions = {
+          from: '',
+          to: to,
+          subject: subject,
+          html : `<h1>${verifyNum}</h1>`,
+
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+          if(err) console.log(err);
+          else {
+              console.log('content: '+ info);
+          }
+      })
+      console.log(verifyNum);
+      return mailOptions;
   }
 }
