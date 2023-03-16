@@ -7,6 +7,7 @@ import axios from "axios";
 import { User } from "../entities";
 import { JwtPayload } from "jsonwebtoken";
 import { addBlacklist, checkBlacklist } from "../utils/Redis";
+import {encrypt} from '../utils/Crypto';
 const key = env.key;
 
 
@@ -87,12 +88,12 @@ export class AuthService{
         })
         .then(res=>res.data)
         .catch(()=>(null));
-        
-        const result : KakaoUserDto= {
+        const result : KakaoUserDto = {
             id: userInfo.id,
             name: userInfo.properties.nickname,
             toEntity : KakaoUserDto.prototype.toEntity,
         }
+        
         return result;
     }
     
@@ -108,14 +109,16 @@ export class AuthService{
             }
         }).then(res=>(res.data.response))
         .catch(()=>(null));
-        
+        const id = encrypt(userInfo.id);
+        console.log(id);
         const result :NaverUserDto = {
-            id:userInfo.id ,
+            id,
             name : userInfo.name,
             gender : userInfo.gender,
-            email: userInfo.email,
+            email: 'n_'+userInfo.email,
             toEntity : NaverUserDto.prototype.toEntity,
         }
+        console.log(result);
         return result;
     }
     public async googleLogin(code:string){
@@ -133,6 +136,7 @@ export class AuthService{
     }
     public async socialRegister(createUserDto : SocialLoginType){
         const entity = createUserDto.toEntity();
+        
         const user = await this.userRepository.save(entity);
         let result:ResponseType ; 
         if(user)
@@ -143,7 +147,7 @@ export class AuthService{
     }
     public async logout(jwtPayload : CustomJwtPayload,token:string){
         const expiresIn = jwtPayload.exp - jwtPayload.iat;
-        addBlacklist(token,expiresIn);
+        await addBlacklist(token,expiresIn);
         await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
         return jwtPayload;
     }

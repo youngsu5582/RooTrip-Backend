@@ -12,14 +12,12 @@ import {
 import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
-import { CreateLocalUserDto, GoogleUserDto, KakaoUserDto, LoginUserDto, NaverUserDto } from "../dtos/UserDto";
-import { Request, Response } from "express";
+import { CreateLocalUserDto, LoginUserDto } from "../dtos/UserDto";
+import { Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
-import { checkAccessToken, checkRefreshToken, extractAccessToken } from "../middlewares/AuthMiddleware";
+import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import { CheckDto, SocialDto } from "../dtos/AuthDto";
 import { SocialLoginType } from "../common";
-import { User } from "../entities";
-import { addBlacklist } from "../utils/Redis";
 
 
 
@@ -54,7 +52,6 @@ export class AuthController {
   @UseBefore()
   public async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
     const result = await this.authService.localLogin(loginUserDto);
-    console.log(result);
 
     if (result.status === false) {
       return res.status(200).send(result);
@@ -144,6 +141,7 @@ export class AuthController {
         user = result.user!;
     }
     const { accessToken, refreshToken } = generateToken(user);
+    console.log(accessToken);
     await this.authService.saveRefreshToken(user.id, refreshToken);
     return {
       status: true,

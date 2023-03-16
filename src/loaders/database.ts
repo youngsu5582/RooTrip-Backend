@@ -14,8 +14,8 @@ export default new DataSource({
         username: database.username,
         password: database.password,
         database: database.name,
-        logging: "all",
-//          synchronize:true,
+        //logging: "all",
+        //synchronize:true,
         connectTimeout:20000,
         acquireTimeout:20000,
         entities: [__dirname+"/../entities/*{.ts,.js}"],
@@ -23,6 +23,6 @@ export default new DataSource({
 })
 
 
-const redisClient = createClient();
+const redisClient = createClient({legacyMode:true,});
 
 export {redisClient};

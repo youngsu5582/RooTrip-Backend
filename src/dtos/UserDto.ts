@@ -3,9 +3,7 @@ import { User } from "../entities";
 import { GenderType } from "../common";
 
 class UserDto {
-    @IsString()
-    @IsNotEmpty()  
-    public id : string;
+
 
     @IsString()
     @IsNotEmpty()  
@@ -14,6 +12,10 @@ class UserDto {
 
 }
 export class NaverUserDto extends UserDto{
+    @IsString()
+    @IsNotEmpty()  
+    public id : string;
+
     @IsEmail()
     public email : string;
 
@@ -32,18 +34,26 @@ export class NaverUserDto extends UserDto{
 }
 
 export class KakaoUserDto extends UserDto{
+    @IsString()
+    @IsNotEmpty()  
+    public id : string;
     public toEntity(){
         const {id,name} = this;
         const user = new User();
         user.id = id;
         user.name = name;
+        
         return user;
     }
 }
 export class GoogleUserDto extends UserDto{
+    @IsString()
+    @IsNotEmpty()  
+    public id : string;
     public toEntity(){
         const {id,name} = this;
         const user = new User();
+        
         user.id = id;
         user.name = name;
         return user;
@@ -77,7 +87,7 @@ export class CreateLocalUserDto extends UserDto{
     public toEntity(){
         const {email,name,
             nickname,password,gender} = this;
-        const user = new User()
+        const user = new User();
         user.email = email;
         user.name = name;
         user.nickname = nickname;

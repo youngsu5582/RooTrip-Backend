@@ -20,6 +20,7 @@ require("dotenv").config({
       apiPrefix: process.env.API_PREFIX || "/api",
       jwtAccessSecret : process.env.JWT_SECRET_ACCESS_KEY||'Random_Secret_Access_x*nd23',
       jwtRefreshSecret : process.env.JWT_SECRET_REFRESH_KEY||'Random_Secret_Refresh_!@39*SD',
+      CryptSecret : process.env.CRYPT_SECRET || 'Random_Crypt_Secret_D&X5#d',
     },
     key: {
       kakaoRestApi: process.env.KAKAO_REST_API_KEY,

@@ -16,13 +16,15 @@ export class PostController{
     
     @HttpCode(200)
     @Get("/:postId")
+    @UseBefore(checkAccessToken)
     @OpenAPI({
         description:'해당 게시글을 조회합니다'
     })
     
-    public async getOne(@Param('postId')postId:string){
+    public async getOne(@Param('postId')postId:string,@Res() res : Response){
+        console.log(res.locals.jwtPayload);
         const result = await this.postService.getPostById(postId);
-        return result;   
+        return "sibal";   
     }
     @HttpCode(200)
     @Post()

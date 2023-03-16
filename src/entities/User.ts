@@ -21,20 +21,20 @@ export default class User{
     @PrimaryGeneratedColumn("uuid")
     id:string;
 
-    @Column({ length: 100 })
+    @Column({ length: 100 , nullable:true })
     email: string;
 
     @Column()
     name:string;
 
-    @Column()
-    nickname:string;
+    @Column({nullable:true,type:String})
+    nickname:string|null;
 
-    @Column({nullable:true})
-    password:string;
+    @Column({nullable:true,type:String})
+    password:string|null;
 
-    @Column()
-    gender : GenderType
+    @Column({nullable:true,type:String})
+    gender : GenderType|null;
 
     @OneToMany((type)=>Post,(post)=>post.user)
     posts:Post[];
@@ -45,18 +45,19 @@ export default class User{
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
 
-    @Column()
-    
-    refreshToken : string;
+    @Column({nullable:true,type:String})
+    refreshToken : string|null;
     
     @BeforeInsert()
     async hashPassword(){
-        this.password = hashSync(this.password,10);
+        if(this.password){
+            this.password = hashSync(this.password,10);
+        }
     }
 
     async comparePassword(unencryptedPassword: string){
         
-        return compareSync(unencryptedPassword,this.password);
+        return compareSync(unencryptedPassword,this.password!);
     }
 
 }
