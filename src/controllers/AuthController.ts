@@ -18,11 +18,6 @@ import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken, extractAccessToken } from "../middlewares/AuthMiddleware";
 import { CheckDto, EmailVerifyDto, SocialDto } from "../dtos/AuthDto";
 import { SocialLoginType } from "../common";
-import { User } from "../entities";
-import { addBlacklist } from "../utils/Redis";
-import mailer from "nodemailer";
-
-
 
 @JsonController("/auth")
 @Service()
@@ -167,12 +162,5 @@ export class AuthController {
 
   }
 
-  @HttpCode(200)
-  @Post('/sendmail')
-  public async emailVerify(@Body()emailVerifyDto: EmailVerifyDto) {
-      const verifyNum = Math.floor(Math.random() * 100000).toString().padStart(6,'5');
-
-      return this.authService.sendMail(emailVerifyDto, verifyNum);
-      
-  }
+  
 }

@@ -4,15 +4,10 @@ import { UserRepository } from "../repositories";
 import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
 import { env } from "../loaders/env";
 import axios from "axios";
-import { User } from "../entities";
-import { JwtPayload } from "jsonwebtoken";
-import { addBlacklist, checkBlacklist } from "../utils/Redis";
+import { addBlacklist } from "../utils/Redis";
 import {encrypt} from '../utils/Crypto';
-import mailer from 'nodemailer';
-import { EmailVerifyDto } from "../dtos/AuthDto";
+
 const key = env.key;
-
-
 
 @Service()
 export class AuthService{
@@ -150,33 +145,12 @@ export class AuthService{
     public async logout(jwtPayload : CustomJwtPayload,token:string){
         const expiresIn = jwtPayload.exp - jwtPayload.iat;
         const result = await addBlacklist(token,expiresIn);
-        console.log(result);
-        await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
-        return jwtPayload;
+        if(result)
+            return result;
+        
+        return await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
+        
     }
 
-    public async sendMail(emailVerifyDto:EmailVerifyDto, verifyNum:String){
-        const transporter = mailer.createTransport({
-            service: 'gmail',
-            host: 'smtp.gmail.com',
-            port: 465,
-            auth: {
-                user: 'dnwoals1011@gmail.com',
-                pass: 'qeklevigclumhwmm'
-            },
-        });
-  
-        var mailOptions = {
-            from: 'dnwoals1011@gmail.com',
-            to: emailVerifyDto.to,
-            subject: emailVerifyDto.subject,
-            html : `<h1>${verifyNum}</h1>`,
 
-        };
-  
-        transporter.sendMail(mailOptions, (err) => {
-            if(err) console.log(err);
-        })
-        return mailOptions; 
-    }
 }

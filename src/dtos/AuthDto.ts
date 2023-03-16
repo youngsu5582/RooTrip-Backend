@@ -23,17 +23,14 @@ export class SocialDto{
 }
 
 export class EmailVerifyDto{
-    // @IsNotEmpty()
-    // @IsString()
-    // public email: string;
 
     @IsNotEmpty()
     @IsString()
-    public to: string;
+    public email: string;
 
     @IsNotEmpty()
     @IsString()
-    public subject: string;
+    public verifyNumber : string;
 }
 
 export class SocialLoginDto{

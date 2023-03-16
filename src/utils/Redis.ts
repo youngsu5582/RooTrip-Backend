@@ -17,16 +17,41 @@ export async function addBlacklist(accessToken : string,expiresIn:number){
     return;
 }
 export async function checkBlacklist(accessToken:string){
-    redisClient.connect();
-    const key = `blacklist : ${accessToken}`;
-    const result = (await redisClient.get(key));
-    redisClient.disconnect();
-    return result;
+    try{
+        redisClient.connect();
+        const key = `blacklist : ${accessToken}`;
+        const result = Boolean(await redisClient.get(key));
+        redisClient.disconnect();
+        return result;
+    }
+    catch(err){
+        throw Error;
+    }
+
 }
-export async function addVerify(email:string){
-    const randomNumber = Math.floor(Math.random() * 100000).toString().padStart(6,'5');
-    await redisClient.set(email,randomNumber);
+export async function addVerify(email:string,randomNumber:string){
+    const key = `verify : ${email}`;
+    
+    try{
+        await redisClient.connect();
+        await redisClient.set(key,randomNumber,{
+            EX:180
+        });
+        redisClient.disconnect();
+    }
+    catch(err){
+        throw Error;
+    }   
 }
 export async function getVerify(email:string){
-    return await redisClient.get(email);
+    try{
+        redisClient.connect();
+        const key = `verify : ${email}`;
+        const result = await redisClient.get(key);
+        redisClient.disconnect();
+        return result;
+    }
+    catch(err){
+        throw Error;
+    }
 }   
