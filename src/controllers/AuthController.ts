@@ -15,18 +15,12 @@ import { OpenAPI } from "routing-controllers-openapi";
 import { CreateLocalUserDto, LoginUserDto } from "../dtos/UserDto";
 import { Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
-<<<<<<< HEAD
-import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
-import { CheckDto, SocialDto } from "../dtos/AuthDto";
-import { SocialLoginType } from "../common";
-=======
 import { checkAccessToken, checkRefreshToken, extractAccessToken } from "../middlewares/AuthMiddleware";
 import { CheckDto, EmailVerifyDto, SocialDto } from "../dtos/AuthDto";
 import { SocialLoginType } from "../common";
 import { User } from "../entities";
 import { addBlacklist } from "../utils/Redis";
 import mailer from "nodemailer";
->>>>>>> 672df4ef4862c956994846b0cfd46740413131c5
 
 
 
