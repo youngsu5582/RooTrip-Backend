@@ -35,7 +35,7 @@ export class App{
     private async setDatabase():Promise<void>{
         try{
             DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>logger.log(err))
-            redisClient.connect().then(()=>console.log('Redis Connect!')).catch(err=>logger.error(err))
+            //redisClient.connect().then(()=>console.log('Redis Connect!')).catch(err=>logger.error(err))
         }
         catch(error){
             logger.error(error);

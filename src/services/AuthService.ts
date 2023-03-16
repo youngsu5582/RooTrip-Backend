@@ -112,7 +112,7 @@ export class AuthService{
         }).then(res=>(res.data.response))
         .catch(()=>(null));
         const id = encrypt(userInfo.id);
-        console.log(id);
+        
         const result :NaverUserDto = {
             id,
             name : userInfo.name,
@@ -120,7 +120,7 @@ export class AuthService{
             email: 'n_'+userInfo.email,
             toEntity : NaverUserDto.prototype.toEntity,
         }
-        console.log(result);
+        
         return result;
     }
     public async googleLogin(code:string){
@@ -149,7 +149,8 @@ export class AuthService{
     }
     public async logout(jwtPayload : CustomJwtPayload,token:string){
         const expiresIn = jwtPayload.exp - jwtPayload.iat;
-        await addBlacklist(token,expiresIn);
+        const result = await addBlacklist(token,expiresIn);
+        console.log(result);
         await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
         return jwtPayload;
     }

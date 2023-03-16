@@ -23,6 +23,6 @@ export default new DataSource({
 })
 
 
-const redisClient = createClient({legacyMode:true,});
+const redisClient = createClient();
 
 export {redisClient};

@@ -1,7 +1,7 @@
 /**
  * NODE_ENV에 따른 .env 파일을 로드한다.
  */
-
+import crypto from 'crypto';
 require("dotenv").config({
   
     path: `config/.env.${process.env.NODE_ENV ||'development'}`,
@@ -20,7 +20,7 @@ require("dotenv").config({
       apiPrefix: process.env.API_PREFIX || "/api",
       jwtAccessSecret : process.env.JWT_SECRET_ACCESS_KEY||'Random_Secret_Access_x*nd23',
       jwtRefreshSecret : process.env.JWT_SECRET_REFRESH_KEY||'Random_Secret_Refresh_!@39*SD',
-      CryptSecret : process.env.CRYPT_SECRET || 'Random_Crypt_Secret_D&X5#d',
+      CryptSecret : process.env.CRYPT_SECRET || crypto.randomBytes(16),
     },
     key: {
       kakaoRestApi: process.env.KAKAO_REST_API_KEY,

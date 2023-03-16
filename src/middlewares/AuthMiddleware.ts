@@ -44,13 +44,13 @@ export const checkAccessToken = async (
   try {
     const jwtPayload = decodeAccessToken(token!);
     if (await checkBlacklist(token!)) {
-      
       throw Error;
     }
 
     res.locals.jwtPayload = jwtPayload;
     res.locals.token = token!;
   } catch (error) {
+    
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }
 

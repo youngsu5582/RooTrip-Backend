@@ -144,7 +144,6 @@ export class AuthController {
         user = result.user!;
     }
     const { accessToken, refreshToken } = generateToken(user);
-    console.log(accessToken);
     await this.authService.saveRefreshToken(user.id, refreshToken);
     return {
       status: true,
@@ -163,6 +162,7 @@ export class AuthController {
   public async logout(@Res()res : Response){
     
     const result = await this.authService.logout(res.locals.jwtPayload,res.locals.token);
+    
       return true;
 
   }
