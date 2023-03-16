@@ -21,6 +21,21 @@ export class SocialDto{
     @IsString()
     public code : string;
 }
+
+export class EmailVerifyDto{
+    // @IsNotEmpty()
+    // @IsString()
+    // public email: string;
+
+    @IsNotEmpty()
+    @IsString()
+    public to: string;
+
+    @IsNotEmpty()
+    @IsString()
+    public subject: string;
+}
+
 export class SocialLoginDto{
     
 }
