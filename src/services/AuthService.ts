@@ -1,4 +1,5 @@
 import  { Service } from "typedi";
+
 import { GoogleUserDto, KakaoUserDto, LocalUserDto, NaverUserDto, LoginUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
 import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
@@ -16,6 +17,7 @@ export class AuthService{
         this.userRepository = UserRepository;
     };
     public async register(createUserDto : LocalUserDto){
+
         let result:ResponseType;
         const email = createUserDto.email;
         if(await this.userRepository.getByEmail(email)){

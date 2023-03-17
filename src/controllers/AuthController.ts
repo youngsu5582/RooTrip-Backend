@@ -11,11 +11,13 @@ import {
 import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
+
 import { LocalUserDto, LoginUserDto } from "../dtos/UserDto";
 import { Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import { CheckDto, SocialDto } from "../dtos/AuthDto";
+
 import { SocialLoginType } from "../common";
 
 @JsonController("/auth")
@@ -30,7 +32,9 @@ export class AuthController {
   })
   @UseBefore()
   public async register(
+
     @Body() createUserDto: LocalUserDto,
+
     @Res() res: Response,
   ) {
     const result = await this.authService.register(createUserDto);
