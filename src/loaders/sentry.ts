@@ -1,6 +1,6 @@
 import express from "express";
 import * as Sentry from "@sentry/node";
-import { env } from "../loaders/env";
+import { env } from "./env";
 
 /**
  * Sentry를 사용하도록 한다.

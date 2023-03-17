@@ -13,7 +13,7 @@ import {OpenAPI} from "routing-controllers-openapi";
 import { Request, Response } from 'express';
 import { TestService } from '../services/TestService';
 import { TestDto } from '../dtos/TestDto';
-import { getFile, uploadFile } from '../loaders/s3';
+import { getFile, uploadFile } from '../utils/s3';
 
 
 @JsonController('/test')

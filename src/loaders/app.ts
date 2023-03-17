@@ -8,18 +8,15 @@ import {
 } from "routing-controllers";
 import morgan from "morgan";
 import DataSource from "./database";
-
 import { routingControllerOptions } from "../utils/RoutingConfig";
 import { logger, stream } from "../utils/Logger";
-import { useSwagger } from "../utils/Swagger";
-import { useSentry } from "../utils/Sentry";
-import {redisClient} from './database';
-
+import { useSwagger } from "./swagger";
+import { useSentry } from "./sentry";
+import { CustomJwtPayload } from "../common";
 declare module 'express'{
   interface Response{
     locals : {
-      
-      jwtPayload:any;
+      jwtPayload:CustomJwtPayload;
       token : string;
     }
   }
@@ -35,17 +32,10 @@ export class App{
     private async setDatabase():Promise<void>{
         try{
             DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>logger.log(err))
-            //redisClient.connect().then(()=>console.log('Redis Connect!')).catch(err=>logger.error(err))
         }
         catch(error){
             logger.error(error);
         }
-        // try{
-        //   const redisClient = redis
-        // }
-        // catch{
-
-        // }
     }
     private setMiddlewares(): void {
         this.app.use(bodyParser.json());
@@ -55,7 +45,6 @@ export class App{
       public async init(port: number): Promise<void> {
         try {
           routingUseContainer(Container);
-
           useExpressServer(this.app,routingControllerOptions);
           useSwagger(this.app);
           useSentry(this.app);

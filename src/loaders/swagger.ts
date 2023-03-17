@@ -8,8 +8,8 @@ import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 
 
 
-import { routingControllerOptions } from "./RoutingConfig";
-import { env } from "../loaders/env";
+import { routingControllerOptions } from "../utils/RoutingConfig";
+import { env } from "./env";
 /**
  * Swagger를 사용하도록 한다.
  * @param app Express Application

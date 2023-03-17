@@ -2,9 +2,6 @@ import {Service} from 'typedi';
 import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, QueryParam, QueryParams, Req, Res, Session, SessionParam, UseBefore} from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { GeoService } from '../services';
-import { CreatePostDto, UpdatePostDto } from '../dtos/PostDto';
-import { Request, Response } from 'express';
-import { checkAccessToken } from '../middlewares/AuthMiddleware';
 import { Coordinate } from '../common';
 
 @JsonController('/photo')

@@ -1,4 +1,3 @@
-import Container from "typedi";
 import { Post } from "../entities";
 import database from "../loaders/database";
 
