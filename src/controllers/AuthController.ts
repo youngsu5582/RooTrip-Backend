@@ -101,6 +101,7 @@ export class AuthController {
     const { type, data } = checkQuery;
     //Error 처리 해야함. + Refactoring
     if (type === "email") 
+    
     return await this.authService.checkDuplicateEmail(data);
     else if (type === "nickname")
       return await this.authService.checkDuplicateNickname(data);
