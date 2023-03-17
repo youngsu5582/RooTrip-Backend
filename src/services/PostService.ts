@@ -1,7 +1,6 @@
-import Container, {Service } from "typedi";
+import {Service } from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import {PostRepository} from "../repositories/PostRepository";
-import { Inject } from "typedi";
 
 
 @Service()

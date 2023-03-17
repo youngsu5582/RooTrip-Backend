@@ -1,5 +1,5 @@
-
-import {env} from './env';  
+import {env} from './env';
+import AWS from 'aws-sdk';  
 import { DataSource} from "typeorm";
 import {createClient} from 'redis';
 
@@ -25,4 +25,10 @@ export default new DataSource({
 
 const redisClient = createClient();
 
-export {redisClient};
+const s3 = env.s3;
+const s3Client = new AWS.S3({credentials:{
+    accessKeyId:s3.accessKey!,
+    secretAccessKey:s3.secretKey!
+}})
+
+export {redisClient,s3Client};

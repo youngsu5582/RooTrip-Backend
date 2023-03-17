@@ -1,9 +1,9 @@
 import {Service} from 'typedi';
-import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, QueryParam, Req, Res, Session, SessionParam, UseBefore} from 'routing-controllers';
+import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post,  Res,UseBefore} from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { PostService } from '../services';
 import { CreatePostDto, UpdatePostDto } from '../dtos/PostDto';
-import { Request, Response } from 'express';
+import {  Response } from 'express';
 import { checkAccessToken } from '../middlewares/AuthMiddleware';
 
 

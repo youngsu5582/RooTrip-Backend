@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, Matches } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 
 type checkType = 'email'|'nickname';

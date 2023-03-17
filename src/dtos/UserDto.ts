@@ -1,10 +1,8 @@
-    import { IsDate, IsDateString, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, Matches, MinLength } from "class-validator";
+    import {  IsEmail, IsNotEmpty, IsString, Matches, MinLength } from "class-validator";
 import { User } from "../entities";
 import { GenderType } from "../common";
 
 class UserDto {
-
-
     @IsString()
     @IsNotEmpty()  
     @Matches(/^[가-힣]{2,}$/)
@@ -61,7 +59,7 @@ export class GoogleUserDto extends UserDto{
 }
 
 
-export class CreateLocalUserDto extends UserDto{
+export class LocalUserDto extends UserDto{
 
 
     @IsNotEmpty()

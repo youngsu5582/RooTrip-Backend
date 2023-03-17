@@ -18,11 +18,6 @@ type SuccessResponseType = {
     user?: User;
 }
 
-type JwtPayloadType = {
-    [key: string]: any;
-    userId : string;
-    userEmail : string;
-}
 type Coordinate = {
     longitude : string;
     latitude : string;
@@ -32,8 +27,9 @@ type Coordinate = {
 type ResponseType = FailureResponseType|SuccessResponseType;
 type SocialLoginType = GoogleUserDto | KakaoUserDto | NaverUserDto;
 type CustomJwtPayload = {
+    [key:string]:any;
     userId:string;
     iat:number;
     exp:number;
 }
-export type {GenderType,ResponseType,JwtPayloadType,Coordinate , SocialLoginType,CustomJwtPayload};
+export type {GenderType,ResponseType,Coordinate , SocialLoginType,CustomJwtPayload};

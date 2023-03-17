@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-
 import { decodeAccessToken, decodeRefreshToken } from "../utils/jwToken";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import { env } from "../loaders/env";
 import { checkBlacklist } from "../utils/Redis";
 /**
  * 헤더에서 AccessToken을 추출한다.
@@ -46,8 +43,7 @@ export const checkAccessToken = async (
     if (await checkBlacklist(token!)) {
       throw Error;
     }
-
-    res.locals.jwtPayload = jwtPayload;
+    res.locals.jwtPayload = jwtPayload as any;
     res.locals.token = token!;
   } catch (error) {
     
