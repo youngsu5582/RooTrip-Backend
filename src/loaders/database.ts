@@ -22,5 +22,4 @@ const s3Client = new AWS.S3({credentials:{
     accessKeyId:s3.accessKey!,
     secretAccessKey:s3.secretKey!
 }})
-
 export {redisClient,s3Client};  

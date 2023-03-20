@@ -1,7 +1,4 @@
 import { IsNotEmpty, IsString } from "class-validator";
-
-
-
 type socialType = 'kakao'|'naver'|'google';
 export class SocialDto{
     @IsNotEmpty()

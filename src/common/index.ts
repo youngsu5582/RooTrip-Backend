@@ -14,6 +14,7 @@ type SuccessResponseType = {
     data?:unknown;
     user?: User;
 }
+
 type CoordinateType = {
     longitude : string;
     latitude : string;
@@ -26,5 +27,7 @@ type CustomJwtPayload = {
     iat:number;
     exp:number;
 }
+
 type checkType = 'email'|'nickname';
 export type {GenderType,ResponseType,CoordinateType, SocialLoginType,CustomJwtPayload,checkType};
+

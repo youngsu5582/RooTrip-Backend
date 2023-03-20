@@ -13,7 +13,7 @@ export async function uploadFile(fileName:string,fileData:any){
     }
 }
 
-export async function getFile(fileName:string){
+export async function getFile(fileName:string){ 
     try{
         const result = await client.getObject({Bucket:bucketName,Key:fileName}).promise();
         return result;

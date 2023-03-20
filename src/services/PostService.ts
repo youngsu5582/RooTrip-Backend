@@ -1,6 +1,7 @@
 import {Service} from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import {PostRepository} from "../repositories/PostRepository";
+
 @Service()
 export class PostService{
     constructor(private readonly postRepository : typeof PostRepository )
