@@ -4,6 +4,8 @@ import {
     ManyToOne,
     JoinColumn,
     PrimaryGeneratedColumn,
+    CreateDateColumn,
+    DeleteDateColumn,
 }
 from 'typeorm';
 import User from './User';
@@ -33,5 +35,10 @@ export default class Post{
 
     @Column({type:'text'})
     content : string;
-    
+
+    @CreateDateColumn({ name: "created_at" })
+    createdAt: Date;
+  
+    @DeleteDateColumn({ name: "deleted_at" })
+    deletedAt: Date;
 }

@@ -1,9 +1,8 @@
 import {Service} from 'typedi';
-import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, QueryParam, QueryParams, Req, Res, Session, SessionParam, UseBefore} from 'routing-controllers';
-import { OpenAPI } from 'routing-controllers-openapi';
-import { GeoService } from '../services';
-import { Coordinate } from '../common';
-
+import {Get, HttpCode, JsonController, QueryParam} from 'routing-controllers';
+import {OpenAPI} from 'routing-controllers-openapi';
+import {GeoService} from '../services';
+import {CoordinateType} from '../common';
 @JsonController('/photo')
 @Service()
 export class PhotoController{
@@ -15,7 +14,7 @@ export class PhotoController{
     })
     public async Address (@QueryParam('latitude') latitude : string,@QueryParam('longitude')longitude : string){
         //어케 받아오는지 생각해야함
-        const coordinate : Coordinate = {
+        const coordinate : CoordinateType = {
             latitude : latitude,
             longitude : longitude
         }

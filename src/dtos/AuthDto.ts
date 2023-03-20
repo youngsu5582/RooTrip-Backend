@@ -1,17 +1,5 @@
 import { IsNotEmpty, IsString } from "class-validator";
-
-
-type checkType = 'email'|'nickname';
 type socialType = 'kakao'|'naver'|'google';
-export class CheckDto{
-    @IsNotEmpty()
-    @IsString()
-    public type : checkType;
-
-    @IsNotEmpty()
-    @IsString()
-    public data : string;
-}
 export class SocialDto{
     @IsNotEmpty()
     @IsString()

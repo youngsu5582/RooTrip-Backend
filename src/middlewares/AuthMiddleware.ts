@@ -41,9 +41,9 @@ export const checkAccessToken = async (
   try {
     const jwtPayload = decodeAccessToken(token!);
     if (await checkBlacklist(token!)) {
-      throw Error;
+      new Error();
     }
-    res.locals.jwtPayload = jwtPayload as any;
+    res.locals.jwtPayload = jwtPayload;
     res.locals.token = token!;
   } catch (error) {
     
