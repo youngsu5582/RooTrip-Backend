@@ -12,6 +12,7 @@ import { logger, stream } from "../utils/Logger";
 import { useSwagger } from "./swagger";
 import { useSentry } from "./sentry";
 import { CustomJwtPayload } from "../common";
+import bodyParser from "body-parser";
 declare module 'express'{
   interface Response{
     locals : {
@@ -30,15 +31,15 @@ export class App{
     }
     private async setDatabase():Promise<void>{
         try{
-            DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>logger.log(err))
+            DataSource.initialize().then(()=>console.log('Mysql Connect!')).catch(err=>logger.error(err))
         }
         catch(error){
             logger.error(error);
         }
     }
     private setMiddlewares(): void {
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(morgan("combined", { stream }));
       }
       public async init(port: number): Promise<void> {

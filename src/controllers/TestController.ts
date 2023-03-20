@@ -19,16 +19,16 @@ import { getFile, uploadFile } from '../utils/s3';
 @JsonController('/test')
 @Service()
 export class TestController{
-    constructor(private testService:TestService){};
+    constructor(private readonly testService:TestService){};
     @HttpCode(200)
     @Get("")
     @OpenAPI({
         summary:"Test Function"
     })
-    public async test(@QueryParam("test")test:TestDto, @Req() req:Request){
+    public async test(){
         
-        const result = await this.testService.testFunction(test);
-        
+        const result = await this.testService.testFunction();
+        console.log(result);
         return result;
     }
 

@@ -6,11 +6,13 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     DeleteDateColumn,
+    OneToMany,
 }
 from 'typeorm';
 import User from './User';
 import { Service } from 'typedi';
-
+import Photo from './Photo';
+type FlagType = 'public'|'private'|'protected';
 
 @Entity({name:"post"})
 @Service()
@@ -36,9 +38,20 @@ export default class Post{
     @Column({type:'text'})
     content : string;
 
+    @Column({type:'int'})
+    like : number;
+
+
+    // 차후 수정
+    @OneToMany((type)=>Photo,(photo)=>photo.post)
+    photos:Photo[];
+
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
   
     @DeleteDateColumn({ name: "deleted_at" })
     deletedAt: Date;
+    
+    @Column()
+    flag: boolean;
 }
