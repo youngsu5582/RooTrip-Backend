@@ -7,20 +7,18 @@ import { env } from "../loaders/env";
 import axios from "axios";
 import { addBlacklist } from "../utils/Redis";
 import {encrypt} from '../utils/Crypto';
-
 const key = env.key;
 
 @Service()
 export class AuthService{
-    private userRepository :typeof UserRepository
+    private readonly _userRepository :typeof UserRepository
     constructor(){
-        this.userRepository = UserRepository;
+        this._userRepository = UserRepository;
     };
     public async register(createUserDto : LocalUserDto){
-
         let result:ResponseType;
         const email = createUserDto.email;
-        if(await this.userRepository.getByEmail(email)){
+        if(await this._userRepository.getByEmail(email)){
             result = {
                 status:false,
                 message:'이메일이 중복입니다.'
@@ -28,7 +26,7 @@ export class AuthService{
             return result;
         }
         const entity = createUserDto.toEntity();
-        const user = await this.userRepository.save(entity);
+        const user = await this._userRepository.save(entity);
         if(user)
             result = {status:true,message:'회원가입 성공'};
         else    
@@ -37,8 +35,7 @@ export class AuthService{
     }
     public async localLogin(loginUserDto : LoginUserDto){
         const {email,password} = loginUserDto;  
-        const user = await this.userRepository.findOne({where:{email}});
-        
+        const user = await this._userRepository.findOne({where:{email}});
         let result:ResponseType;
         if(user){
             if(await user.comparePassword(password))
@@ -52,20 +49,18 @@ export class AuthService{
         return result;
     }
     public async validateUserToken(id : string,refreshToken : string){
-        return await this.userRepository.findOne({where:{id,refreshToken}});
+        return await this._userRepository.findOne({where:{id,refreshToken}});
     }
     public async saveRefreshToken(id:string,refreshToken : string){
-        return await this.userRepository.update({id},{refreshToken});
+        return await this._userRepository.update({id},{refreshToken});
     }
     public async checkDuplicateEmail(email:string){
-        return Boolean(!await this.userRepository.getByEmail(email));
+        return Boolean(!await this._userRepository.getByEmail(email));
     }
     public async checkDuplicateNickname(nickname:string){
-        return Boolean(!await this.userRepository.findOne({where:{nickname:nickname}}));
+        return Boolean(!await this._userRepository.findOne({where:{nickname:nickname}}));
     }
-
     public async kakaoLogin(code:string) {
-        
         const accessToken = await axios.post('https://kauth.kakao.com/oauth/token', {}, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -92,16 +87,13 @@ export class AuthService{
             name: userInfo.properties.nickname,
             toEntity : KakaoUserDto.prototype.toEntity,
         }
-        
         return result;
     }
-    
     public async naverLogin(code:string) {
         const naverTokenUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${key.NaverClientId}&client_secret=${key.NaverClientSecret}&code=${code}&state=state`;
         const accessToken = await axios.post(naverTokenUrl,{},{})
         .then(res=>res.data.access_token)
         .catch(()=>(null));
-        
         const userInfo:any = await axios.get('https://openapi.naver.com/v1/nid/me',{
             headers:{
                 "Authorization" : `Bearer ${accessToken}`
@@ -109,7 +101,6 @@ export class AuthService{
         }).then(res=>(res.data.response))
         .catch(()=>(null));
         const id = encrypt(userInfo.id);
-        
         const result :NaverUserDto = {
             id,
             name : userInfo.name,
@@ -117,7 +108,6 @@ export class AuthService{
             email: 'n_'+userInfo.email,
             toEntity : NaverUserDto.prototype.toEntity,
         }
-        
         return result;
     }
     public async googleLogin(code:string){
@@ -131,12 +121,12 @@ export class AuthService{
         return result;
     }
     public async getUserById(id:string){
-        return await this.userRepository.getById(id);
+        return await this._userRepository.getById(id);
     }
     public async socialRegister(createUserDto : SocialLoginType){
         const entity = createUserDto.toEntity();
         
-        const user = await this.userRepository.save(entity);
+        const user = await this._userRepository.save(entity);
         let result:ResponseType ; 
         if(user)
             result = {status:true,user};
@@ -146,13 +136,7 @@ export class AuthService{
     }
     public async logout(jwtPayload : CustomJwtPayload,token:string){
         const expiresIn = jwtPayload.exp - jwtPayload.iat;
-        const result = await addBlacklist(token,expiresIn);
-        if(result)
-            return result;
-        
-        return await this.userRepository.deleteRefreshTokenById(jwtPayload.userId);
-        
+        await addBlacklist(token,expiresIn);
+        return await this._userRepository.deleteRefreshTokenById(jwtPayload.userId);
     }
-
-
 }

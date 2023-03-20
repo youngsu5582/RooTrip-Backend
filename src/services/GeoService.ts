@@ -1,5 +1,5 @@
 import  { Service } from "typedi";
-import { Coordinate } from "../common";
+import { CoordinateType } from "../common";
 import { DistrictRepository } from "../repositories";
 
 @Service()
@@ -8,7 +8,7 @@ export class GeoService{
     constructor(){
         this.districtRepository = DistrictRepository;
     };
-    public async getAddress(coordinate:Coordinate){
+    public async getAddress(coordinate:CoordinateType){
         const point = `POINT(${coordinate.longitude} ${coordinate.latitude})`;
         
         return await this.districtRepository.getAddressByPoint(point);

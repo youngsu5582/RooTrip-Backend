@@ -1,5 +1,6 @@
 import {  District } from "../entities";
 import database from "../loaders/database";
+import { logger } from "../utils/Logger";
 
 export const DistrictRepository =  database.getRepository(District).extend({
     async getAddressByPoint(coordinate: string) {
@@ -10,9 +11,8 @@ export const DistrictRepository =  database.getRepository(District).extend({
         ORDER BY ST_Distance_Sphere(coordinate, ST_GeomFromText('${coordinate}'))
         LIMIT 1;
         `
-    ).catch(err=>console.log(err));
+    ).catch(err=>logger.log(err));
     }
 });
 
 
-    

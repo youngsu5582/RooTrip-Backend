@@ -1,22 +1,13 @@
-import {Service } from "typedi";
+import {Service} from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import {PostRepository} from "../repositories/PostRepository";
-
-
 @Service()
-
 export class PostService{
-    
-    private postRepository:typeof PostRepository
-    constructor(
-        
-         ){
+    constructor(private readonly postRepository : typeof PostRepository )
+         {
             this.postRepository = PostRepository;
          }
-    /**
-     * 테스트를 위한 Function
-     * 
-     */
+
     public async createPost(createPostDto:CreatePostDto,userId:string){
        const post = createPostDto.toEntity(userId);
         return await this.postRepository.save(post);

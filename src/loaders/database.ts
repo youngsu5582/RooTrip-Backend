@@ -2,12 +2,8 @@ import {env} from './env';
 import AWS from 'aws-sdk';  
 import { DataSource} from "typeorm";
 import {createClient} from 'redis';
-
-const database = env.database;
-
-
+const {database,s3} = env;
 export default new DataSource({
-        
         type : 'mysql',
         host: database.host,
         port: database.port,
@@ -19,16 +15,12 @@ export default new DataSource({
         connectTimeout:20000,
         acquireTimeout:20000,
         entities: [__dirname+"/../entities/*{.ts,.js}"],
-        
 })
 
-
 const redisClient = createClient();
-
-const s3 = env.s3;
 const s3Client = new AWS.S3({credentials:{
     accessKeyId:s3.accessKey!,
     secretAccessKey:s3.secretKey!
 }})
 
-export {redisClient,s3Client};
+export {redisClient,s3Client};  
