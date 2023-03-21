@@ -18,6 +18,7 @@ import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import {  SocialDto } from "../dtos/AuthDto";
 import { checkType, SocialLoginType } from "../common";
+import ExifReader from 'exifreader';
 
 @JsonController("/auth")
 @Service()
@@ -163,8 +164,5 @@ export class AuthController {
         return true;
       else
         return false;
-
   }
-
-  
 }

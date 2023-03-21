@@ -60,26 +60,21 @@ export class GoogleUserDto extends UserDto{
 
 
 export class LocalUserDto extends UserDto{
-
-
     @IsNotEmpty()
     @IsEmail()
     public email : string;
-
 
     @IsNotEmpty()
     @IsString()
     @Matches(/^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{2,8}$/)
     public nickname: string;
 
-    
     @IsNotEmpty()
     @IsString()
     @MinLength(8)
-    @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]*$/, {message: 'password too weak'})
+    @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()/])[A-Za-z\d`~!@#$%^&*()/]{8,16}$/, {message: 'password too weak'})
     public password: string;
 
-    
     public gender : GenderType;
 
     public toEntity(){
