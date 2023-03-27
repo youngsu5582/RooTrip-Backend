@@ -12,13 +12,14 @@ import {
 import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
-import { LocalUserDto, LoginUserDto } from "../dtos/UserDto";
+import { ChangePasswordDto, LocalUserDto, LoginUserDto } from "../dtos/UserDto";
 import { Response } from "express";
 import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import {  SocialDto } from "../dtos/AuthDto";
 import { checkType, SocialLoginType } from "../common";
-import ExifReader from 'exifreader';
+import database from "../loaders/database";
+import { User } from "../entities";
 
 @JsonController("/auth")
 @Service()
@@ -164,5 +165,13 @@ export class AuthController {
         return true;
       else
         return false;
+  }
+
+  @HttpCode(201)
+  @Post("/change/password")
+  public async changePw(@Body() changePasswordDto: ChangePasswordDto) {
+    const userRepository = await database.getRepository(User);
+    const user = userRepository.update({email:changePasswordDto.email},{password:changePasswordDto.password})
+    return user;
   }
 }

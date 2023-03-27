@@ -11,7 +11,7 @@ export default new DataSource({
         password: database.password,
         database: database.name,
         //logging: "all",
-        //synchronize:true,
+        synchronize:true,
         connectTimeout:20000,
         acquireTimeout:20000,
         entities: [__dirname+"/../entities/*{.ts,.js}"],
