@@ -2,9 +2,10 @@ import {Service} from 'typedi';
 import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, Res, UseBefore} from 'routing-controllers';
 import {OpenAPI} from 'routing-controllers-openapi';
 import {PostService} from '../services';
-import {CreatePostDto, UpdatePostDto} from '../dtos/PostDto';
+import {CreatePostDto, LikePostDto, UpdatePostDto} from '../dtos/PostDto';
 import {Response} from 'express';
 import {checkAccessToken} from '../middlewares/AuthMiddleware';
+import { Like } from 'typeorm';
 
 @JsonController('/post')
 @Service()
@@ -79,6 +80,27 @@ export class PostController{
                 status:'nok',
                 message:'로그인 유저와 게시글 작성자가 일치하지 않습니다.'
             })
+        }
+    }
+    @HttpCode(200)
+    @Post("/:postId/like")
+    @OpenAPI({
+        description:'게시글을 추천합니다'
+    })
+    public async like(@Body() likePostDto : LikePostDto){
+        const {userId,postId} = likePostDto;
+        const result = await this.postService.likePost(userId,postId);
+        if(result){
+            return {
+                status:true,
+                message:'게시글 추천을 완료했습니다.'
+            }
+        }
+        else{
+            return {
+                status:false,
+                message:'추천 중복입니다!'
+            }
         }
     }
 

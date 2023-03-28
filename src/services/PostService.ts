@@ -1,12 +1,16 @@
 import {Service} from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
+import { LikeRepository } from "../repositories/LikeRepository";
 import {PostRepository} from "../repositories/PostRepository";
 
 @Service()
 export class PostService{
-    constructor(private readonly postRepository : typeof PostRepository )
+    constructor(private readonly postRepository : typeof PostRepository ,
+            private readonly likeRepository : typeof LikeRepository
+        )
          {
             this.postRepository = PostRepository;
+            this.likeRepository = LikeRepository;
          }
 
     public async createPost(createPostDto:CreatePostDto,userId:string){
@@ -25,4 +29,11 @@ export class PostService{
     public async deletePost(postId:string){
         return await this.postRepository.delete(postId);
     }
+    public async likePost(userId:string,postId:string){
+        if(await this.likeRepository.checkDuplicate(userId,postId))
+            return false;
+        else
+            return await this.likeRepository.save({userId,postId});
+    }
+
 }

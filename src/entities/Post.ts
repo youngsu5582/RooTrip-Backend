@@ -41,7 +41,6 @@ export default class Post{
     @Column({type:'int'})
     like : number;
 
-
     // 차후 수정
     @OneToMany((type)=>Photo,(photo)=>photo.post)
     photos:Photo[];

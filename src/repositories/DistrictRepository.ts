@@ -14,6 +14,6 @@ export const DistrictRepository =  database.getRepository(District).extend({
     ).then((data)=>data[0])
     .catch(err=>logger.error(err));
     }
-});
+}); 
 
 
