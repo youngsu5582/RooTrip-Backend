@@ -38,14 +38,3 @@ export class UpdatePostDto{
     @IsString()
     public content: string;
 }
-export class LikePostDto{
-    @IsNotEmpty()
-    @IsString()
-    public userId : string;
-
-
-    @IsNotEmpty()
-    @IsString()
-    public postId: string;
-}
-

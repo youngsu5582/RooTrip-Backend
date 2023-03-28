@@ -29,7 +29,7 @@ export class PostService{
     public async deletePost(postId:string){
         return await this.postRepository.delete(postId);
     }
-    public async likePost(userId:string,postId:string){
+    public async likePost(userId:string,postId:string){ 
         if(await this.likeRepository.checkDuplicate(userId,postId))
             return false;
         else

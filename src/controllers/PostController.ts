@@ -2,7 +2,7 @@ import {Service} from 'typedi';
 import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, Res, UseBefore} from 'routing-controllers';
 import {OpenAPI} from 'routing-controllers-openapi';
 import {PostService} from '../services';
-import {CreatePostDto, LikePostDto, UpdatePostDto} from '../dtos/PostDto';
+import {CreatePostDto, UpdatePostDto} from '../dtos/PostDto';
 import {Response} from 'express';
 import {checkAccessToken} from '../middlewares/AuthMiddleware';
 import { Like } from 'typeorm';
@@ -87,8 +87,9 @@ export class PostController{
     @OpenAPI({
         description:'게시글을 추천합니다'
     })
-    public async like(@Body() likePostDto : LikePostDto){
-        const {userId,postId} = likePostDto;
+    @UseBefore(checkAccessToken)
+    public async like(@Param('postId')postId:string,@Res() res : Response){
+        const userId = res.locals.jwtPayload.userId;
         const result = await this.postService.likePost(userId,postId);
         if(result){
             return {
