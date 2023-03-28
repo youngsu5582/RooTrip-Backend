@@ -18,7 +18,6 @@ import { generateAccessToken, generateToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import {  SocialDto } from "../dtos/AuthDto";
 import { checkType, SocialLoginType } from "../common";
-import ExifReader from 'exifreader';
 
 @JsonController("/auth")
 @Service()
@@ -119,13 +118,13 @@ export class AuthController {
   public async socialLogin(@Body() socialDto: SocialDto, @Res() res:Response) {
     let data : SocialLoginType;
     const {code,provider} = socialDto;
-    
     if(provider==='kakao')
       data = await this.authService.kakaoLogin(code);
     else if (provider==='naver')
       data = await this.authService.naverLogin(code);
     else
       data = await this.authService.googleLogin(code);  
+    console.log(data);
     if(!data){
       return res.status(401).send({
         status: false,

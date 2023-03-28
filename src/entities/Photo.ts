@@ -13,6 +13,7 @@ import Post from './Post';
 @Service()
 @Entity({name:"photo"})
 export default class Photo{
+    constructor(){}
     @PrimaryGeneratedColumn("uuid")
     id:string;
 
@@ -21,12 +22,14 @@ export default class Photo{
 
 
     @Column({})
-    image_url : string;
+    url : string;
     
     @ManyToOne(()=>Post,(post)=>post.id,{
         cascade:true,
         onDelete:'CASCADE',
     })
+    @Column({ name: "post_id" })
+    postId: string;
     @JoinColumn({ name: "post_id" })
     post:Post;
     

@@ -74,6 +74,7 @@ export class AuthService{
         })
         .then(res=>res.data.access_token)
         .catch(()=>(null));
+        
         const userInfo = await axios.post('https://kapi.kakao.com/v2/user/me',{},{
             headers: {  
                 "Content-Type" : "application/x-www-form-urlencoded;charset",
@@ -82,6 +83,7 @@ export class AuthService{
         })
         .then(res=>res.data)
         .catch(()=>(null));
+        
         const result : KakaoUserDto = {
             id: userInfo.id,
             name: userInfo.properties.nickname,
