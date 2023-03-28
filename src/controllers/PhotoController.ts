@@ -3,6 +3,7 @@ import {Get, HttpCode, JsonController, QueryParam} from 'routing-controllers';
 import {OpenAPI} from 'routing-controllers-openapi';
 import {GeoService} from '../services';
 import {CoordinateType} from '../common';
+
 @JsonController('/photo')
 @Service()
 export class PhotoController{

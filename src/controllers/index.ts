@@ -1,7 +1,7 @@
 import {AuthController} from'./AuthController';
 import {PostController} from './PostController';
 import {TestController} from './TestController';
-import { PhotoController } from './PhotoController';
+import {PhotoController } from './PhotoController';
 import {EmailController} from './EmailController';
 export class Controllers {
     constructor(){};
