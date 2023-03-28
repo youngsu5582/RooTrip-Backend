@@ -48,16 +48,16 @@ export default class User{
     @Column({nullable:true,type:String})
     refreshToken : string|null;
     
-    @BeforeInsert()
-    async hashPassword(){
-        if(this.password){
-            this.password = hashSync(this.password,10);
-        }
-    }
+    // @BeforeInsert()
+    // async hashPassword(){
+    //     if(this.password){
+    //         this.password = hashSync(this.password,10);
+    //     }
+    // }
 
-    async comparePassword(unencryptedPassword: string){
+    // async comparePassword(unencryptedPassword: string){
         
-        return compareSync(unencryptedPassword,this.password!);
-    }
+    //     return compareSync(unencryptedPassword,this.password!);
+    // }
 
 }
