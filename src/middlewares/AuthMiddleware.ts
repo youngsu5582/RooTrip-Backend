@@ -10,7 +10,6 @@ export const extractAccessToken = (req: Request) => {
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "Bearer"
   ) {
-    console.log(req.headers.authorization);
     return req.headers.authorization.split(" ")[1];
   }
 };
@@ -37,7 +36,7 @@ export const checkAccessToken = async (
   next: NextFunction,
 ) => {
   const token = extractAccessToken(req);
-  
+  console.log(token);
   try {
     const jwtPayload = decodeAccessToken(token!);
     if (await checkBlacklist(token!)) {
