@@ -23,8 +23,9 @@ export class LoginController{
       }
     })
     public async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
+      
       const result = await this.authService.localLogin(loginUserDto);
-  
+      
       if (result.status === false) {
         return res.status(200).send(result);
       }
@@ -47,12 +48,14 @@ export class LoginController{
     public async socialLogin(@Body() socialDto: SocialDto, @Res() res:Response) {
       let data : SocialLoginType;
       const {code,provider} = socialDto;
+      console.log(socialDto);
       if(provider==='kakao')
         data = await this.authService.kakaoLogin(code);
       else if (provider==='naver')
         data = await this.authService.naverLogin(code);
       else
         data = await this.authService.googleLogin(code);  
+      console.log(data);
       if(!data){
         return res.status(401).send({
           status: false,

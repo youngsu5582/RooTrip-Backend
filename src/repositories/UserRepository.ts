@@ -14,4 +14,3 @@ export const UserRepository =  database.getRepository(User).extend({
         return await this.update(id,{refreshToken:undefined});
     },
 })
-
