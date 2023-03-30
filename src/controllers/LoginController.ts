@@ -1,16 +1,18 @@
 import {Service} from 'typedi';
 import {Body, HttpCode, JsonController, Post , Res} from 'routing-controllers';
 import {OpenAPI} from 'routing-controllers-openapi';
-import {AuthService} from '../services';
 import {Response} from "express";
 import {LoginUserDto} from '../dtos/UserDto';
 import {SocialLoginType} from '../common';
 import { generateToken } from '../utils/jwToken';
 import { SocialDto } from '../dtos/AuthDto';
+import { AuthService, LoginService } from '../services';
 @JsonController('/auth')
 @Service()
 export class LoginController{
-    constructor(private readonly authService: AuthService) {}
+    constructor(private readonly loginService: LoginService,
+        private readonly authService:AuthService,
+      ) {}
     private readonly minute = 60;
     @HttpCode(201)
     @Post("/login")
@@ -23,9 +25,7 @@ export class LoginController{
       }
     })
     public async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
-      
-      const result = await this.authService.localLogin(loginUserDto);
-      
+      const result = await this.loginService.localLogin(loginUserDto);
       if (result.status === false) {
         return res.status(200).send(result);
       }
@@ -39,7 +39,6 @@ export class LoginController{
         refreshToken,
       };
     }
-  
     @HttpCode(201)  
     @Post("/social")
     @OpenAPI({
@@ -50,11 +49,11 @@ export class LoginController{
       const {code,provider} = socialDto;
       console.log(socialDto);
       if(provider==='kakao')
-        data = await this.authService.kakaoLogin(code);
+        data = await this.loginService.kakaoLogin(code);
       else if (provider==='naver')
-        data = await this.authService.naverLogin(code);
+        data = await this.loginService.naverLogin(code);
       else
-        data = await this.authService.googleLogin(code);  
+        data = await this.loginService.googleLogin(code);  
       console.log(data);
       if(!data){
         return res.status(401).send({

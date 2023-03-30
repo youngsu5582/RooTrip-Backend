@@ -16,7 +16,6 @@ import { Response } from "express";
 import { generateAccessToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
-
   @JsonController("/auth")
   @Service()
   export class AuthController {
