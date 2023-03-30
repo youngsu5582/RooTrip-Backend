@@ -4,7 +4,6 @@ import {
   HttpCode,
   JsonController,
   Post,
-
   QueryParam,
   Res,
   UseBefore,
@@ -12,13 +11,11 @@ import {
 import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
-import { ChangePasswordDto, LocalUserDto } from "../dtos/UserDto";
+import {  LocalUserDto } from "../dtos/UserDto";
 import { Response } from "express";
 import { generateAccessToken } from "../utils/jwToken";
 import { checkAccessToken, checkRefreshToken } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
-import database from "../loaders/database";
-import { User } from "../entities";
 
   @JsonController("/auth")
   @Service()
@@ -37,7 +34,6 @@ import { User } from "../entities";
     })
     public async register(
       @Body() userDto: LocalUserDto,
-      @Res() res: Response,
     ) {
       const result = await this.authService.register(userDto);
       return result;
@@ -59,7 +55,6 @@ import { User } from "../entities";
     public async refresh(@Res() res: Response) {
       const userId = res.locals.jwtPayload.userId;
       const refreshToken = res.locals.token;
-
       const user = await this.authService.validateUserToken(userId, refreshToken);
       if (!user) {
         return res.status(401).send({
@@ -85,7 +80,6 @@ import { User } from "../entities";
         return await this.authService.checkDuplicateNickname(data);
       else return;
     }
-
     @HttpCode(201)
     @Post("/logout")
     @UseBefore(checkAccessToken)
@@ -93,19 +87,10 @@ import { User } from "../entities";
       description : "로그아웃을 합니다.",
     })
     public async logout(@Res()res : Response){
-      
         const result = await this.authService.logout(res.locals.jwtPayload,res.locals.token);
         if(result)
           return true;
         else
           return false;
-    }
-
-    @HttpCode(201)
-    @Post("/change/password")
-    public async changePw(@Body() changePasswordDto: ChangePasswordDto) {
-      const userRepository = await database.getRepository(User);
-      const user = userRepository.update({email:changePasswordDto.email},{password:changePasswordDto.password})
-      return user;
     }
   }

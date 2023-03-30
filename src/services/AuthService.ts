@@ -7,6 +7,7 @@ import { env } from "../loaders/env";
 import axios from "axios";
 import { addBlacklist } from "../utils/Redis";
 import {encrypt} from '../utils/Crypto';
+import { UUID } from "../utils/Uuid";
 const key = env.key;
 
 @Service()
@@ -37,16 +38,6 @@ export class AuthService{
         const {email,password} = loginUserDto;  
         const user = await this._userRepository.findOne({where:{email}});
         let result:ResponseType;
-        // if(user){
-        //     if(user.password == password)
-        //         result = {status:true,user};
-        //     else
-        //         result =  {status:false,message:'비밀번호가 일치하지 않습니다.'};
-        // }
-        // else{
-        //     result =  {status:false,message:'해당 이메일이 없습니다.'}
-        // }
-        // return result;
         if(user){
             if(await user.comparePassword(password))
                 result = {status:true,user};
@@ -150,5 +141,14 @@ export class AuthService{
         const expiresIn = jwtPayload.exp - jwtPayload.iat;
         await addBlacklist(token,expiresIn);
         return await this._userRepository.deleteRefreshTokenById(jwtPayload.userId);
+    }
+    public async changePassword(email:string,newPassword:string){
+        const user = await this._userRepository.findOne({where:{email}});
+        user!.password = newPassword
+        const result = await this._userRepository.save(user!);
+        if(result)
+            return true;
+        else
+            return new Error("유저 정보 변경 실패!");
     }
 }

@@ -20,8 +20,3 @@ export class EmailVerifyDto{
     @IsString()
     public verifyNumber : string;
 }
-
-export class SocialLoginDto{
-    
-}
-

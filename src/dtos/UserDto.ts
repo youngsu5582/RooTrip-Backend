@@ -100,25 +100,3 @@ export class LoginUserDto{
     @IsString()
     public password : string;
 }
-
-export class ChangePasswordDto{
-
-    @IsNotEmpty()
-    @IsEmail()
-    public email : string;
-
-    @IsNotEmpty()
-    @IsString()
-    @MinLength(8)
-    @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()/])[A-Za-z\d`~!@#$%^&*()/]{8,16}$/, {message: 'password too weak'})
-    public password: string;
-    
-
-    public toEntity() {
-        const {password} = this;
-        const user = new User();
-        user.password = password;
-
-        return user;
-    }
-}

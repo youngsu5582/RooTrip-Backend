@@ -24,8 +24,5 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
           errors : errors
     })  
   }
-  else{
-    res.json('sibal');
-  }
   }
 }

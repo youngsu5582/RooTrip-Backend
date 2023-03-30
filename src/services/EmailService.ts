@@ -10,6 +10,7 @@ import { EmailVerifyDto } from "../dtos/AuthDto";
 @Service()
 export class EmailService{
     private VerifySubject = "RooTrip 이메일 인증";
+    private ResetSubject = "RooTrip 비밀번호 초기화";
     constructor(){
         
     };
@@ -38,6 +39,20 @@ export class EmailService{
             return true;
         else
             return false;
+    }
+    public async sendPassword(email:string,password:string){
+        const transporter = mailer.createTransport(emailConfig);
+        var mailOptions = {
+            from: 'RooTripEmail@gmail.com',
+            to: email,
+            subject: this.ResetSubject,
+            html : `<h1>${password}</h1>`,
+        };
+        const result = await transporter.sendMail(mailOptions);
+        if(result)
+            return true;
+        else
+            return new Error("이메일 전송 실패");
     }
 
 }
