@@ -38,7 +38,7 @@ export default class Post{
     @Column({type:'text'})
     content : string;
 
-    @Column({type:'int'})
+    @Column({type:'int',default:0})
     like : number;
 
     // 차후 수정
@@ -50,7 +50,4 @@ export default class Post{
   
     @DeleteDateColumn({ name: "deleted_at" })
     deletedAt: Date;
-    
-    @Column()
-    flag: boolean;
 }

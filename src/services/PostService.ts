@@ -14,6 +14,7 @@ export class PostService{
          }
 
     public async createPost(createPostDto:CreatePostDto,userId:string){
+        
        const post = createPostDto.toEntity(userId);
         return await this.postRepository.save(post);
     }

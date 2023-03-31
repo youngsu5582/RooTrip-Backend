@@ -1,16 +1,21 @@
 import {Service} from 'typedi';
 import {Body, Delete, Get, HttpCode, JsonController, Param, Patch, Post, Res, UseBefore} from 'routing-controllers';
 import {OpenAPI} from 'routing-controllers-openapi';
-import {PostService} from '../services';
+import {PostService,GeoService, PhotoService} from '../services';
 import {CreatePostDto, UpdatePostDto} from '../dtos/PostDto';
 import {Response} from 'express';
 import {checkAccessToken} from '../middlewares/AuthMiddleware';
-import { Like } from 'typeorm';
+import { CreatePhotoDto } from '../dtos/PhotoDto';
+
+
 
 @JsonController('/post')
 @Service()
 export class PostController{
-    constructor(private postService :PostService){};
+    constructor(private postService :PostService,
+            private readonly _geoService : GeoService,
+            private readonly _photoService : PhotoService,
+        ){};
     @HttpCode(200)
     @Get("/:postId")
     @UseBefore(checkAccessToken)
@@ -29,11 +34,18 @@ export class PostController{
         description : '게시글을 생성합니다'
     })
     @UseBefore(checkAccessToken)
-    public async create(@Body() createPostDto:CreatePostDto,@Res() res:Response){
+public async create(@Body() createPostDto:CreatePostDto,@Res() res:Response){
         const userId = res.locals.jwtPayload.userId;
-        const result = await this.postService.createPost(createPostDto,userId);
-        
-        return result;
+        const photos = await Promise.all(createPostDto.photos.map(async (photo)=>{
+         return {   
+            image_url:photo.image_url,
+            ...await this._geoService.getAddress(photo.coordinateType),
+         } 
+        }));
+
+        const post =await this.postService.createPost(createPostDto,userId);
+        const result = await this._photoService.createPhotos(photos,post.id);
+        return true;
     }
     @HttpCode(200)
     @Patch("/:postId")

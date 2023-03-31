@@ -10,7 +10,6 @@ export class GeoService{
     };
     public async getAddress(coordinate:CoordinateType){
         const point = `POINT(${coordinate.longitude} ${coordinate.latitude})`;
-        
         return await this.districtRepository.getAddressByPoint(point);
 
     }

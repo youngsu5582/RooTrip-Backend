@@ -1,13 +1,20 @@
-import { IsNotEmpty, IsString, IsUUID } from "class-validator";
+import { IsArray, IsNotEmpty, IsString } from "class-validator";
 import { Post } from "../entities";
+import { CoordinateType } from "../common";
 
-
+type photoType = {
+    image_url : string;
+    coordinateType : CoordinateType;
+}
 export class CreatePostDto{
     @IsNotEmpty()
     @IsString()
     
     public title : string;
 
+    @IsNotEmpty()
+    @IsArray({})
+    public photos : photoType[];
 
     @IsNotEmpty()
     @IsString()
@@ -16,16 +23,11 @@ export class CreatePostDto{
     public toEntity(userId:string): Post {
         const {title,content} = this;
         const post = new Post();
-        
         post.title = title;
         post.content = content;
         post.userId = userId;
-        
         return post;
       }
-
-
-
 }
 
 export class UpdatePostDto{

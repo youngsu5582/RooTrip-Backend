@@ -5,6 +5,7 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
     JoinColumn,
+    Point,
 }
 from 'typeorm';
 import { Service } from 'typedi';
@@ -18,11 +19,7 @@ export default class Photo{
     id:string;
 
     @Column({})
-    provider : string;
-
-
-    @Column({})
-    url : string;
+    image_url : string;
     
     @ManyToOne(()=>Post,(post)=>post.id,{
         cascade:true,
