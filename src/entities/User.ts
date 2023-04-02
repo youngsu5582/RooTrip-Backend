@@ -8,6 +8,8 @@ import {
     BeforeInsert,
     PrimaryColumn,
     BeforeUpdate,
+    JoinTable,
+    ManyToMany
 }
 from 'typeorm';
 import Post from './Post';
@@ -48,7 +50,12 @@ export default class User{
 
     @Column({nullable:true,type:String})
     refreshToken : string|null;
-    
+
+    @ManyToMany(type => User)
+    following: User[];
+
+    @ManyToMany(type => User)
+    followers: User[];
     
     @BeforeInsert()
     @BeforeUpdate()

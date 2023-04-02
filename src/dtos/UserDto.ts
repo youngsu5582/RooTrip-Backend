@@ -58,7 +58,6 @@ export class GoogleUserDto extends UserDto{
     }
 }
 
-
 export class LocalUserDto extends UserDto{
     @IsNotEmpty()
     @IsEmail()

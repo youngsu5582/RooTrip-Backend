@@ -10,7 +10,6 @@ export const UserRepository =  database.getRepository(User).extend({
         return await this.findOne({where:{email}});
     },
     async deleteRefreshTokenById(id:string){
-        
         return await this.update(id,{refreshToken:undefined});
     },
 })
