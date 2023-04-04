@@ -9,5 +9,11 @@ export const FollowerRepository = database.getRepository(Follower).extend({
     },
     async deleteFollowing(followingState:number) {
         return await this.delete({id:followingState})
-    }
+    },
+    async checkFollowList(userId:string) {
+        return await this.find({
+            where:{follower:{id:userId}},
+            relations:['following']
+        })
+    },
 });

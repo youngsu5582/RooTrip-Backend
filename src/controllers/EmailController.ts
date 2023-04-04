@@ -1,4 +1,5 @@
-import { Body, BodyParam, HttpCode, JsonController, Post } from 'routing-controllers';
+import { Response } from 'express';
+import { Body, BodyParam, HttpCode, JsonController, Post, Res } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { Service } from 'typedi';
 import { EmailVerifyDto } from '../dtos/AuthDto';
