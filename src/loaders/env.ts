@@ -26,7 +26,9 @@ require("dotenv").config({
       kakaoRestApi: process.env.KAKAO_REST_API_KEY,
       kakaoRedirectUri: process.env.KAKAO_REDIRECT_URI,
       NaverClientId: process.env.NAVER_CLIENT_ID,
-      NaverClientSecret: process.env.NAVER_CLIENT_SECRET_KEY
+      NaverClientSecret: process.env.NAVER_CLIENT_SECRET_KEY,
+      googleClientId: process.env.GOOGLE_CLIENT_ID,
+      googleSecretKey: process.env.GOOGLE_SECRET_KEY
     },
     database: {
       host: process.env.DATABASE_HOST,

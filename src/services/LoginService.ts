@@ -80,10 +80,27 @@ export class LoginService{
         return result;
     }
     public async googleLogin(code:string){
-        let userInfo:any;
+    let userInfo:any;
+    const {data} = await axios.post(
+        'https://www.googleapis.com/oauth2/v4/token',
+        {
+            code: code,
+            client_id: env.key.googleClientId,
+            client_secret: env.key.googleSecretKey,
+            grant_type: 'authorization_code',
+            redirect_uri : "http://rootrip.site:8080/oauth/google/callback"
+        }
+        )
+        const googleAPI = `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${data.access_token}`
+        userInfo = await axios.get(googleAPI, {
+        headers:{
+            authorization: `Bearer ${data.access_token}`
+        },
+    })
+    console.log(userInfo);
         const result : GoogleUserDto = {
-            id:userInfo.id ,
-            name : userInfo.name,
+            id:userInfo.data.id ,
+            name : userInfo.data.name,
             toEntity : GoogleUserDto.prototype.toEntity,
         }
         return result;
