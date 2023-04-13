@@ -37,13 +37,7 @@ export default class User extends defaultColumn{
 
     @OneToMany((type)=>Post,(post)=>post.user)
     posts:Post[];
-
-    // @CreateDateColumn({ name: "created_at" })
-    // createdAt: Date;
-  
-    // @UpdateDateColumn({ name: "updated_at" })
-    // updatedAt: Date;
-
+    
     @Column({nullable:true,type:String})
     refreshToken : string|null;
 

@@ -10,13 +10,11 @@ import {
 from 'typeorm';
 import { Service } from 'typedi';
 import Post from './Post';
+import { defaultColumn } from './common/default-column';
 
 @Service()
 @Entity({name:"photo"})
-export default class Photo{
-    constructor(){}
-    @PrimaryGeneratedColumn("uuid")
-    id:string;
+export default class Photo extends defaultColumn{
 
     @Column({})
     image_url : string;

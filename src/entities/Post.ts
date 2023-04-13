@@ -12,15 +12,14 @@ from 'typeorm';
 import User from './User';
 import { Service } from 'typedi';
 import Photo from './Photo';
+import { defaultColumn } from './common/default-column';
 type FlagType = 'public'|'private'|'protected';
 
 @Entity({name:"post"})
 @Service()
 
 
-export default class Post{
-    @PrimaryGeneratedColumn("uuid")
-    id:string;
+export default class Post extends defaultColumn{
 
     @Column({ name: "user_id" })
     userId: string;
@@ -44,10 +43,4 @@ export default class Post{
     // 차후 수정
     @OneToMany((type)=>Photo,(photo)=>photo.post)
     photos:Photo[];
-
-    @CreateDateColumn({ name: "created_at" })
-    createdAt: Date;
-  
-    @DeleteDateColumn({ name: "deleted_at" })
-    deletedAt: Date;
 }

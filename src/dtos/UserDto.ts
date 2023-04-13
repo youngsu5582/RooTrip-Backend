@@ -49,22 +49,7 @@ export class LocalUserDto extends UserDto{
     public password: string;
 
     public gender : GenderType;
-
-    // public toEntity(){
-    //     const {email,name,
-    //          nickname,password,gender} = this;
-    //     const user = new User();
-    //     user.email = email;
-    //     user.name = name;
-    //     user.nickname = nickname;
-    //     user.password = password;
-    //     user.gender = gender;   
-    //     return user;
-    // }
 }
-// export type LocalUserDto = Pick<
-// User,'email'|'nickname'|'password'|'gender'|'name'|'createdAt'|'deletedAt'>;
-    
 export class LoginUserDto{
     @IsNotEmpty()
     @IsEmail()

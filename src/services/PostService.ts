@@ -2,6 +2,7 @@ import {Service} from "typedi";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import {PostRepository} from "../repositories/PostRepository";
+import {Post} from '../entities/index';
 
 @Service()
 export class PostService{
@@ -15,8 +16,7 @@ export class PostService{
 
     public async createPost(createPostDto:CreatePostDto,userId:string){
         
-       const post = createPostDto.toEntity(userId);
-        return await this.postRepository.save(post);
+       return await this.postRepository.save(Post.create({...createPostDto,userId}));
     }
     public async getPostById(postId : string){
         return await this.postRepository.getPostById(postId);
