@@ -1,8 +1,6 @@
 import { UserRepository, FollowerRepository } from "../repositories";
 import { Follower } from "../entities";
 import { Service } from "typedi";
-import { ResponseType } from "../common";
-import { PrivateNetworks } from "aws-sdk";
 
 @Service()
 export class UserService {
@@ -21,12 +19,11 @@ export class UserService {
     const following = await this._userRepository.findOne({
       where: { id: followingId }
     });
-    let message: ResponseType;
     if (!follower || !following) {
-      return (message = {
+      return {
         status: false,
         message: `존재하지 않는 회원입니다.`
-      });
+      };
     }
 
     const followingState = await this._followerRepository.getByFollowingState(
@@ -34,10 +31,10 @@ export class UserService {
       followingId
     );
     if (followingState) {
-      return (message = {
+      return {
         status: true,
         message: `이미 팔로우중입니다.`
-      });
+      };
     }
 
     const follow = new Follower();
@@ -45,15 +42,15 @@ export class UserService {
     follow.following = following;
     const followInfo = await this._followerRepository.save(follow);
     if (followInfo) {
-      return (message = {
+      return {
         status: true,
         message: `${followInfo.follower.name}님이 ${followInfo.following.name}님을 팔로우 합니다.`
-      });
+      };
     } else {
-      return (message = {
+      return {
         status: false,
         message: `팔로우 실패`
-      });
+      };
     }
   }
 
@@ -62,22 +59,20 @@ export class UserService {
       followerId,
       followingId
     );
-    let message: ResponseType;
-
     if (!followingState) {
-      return (message = {
+      return {
         status: false,
         message: `팔로우중이 아닙니다.`
-      });
+      };
     }
     const unfollowState = await this._followerRepository.deleteFollowing(
       followingState.id
     );
     if (unfollowState) {
-      return (message = {
+      return {
         status: true,
         message: `언팔로우 합니다.`
-      });
+      };
     }
   }
 

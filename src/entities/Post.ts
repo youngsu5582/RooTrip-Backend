@@ -1,18 +1,8 @@
-import {
-  Entity,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  DeleteDateColumn,
-  OneToMany
-} from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import User from "./User";
 import { Service } from "typedi";
 import Photo from "./Photo";
 import { defaultColumn } from "./common/default-column";
-type FlagType = "public" | "private" | "protected";
 
 @Entity({ name: "post" })
 @Service()
@@ -37,6 +27,6 @@ export default class Post extends defaultColumn {
   like: number;
 
   // 차후 수정
-  @OneToMany((type) => Photo, (photo) => photo.post)
+  @OneToMany(() => Photo, (photo) => photo.post)
   photos: Photo[];
 }

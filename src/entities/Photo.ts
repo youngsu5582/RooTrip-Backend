@@ -1,12 +1,4 @@
-import {
-  Entity,
-  Column,
-  Index,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  Point
-} from "typeorm";
+import { Entity, Column, Index, ManyToOne, JoinColumn } from "typeorm";
 import { Service } from "typedi";
 import Post from "./Post";
 import { defaultColumn } from "./common/default-column";

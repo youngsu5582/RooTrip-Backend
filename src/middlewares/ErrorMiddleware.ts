@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import {
   Middleware,
   ExpressErrorMiddlewareInterface
@@ -12,9 +12,8 @@ import { Service } from "typedi";
 @Service()
 @Middleware({ type: "after" })
 export class ErrorHandler implements ExpressErrorMiddlewareInterface {
-  error(errors: any, req: Request, res: Response, next: NextFunction): void {
+  error(errors: any, req: Request, res: Response): void {
     logger.error(errors);
-    console.log(errors);
     if (errors.length !== 0) {
       res.status(200).send({
         message: "Missing required parameter",

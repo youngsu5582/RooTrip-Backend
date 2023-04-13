@@ -36,14 +36,16 @@ export const checkAccessToken = async (
   next: NextFunction
 ) => {
   const token = extractAccessToken(req);
-  console.log(token);
+
   try {
-    const jwtPayload = decodeAccessToken(token!);
-    if (await checkBlacklist(token!)) {
-      new Error();
+    if (token) {
+      const jwtPayload = decodeAccessToken(token);
+      if (await checkBlacklist(token)) {
+        new Error();
+      }
+      res.locals.jwtPayload = jwtPayload;
+      res.locals.token = token;
     }
-    res.locals.jwtPayload = jwtPayload;
-    res.locals.token = token!;
   } catch (error) {
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }

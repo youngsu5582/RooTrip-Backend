@@ -44,10 +44,10 @@ export default class Route {
   @Column({ type: "int" })
   like: number;
 
-  @OneToMany((type) => Photo, (photo) => photo.post)
+  @OneToMany(() => Photo, (photo) => photo.post)
   photos: Photo[];
 
-  @OneToMany((type) => Comment, (comment) => comment.post)
+  @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
 
   @CreateDateColumn({ name: "created_at" })

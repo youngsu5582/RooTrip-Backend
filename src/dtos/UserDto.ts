@@ -5,7 +5,6 @@ import {
   Matches,
   MinLength
 } from "class-validator";
-import { User } from "../entities";
 import { GenderType } from "../common";
 
 class UserDto {

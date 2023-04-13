@@ -92,7 +92,6 @@ export class LoginService {
     return result;
   }
   public async googleLogin(code: string) {
-    let userInfo: any;
     const { data } = await axios.post(
       "https://www.googleapis.com/oauth2/v4/token",
       {
@@ -104,7 +103,7 @@ export class LoginService {
       }
     );
     const googleAPI = `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${data.access_token}`;
-    userInfo = await axios.get(googleAPI, {
+    const userInfo = await axios.get(googleAPI, {
       headers: {
         authorization: `Bearer ${data.access_token}`
       }

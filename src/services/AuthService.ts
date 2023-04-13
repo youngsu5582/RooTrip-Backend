@@ -61,9 +61,11 @@ export class AuthService {
   }
   public async changePassword(email: string, newPassword: string) {
     const user = await this._userRepository.findOne({ where: { email } });
-    user!.password = newPassword;
-    const result = await this._userRepository.save(user!);
-    if (result) return true;
-    else return new Error("유저 정보 변경 실패!");
+    if (user) {
+      user.password = newPassword;
+      const result = await this._userRepository.save(user);
+      if (result) return true;
+      else return false;
+    } else return new Error("유저 정보 변경 실패!");
   }
 }

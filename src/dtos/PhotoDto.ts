@@ -1,5 +1,4 @@
-import { IsArray, IsNotEmpty, IsString, IsUUID } from "class-validator";
-import { Photo } from "../entities";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreatePhotoDto {
   @IsString()

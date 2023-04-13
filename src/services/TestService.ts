@@ -1,5 +1,4 @@
 import { Service } from "typedi";
-import { TestDto } from "../dtos/TestDto";
 import { DistrictRepository } from "../repositories/DistrictRepository";
 
 @Service()
@@ -15,7 +14,6 @@ export class TestService {
     const result = await this.districtRepository.getAddressByPoint(
       "POINT(128.6240551 36.8056858)"
     );
-    console.log(result);
     return result.city;
   }
 }

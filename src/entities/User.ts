@@ -2,9 +2,6 @@ import {
   Entity,
   Column,
   OneToMany,
-  CreateDateColumn,
-  UpdateDateColumn,
-  PrimaryGeneratedColumn,
   BeforeInsert,
   BeforeUpdate,
   ManyToMany
@@ -32,16 +29,16 @@ export default class User extends defaultColumn {
   @Column({ nullable: true, type: String })
   gender: GenderType | null;
 
-  @OneToMany((type) => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
   @Column({ nullable: true, type: String })
   refreshToken: string | null;
 
-  @ManyToMany((type) => User)
+  @ManyToMany(() => User)
   following: User[];
 
-  @ManyToMany((type) => User)
+  @ManyToMany(() => User)
   followers: User[];
 
   @BeforeInsert()

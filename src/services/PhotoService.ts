@@ -10,12 +10,8 @@ export class PhotoService {
   }
   public async createPhotos(createPhotoDtos: CreatePhotoDto[], postId: string) {
     try {
-      //const array = [];
       for (const createPhotoDto of createPhotoDtos) {
-        const result = await this._photoRepository.createPhoto(
-          createPhotoDto,
-          postId
-        );
+        await this._photoRepository.createPhoto(createPhotoDto, postId);
       }
     } catch (err) {
       logger.error(err);

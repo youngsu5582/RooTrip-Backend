@@ -16,7 +16,6 @@ import { PostService, GeoService, PhotoService } from "../services";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
 import { Response } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
-import { CreatePhotoDto } from "../dtos/PhotoDto";
 
 @JsonController("/post")
 @Service()
@@ -32,10 +31,9 @@ export class PostController {
   @OpenAPI({
     description: "해당 게시글을 조회합니다"
   })
-  public async getOne(@Param("postId") postId: string, @Res() res: Response) {
-    console.log(res.locals.jwtPayload);
+  public async getOne(@Param("postId") postId: string) {
     const result = await this.postService.getPostById(postId);
-    return "sibal";
+    return result;
   }
   @HttpCode(200)
   @Post()
@@ -59,7 +57,7 @@ export class PostController {
 
     const post = await this.postService.createPost(createPostDto, userId);
     const result = await this._photoService.createPhotos(photos, post.id);
-    return true;
+    return result;
   }
   @HttpCode(200)
   @Patch("/:postId")
@@ -96,11 +94,17 @@ export class PostController {
     const userId = res.locals.jwtPayload.userId;
     if (await this.postService.checkUser(userId, postId)) {
       const result = await this.postService.deletePost(postId);
-      // 삭제못할시도 구현해야함.
-      return {
-        status: "ok",
-        message: "삭제 성공했습니다."
-      };
+      if (result) {
+        return {
+          status: "ok",
+          message: "삭제 성공했습니다."
+        };
+      } else {
+        return {
+          status: "nok",
+          message: "삭제 실패했습니다."
+        };
+      }
     } else {
       res.status(401).send({
         status: "nok",

@@ -2,7 +2,10 @@
  * NODE_ENV에 따른 .env 파일을 로드한다.
  */
 import crypto from "crypto";
-require("dotenv").config({
+
+import dotenv from "dotenv";
+
+dotenv.config({
   path: `config/.env.${process.env.NODE_ENV || "development"}`
 });
 
@@ -40,7 +43,7 @@ export const env = {
     logging: process.env.LOGGING
   },
   swagger: {
-    route: process.env.SWAGGER_ROUTE
+    route: process.env.SWAGGER_ROUTE || "/api-docs"
   },
   sentry: {
     dsn: process.env.SENTRY_DSN

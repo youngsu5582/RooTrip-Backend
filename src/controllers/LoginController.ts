@@ -46,15 +46,12 @@ export class LoginController {
     description: "소셜을 통해 로그인을 합니다."
   })
   public async socialLogin(@Body() socialDto: SocialDto, @Res() res: Response) {
-    console.log("social");
     let data: SocialLoginType;
     const { code, provider } = socialDto;
-    console.log(socialDto);
     if (provider === "kakao") data = await this.loginService.kakaoLogin(code);
     else if (provider === "naver")
       data = await this.loginService.naverLogin(code);
     else data = await this.loginService.googleLogin(code);
-    console.log(data);
     if (!data) {
       return res.status(401).send({
         status: false,

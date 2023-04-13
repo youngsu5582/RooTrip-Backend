@@ -1,11 +1,9 @@
-import { Response } from "express";
 import {
   Body,
   BodyParam,
   HttpCode,
   JsonController,
-  Post,
-  Res
+  Post
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { Service } from "typedi";
@@ -28,7 +26,6 @@ export class EmailController {
     description: "인증 이메일을 보냅니다."
   })
   public async verifySend(@BodyParam("email") email: string) {
-    console.log(email);
     return this._emailService.sendVerify(email);
   }
   @HttpCode(201)

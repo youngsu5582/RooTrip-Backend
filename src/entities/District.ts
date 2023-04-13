@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  Geometry,
-  Index,
-  PrimaryGeneratedColumn
-} from "typeorm";
+import { Entity, Column, Index, PrimaryGeneratedColumn } from "typeorm";
 import { Service } from "typedi";
 
 @Entity({ name: "district", synchronize: false })

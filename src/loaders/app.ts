@@ -32,7 +32,7 @@ export class App {
   private async setDatabase(): Promise<void> {
     try {
       DataSource.initialize()
-        .then(() => console.log("Mysql Connect!"))
+        .then(() => logger.info("Mysql Connect!"))
         .catch((err) => logger.error(err));
     } catch (error) {
       logger.error(error);

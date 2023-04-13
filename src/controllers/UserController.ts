@@ -4,18 +4,12 @@ import {
   JsonController,
   Param,
   Post,
-  Get,
   Res,
-  UseBefore,
-  Params,
-  Body,
-  QueryParam,
-  BodyParam,
-  Req
+  UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { UserService } from "../services";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 
 @JsonController("/user")

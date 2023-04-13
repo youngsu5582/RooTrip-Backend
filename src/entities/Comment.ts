@@ -1,12 +1,4 @@
-import {
-  Entity,
-  Column,
-  Index,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  CreateDateColumn
-} from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Service } from "typedi";
 import Post from "./Post";
 import User from "./User";
