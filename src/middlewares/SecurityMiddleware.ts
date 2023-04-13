@@ -10,7 +10,6 @@ import { Service } from "typedi";
 @Service()
 export class SecurityMiddleware implements ExpressMiddlewareInterface {
   use(req: Request, res: Response, next: NextFunction): any {
-    
     return helmet()(req, res, next);
   }
 }

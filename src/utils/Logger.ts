@@ -5,19 +5,12 @@ import {
   createLogger,
   LoggerOptions,
   format,
-  transports,
+  transports
 } from "winston";
 import DailyRotateFile = require("winston-daily-rotate-file");
 
-const {
-  combine,
-  timestamp,
-  printf,
-  prettyPrint,
-  colorize,
-  json,
-  errors,
-} = format;
+const { combine, timestamp, printf, prettyPrint, colorize, json, errors } =
+  format;
 
 const logDirectory = "logs";
 const filename = join(logDirectory, "app-%DATE%.log");
@@ -36,7 +29,7 @@ const consoleOutputFormat = combine(
   json(),
   printf((info) => {
     return `${info.timestamp} ${info.level}: ${info.message}`;
-  }),
+  })
 );
 
 /**
@@ -49,7 +42,7 @@ const fileOutputFormat = combine(
     }
 
     return `${info.timestamp} ${info.level}: ${info.message}`;
-  }),
+  })
 );
 
 const options: LoggerOptions = {
@@ -57,21 +50,21 @@ const options: LoggerOptions = {
   exitOnError: false,
   format: combine(
     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    errors({ stack: true }),
+    errors({ stack: true })
   ),
   transports: [
     // 콘솔 로그 출력
     new transports.Console({
       handleExceptions: true,
-      format: consoleOutputFormat,
+      format: consoleOutputFormat
     }),
     // 파일 로그 출력
     new DailyRotateFile({
       handleExceptions: true,
       format: fileOutputFormat,
-      filename,
-    }),
-  ],
+      filename
+    })
+  ]
 };
 
 const logger: Logger = createLogger(options);
@@ -79,8 +72,7 @@ const logger: Logger = createLogger(options);
 const stream = {
   write: (message: string) => {
     logger.info(message);
-  },
+  }
 };
 
 export { logger, stream };
-

@@ -33,7 +33,7 @@ export const extractRefreshToken = (req: Request) => {
 export const checkAccessToken = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const token = extractAccessToken(req);
   console.log(token);
@@ -45,7 +45,6 @@ export const checkAccessToken = async (
     res.locals.jwtPayload = jwtPayload;
     res.locals.token = token!;
   } catch (error) {
-    
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }
 
@@ -61,7 +60,7 @@ export const checkAccessToken = async (
 export const checkRefreshToken = (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   const token = extractRefreshToken(req);
   try {

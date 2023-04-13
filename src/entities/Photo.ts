@@ -1,58 +1,53 @@
 import {
-    Entity,
-    Column,
-    Index,
-    PrimaryGeneratedColumn,
-    ManyToOne,
-    JoinColumn,
-    Point,
-}
-from 'typeorm';
-import { Service } from 'typedi';
-import Post from './Post';
-import { defaultColumn } from './common/default-column';
+  Entity,
+  Column,
+  Index,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  Point
+} from "typeorm";
+import { Service } from "typedi";
+import Post from "./Post";
+import { defaultColumn } from "./common/default-column";
 
 @Service()
-@Entity({name:"photo"})
-export default class Photo extends defaultColumn{
+@Entity({ name: "photo" })
+export default class Photo extends defaultColumn {
+  @Column({})
+  image_url: string;
 
-    @Column({})
-    image_url : string;
-    
+  @Column({ name: "post_id" })
+  postId: string;
 
-    @Column({ name: "post_id" })
-    postId: string;
+  @ManyToOne(() => Post, (post) => post.photos, {
+    cascade: true,
+    onDelete: "CASCADE"
+  })
+  @JoinColumn({ name: "post_id" })
+  post: Post;
 
-    @ManyToOne(()=>Post,(post)=>post.photos,{
-        cascade:true,
-        onDelete:'CASCADE',
-    })
-    @JoinColumn({ name: "post_id" })
-    post:Post;
-    
+  @Index({ spatial: true })
+  @Column({
+    type: "geometry",
+    spatialFeatureType: "Point",
+    srid: 4326,
+    select: false
+  })
+  coordinate: string;
 
-    @Index({spatial:true})
-    @Column({
-        type : 'geometry',
-        spatialFeatureType: 'Point',
-        srid:4326,
-        select:false
-    })
-    coordinate : string;
+  @Column()
+  city: string;
 
-    @Column()
-    city: string;
+  @Column()
+  first: string;
 
-    @Column()
-    first: string;
-    
-    @Column({nullable:true})
-    second: string;
-    
-    // @Column({nullable:true})
-    // third!: string;
-    
-    // @Column({nullable:true})
-    // fourth!: string;
+  @Column({ nullable: true })
+  second: string;
 
-};
+  // @Column({nullable:true})
+  // third!: string;
+
+  // @Column({nullable:true})
+  // fourth!: string;
+}

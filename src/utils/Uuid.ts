@@ -1,4 +1,4 @@
-import {v4} from 'uuid';
-export async function UUID(){
-    return v4();
+import { v4 } from "uuid";
+export async function UUID() {
+  return v4();
 }

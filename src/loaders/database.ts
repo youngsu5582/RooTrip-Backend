@@ -1,25 +1,27 @@
-import {env} from './env';
-import AWS from 'aws-sdk';  
-import { DataSource} from "typeorm";
-import {createClient} from 'redis';
-const {database,s3} = env;
+import { env } from "./env";
+import AWS from "aws-sdk";
+import { DataSource } from "typeorm";
+import { createClient } from "redis";
+const { database, s3 } = env;
 export default new DataSource({
-        type : 'mysql',
-        host: database.host,
-        port: database.port,
-        username: database.username,
-        password: database.password,
-        database: database.name,
-        //logging: "all",
-        synchronize:true,
-        connectTimeout:20000,
-        acquireTimeout:20000,
-        entities: [__dirname+"/../entities/*{.ts,.js}"],
-})
+  type: "mysql",
+  host: database.host,
+  port: database.port,
+  username: database.username,
+  password: database.password,
+  database: database.name,
+  //logging: "all",
+  synchronize: true,
+  connectTimeout: 20000,
+  acquireTimeout: 20000,
+  entities: [__dirname + "/../entities/*{.ts,.js}"]
+});
 
 const redisClient = createClient();
-const s3Client = new AWS.S3({credentials:{
-    accessKeyId:s3.accessKey!,
-    secretAccessKey:s3.secretKey!
-}})
-export {redisClient,s3Client};  
+const s3Client = new AWS.S3({
+  credentials: {
+    accessKeyId: s3.accessKey!,
+    secretAccessKey: s3.secretKey!
+  }
+});
+export { redisClient, s3Client };

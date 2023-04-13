@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   Middleware,
-  ExpressErrorMiddlewareInterface,
+  ExpressErrorMiddlewareInterface
 } from "routing-controllers";
 import { logger } from "../utils/Logger";
 import { Service } from "typedi";
@@ -12,17 +12,14 @@ import { Service } from "typedi";
 @Service()
 @Middleware({ type: "after" })
 export class ErrorHandler implements ExpressErrorMiddlewareInterface {
-  
   error(errors: any, req: Request, res: Response, next: NextFunction): void {
-    
     logger.error(errors);
     console.log(errors);
-    if(errors.length!==0){
+    if (errors.length !== 0) {
       res.status(200).send({
-        
-          message : 'Missing required parameter',
-          errors : errors
-    })  
-  }
+        message: "Missing required parameter",
+        errors: errors
+      });
+    }
   }
 }

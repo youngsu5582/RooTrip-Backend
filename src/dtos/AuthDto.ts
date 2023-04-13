@@ -1,22 +1,21 @@
 import { IsNotEmpty, IsString } from "class-validator";
-type socialType = 'kakao'|'naver'|'google';
-export class SocialDto{
-    @IsNotEmpty()
-    @IsString()
-    public provider : socialType;
+type socialType = "kakao" | "naver" | "google";
+export class SocialDto {
+  @IsNotEmpty()
+  @IsString()
+  public provider: socialType;
 
-    @IsNotEmpty()
-    @IsString()
-    public code : string;
+  @IsNotEmpty()
+  @IsString()
+  public code: string;
 }
 
-export class EmailVerifyDto{
+export class EmailVerifyDto {
+  @IsNotEmpty()
+  @IsString()
+  public email: string;
 
-    @IsNotEmpty()
-    @IsString()
-    public email: string;
-
-    @IsNotEmpty()
-    @IsString()
-    public verifyNumber : string;
+  @IsNotEmpty()
+  @IsString()
+  public verifyNumber: string;
 }

@@ -6,11 +6,11 @@ import { UserService } from "./Userservice";
 import { LoginService } from "./LoginService";
 import { PhotoService } from "./PhotoService";
 export {
-    PostService,
-    TestService,
-    AuthService,
-    GeoService,
-    UserService,
-    LoginService,
-    PhotoService,
-}
+  PostService,
+  TestService,
+  AuthService,
+  GeoService,
+  UserService,
+  LoginService,
+  PhotoService
+};
