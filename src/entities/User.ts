@@ -6,9 +6,7 @@ import {
     UpdateDateColumn,
     PrimaryGeneratedColumn,
     BeforeInsert,
-    PrimaryColumn,
     BeforeUpdate,
-    JoinTable,
     ManyToMany
 }
 from 'typeorm';
@@ -16,13 +14,11 @@ import Post from './Post';
 
 import { GenderType } from '../common';
 import {hashSync,compareSync} from 'bcrypt';
-import {v4} from 'uuid';
+import { defaultColumn } from './common/default-column';
 
 @Entity({name:"user"})
-export default class User{
+export default class User extends defaultColumn{
 
-    @PrimaryGeneratedColumn("uuid")
-    id:string;
 
     @Column({ length: 100 , nullable:true })
     email: string;
@@ -42,11 +38,11 @@ export default class User{
     @OneToMany((type)=>Post,(post)=>post.user)
     posts:Post[];
 
-    @CreateDateColumn({ name: "created_at" })
-    createdAt: Date;
+    // @CreateDateColumn({ name: "created_at" })
+    // createdAt: Date;
   
-    @UpdateDateColumn({ name: "updated_at" })
-    updatedAt: Date;
+    // @UpdateDateColumn({ name: "updated_at" })
+    // updatedAt: Date;
 
     @Column({nullable:true,type:String})
     refreshToken : string|null;

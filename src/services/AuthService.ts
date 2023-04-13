@@ -3,6 +3,7 @@ import { LocalUserDto} from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
 import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
 import { addBlacklist } from "../utils/Redis";
+import { User } from "../entities";
 @Service()
 
 export class AuthService{
@@ -20,8 +21,7 @@ export class AuthService{
             }
             return result;
         }
-        const entity = createUserDto.toEntity();
-        const user = await this._userRepository.save(entity);
+        const user = await this._userRepository.save(User.create({...createUserDto}));
         if(user)
             result = {status:true,message:'회원가입 성공'};
         else    
@@ -45,9 +45,8 @@ export class AuthService{
         return await this._userRepository.getById(id);
     }
     public async socialRegister(createUserDto : SocialLoginType){
-        const entity = createUserDto.toEntity();
         
-        const user = await this._userRepository.save(entity);
+        const user = await this._userRepository.save(User.create({...createUserDto}));
         let result:ResponseType ; 
         if(user)
             result = {status:true,user};

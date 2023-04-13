@@ -25,7 +25,7 @@ export default class Post{
     @Column({ name: "user_id" })
     userId: string;
 
-    @ManyToOne(()=>User,(user)=>user.id,{
+    @ManyToOne(()=>User,(user)=>user.posts,{
         cascade:true,
         onDelete:'CASCADE',
     })

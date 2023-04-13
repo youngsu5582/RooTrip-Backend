@@ -14,7 +14,6 @@ export class PhotoService{
         //const array = [];
         for(const createPhotoDto of createPhotoDtos){
             const result = await this._photoRepository.createPhoto(createPhotoDto,postId);
-            console.log(result);
         }
         }
         catch(err){

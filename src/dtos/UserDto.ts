@@ -19,45 +19,19 @@ export class NaverUserDto extends UserDto{
 
     @IsString()
     public gender : GenderType;
-    public toEntity(){
-        const {id,name,gender,email} = this;
-        const user = new User();
-        user.id = id;
-        user.name = name;
-        user.gender = gender;
-        user.email = email;
-        return user;
-
-    }
 }
 
 export class KakaoUserDto extends UserDto{
     @IsString()
     @IsNotEmpty()  
     public id : string;
-    public toEntity(){
-        const {id,name} = this;
-        const user = new User();
-        user.id = id;
-        user.name = name;
-        
-        return user;
-    }
 }
 export class GoogleUserDto extends UserDto{
     @IsString()
     @IsNotEmpty()  
     public id : string;
-    public toEntity(){
-        const {id,name} = this;
-        const user = new User();
-        
-        user.id = id;
-        user.name = name;
-        return user;
-    }
-}
 
+}
 export class LocalUserDto extends UserDto{
     @IsNotEmpty()
     @IsEmail()
@@ -76,19 +50,20 @@ export class LocalUserDto extends UserDto{
 
     public gender : GenderType;
 
-    public toEntity(){
-        const {email,name,
-            nickname,password,gender} = this;
-        const user = new User();
-        user.email = email;
-        user.name = name;
-        user.nickname = nickname;
-        user.password = password;
-        user.gender = gender;   
-        
-        return user;
-    }
+    // public toEntity(){
+    //     const {email,name,
+    //          nickname,password,gender} = this;
+    //     const user = new User();
+    //     user.email = email;
+    //     user.name = name;
+    //     user.nickname = nickname;
+    //     user.password = password;
+    //     user.gender = gender;   
+    //     return user;
+    // }
 }
+// export type LocalUserDto = Pick<
+// User,'email'|'nickname'|'password'|'gender'|'name'|'createdAt'|'deletedAt'>;
     
 export class LoginUserDto{
     @IsNotEmpty()

@@ -21,15 +21,18 @@ export default class Photo{
     @Column({})
     image_url : string;
     
-    @ManyToOne(()=>Post,(post)=>post.id,{
+
+    @Column({ name: "post_id" })
+    postId: string;
+
+    @ManyToOne(()=>Post,(post)=>post.photos,{
         cascade:true,
         onDelete:'CASCADE',
     })
-    @Column({ name: "post_id" })
-    postId: string;
     @JoinColumn({ name: "post_id" })
     post:Post;
     
+
     @Index({spatial:true})
     @Column({
         type : 'geometry',
@@ -48,10 +51,10 @@ export default class Photo{
     @Column({nullable:true})
     second: string;
     
-    @Column({nullable:true})
-    third: string;
+    // @Column({nullable:true})
+    // third!: string;
     
-    @Column({nullable:true})
-    fourth: string;
+    // @Column({nullable:true})
+    // fourth!: string;
 
 };

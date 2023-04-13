@@ -54,7 +54,6 @@ export class LoginService{
         const result : KakaoUserDto = {
             id: userInfo.id,
             name: userInfo.properties.nickname,
-            toEntity : KakaoUserDto.prototype.toEntity,
         }
         return result;
     }
@@ -75,7 +74,6 @@ export class LoginService{
             name : userInfo.name,
             gender : userInfo.gender,
             email: 'n_'+userInfo.email,
-            toEntity : NaverUserDto.prototype.toEntity,
         }
         return result;
     }
@@ -97,11 +95,9 @@ export class LoginService{
             authorization: `Bearer ${data.access_token}`
         },
     })
-    console.log(userInfo);
         const result : GoogleUserDto = {
             id:userInfo.data.id ,
-            name : userInfo.data.name,
-            toEntity : GoogleUserDto.prototype.toEntity,
+            name : userInfo.data.name
         }
         return result;
     }
