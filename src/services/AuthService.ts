@@ -20,9 +20,9 @@ export class AuthService {
       };
       return result;
     }
-    const user = await this._userRepository.save(
-      User.create({ ...createUserDto })
-    );
+    const user = await this._userRepository
+      .save(User.create({ ...createUserDto }))
+      .catch(() => null);
     if (user) result = { status: true, message: "회원가입 성공" };
     else result = { status: false, message: "회원가입에 실패했습니다." };
     return result;
