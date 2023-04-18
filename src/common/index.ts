@@ -11,8 +11,7 @@ type SuccessResponseType = {
   status: true;
   httpCode?: number;
   message?: string;
-  data?: unknown;
-  user?: User;
+  data?: any;
 };
 
 type CoordinateType = {

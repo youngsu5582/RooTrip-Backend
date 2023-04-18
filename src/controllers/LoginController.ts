@@ -30,7 +30,7 @@ export class LoginController {
     if (result.status === false) {
       return res.status(200).send(result);
     }
-    const user = result.user!;
+    const user = result.data!;
     const { accessToken, refreshToken } = generateToken(user);
     await this.authService.saveRefreshToken(user.id, refreshToken);
     return {
@@ -65,7 +65,7 @@ export class LoginController {
       if (!result.status) {
         return res.status(200).send(result.message);
       }
-      user = result.user!;
+      user = result.data!;
     }
     const { accessToken, refreshToken } = generateToken(user);
     await this.authService.saveRefreshToken(user.id, refreshToken);

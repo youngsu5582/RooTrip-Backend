@@ -9,7 +9,7 @@ import { CoordinateType } from "../common";
 export class PhotoController {
   constructor(private geoservice: GeoService) {}
   @HttpCode(200)
-  @Get("/temp")
+  @Get("/reverse")
   @OpenAPI({
     description: "사진 좌표"
   })
