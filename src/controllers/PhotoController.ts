@@ -1,8 +1,16 @@
 import { Service } from "typedi";
-import { Get, HttpCode, JsonController, QueryParam } from "routing-controllers";
+import {
+  Body,
+  Get,
+  HttpCode,
+  JsonController,
+  Post,
+  QueryParam
+} from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { GeoService } from "../services";
 import { CoordinateType } from "../common";
+import { signedUrl } from "../utils/s3";
 
 @JsonController("/photo")
 @Service()
@@ -22,7 +30,12 @@ export class PhotoController {
       latitude: latitude,
       longitude: longitude
     };
-
     return await this.geoservice.getAddress(coordinate);
+  }
+
+  @HttpCode(201)
+  @Post("/signed")
+  public async getSigned(@Body() fileNames: string[]) {
+    return await signedUrl(fileNames);
   }
 }

@@ -23,7 +23,8 @@ export class LoginService {
     const user = await this._userRepository.findOne({ where: { email } });
     let result: ResponseType;
     if (user) {
-      if (await user.comparePassword(password)) result = { status: true, data:user };
+      if (await user.comparePassword(password))
+        result = { status: true, data: user };
       else result = { status: false, message: "비밀번호가 일치하지 않습니다." };
     } else {
       result = { status: false, message: "해당 이메일이 없습니다." };

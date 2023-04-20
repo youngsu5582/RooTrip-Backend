@@ -13,13 +13,13 @@ export default class District {
   @Column()
   first: string;
 
-  @Column({ nullable: true ,select:false})
+  @Column({ nullable: true, select: false })
   second: string;
 
-  @Column({ nullable: true , select:false })
+  @Column({ nullable: true, select: false })
   third: string;
 
-  @Column({ nullable: true , select:false })
+  @Column({ nullable: true, select: false })
   fourth: string;
 
   @Index({ spatial: true })

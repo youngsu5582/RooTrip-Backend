@@ -1,5 +1,4 @@
 import { GoogleUserDto, KakaoUserDto, NaverUserDto } from "../dtos/UserDto";
-import { User } from "../entities";
 
 type GenderType = "m" | "w" | "";
 type FailureResponseType = {

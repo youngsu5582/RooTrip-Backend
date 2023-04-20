@@ -50,7 +50,7 @@ export class AuthService {
       User.create({ ...createUserDto })
     );
     let result: ResponseType;
-    if (user) result = { status: true, data:user };
+    if (user) result = { status: true, data: user };
     else result = { status: false, message: "회원가입에 실패했습니다." };
     return result;
   }
