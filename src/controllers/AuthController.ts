@@ -5,6 +5,7 @@ import {
   JsonController,
   Post,
   QueryParam,
+  Req,
   Res,
   UseBefore
 } from "routing-controllers";
@@ -12,7 +13,7 @@ import { Service } from "typedi";
 import { AuthService } from "../services";
 import { OpenAPI } from "routing-controllers-openapi";
 import { LocalUserDto } from "../dtos/UserDto";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { generateAccessToken } from "../utils/jwToken";
 import {
   checkAccessToken,
@@ -51,9 +52,9 @@ export class AuthController {
     security: [{ bearerAuth: [] }]
   })
   @UseBefore(checkRefreshToken)
-  public async refresh(@Res() res: Response) {
-    const userId = res.locals.jwtPayload.userId;
-    const refreshToken = res.locals.token;
+  public async refresh(@Req() req: Request, @Res() res: Response) {
+    const userId = req.user.jwtPayload.userId;
+    const refreshToken = req.user.token;
     const user = await this.authService.validateUserToken(userId, refreshToken);
     if (!user) {
       return res.status(401).send({
@@ -88,10 +89,10 @@ export class AuthController {
   @OpenAPI({
     description: "로그아웃을 합니다."
   })
-  public async logout(@Res() res: Response) {
+  public async logout(@Req() req: Request) {
     const result = await this.authService.logout(
-      res.locals.jwtPayload,
-      res.locals.token
+      req.user.jwtPayload,
+      req.user.token
     );
     if (result) return true;
     else return false;

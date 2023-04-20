@@ -57,6 +57,7 @@ export class AuthService {
   public async logout(jwtPayload: CustomJwtPayload, token: string) {
     const expiresIn = jwtPayload.exp - jwtPayload.iat;
     await addBlacklist(token, expiresIn);
+
     return await this._userRepository.deleteRefreshTokenById(jwtPayload.userId);
   }
   public async changePassword(email: string, newPassword: string) {

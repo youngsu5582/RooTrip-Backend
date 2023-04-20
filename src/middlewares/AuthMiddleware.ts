@@ -43,8 +43,10 @@ export const checkAccessToken = async (
       if (await checkBlacklist(token)) {
         new Error();
       }
-      res.locals.jwtPayload = jwtPayload;
-      res.locals.token = token;
+      req.user = {
+        jwtPayload,
+        token
+      };
     }
   } catch (error) {
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
@@ -67,8 +69,10 @@ export const checkRefreshToken = (
   const token = extractRefreshToken(req);
   try {
     const jwtPayload = decodeRefreshToken(token);
-    res.locals.jwtPayload = jwtPayload;
-    res.locals.token = token;
+    req.user = {
+      jwtPayload,
+      token
+    };
   } catch (error) {
     return res.status(401).send({ message: "Invalid or Missing JWT token" });
   }

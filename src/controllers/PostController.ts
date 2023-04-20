@@ -8,13 +8,14 @@ import {
   Param,
   Patch,
   Post,
+  Req,
   Res,
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { PostService, GeoService, PhotoService } from "../services";
 import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 
 @JsonController("/post")
@@ -43,9 +44,9 @@ export class PostController {
   @UseBefore(checkAccessToken)
   public async create(
     @Body() createPostDto: CreatePostDto,
-    @Res() res: Response
+    @Req() req: Request
   ) {
-    const userId = res.locals.jwtPayload.userId;
+    const userId = req.user.jwtPayload.userId;
     const photos = await Promise.all(
       createPostDto.photos.map(async (photo) => {
         return {
@@ -68,9 +69,10 @@ export class PostController {
   public async update(
     @Param("postId") postId: string,
     @Body() updatePostDto: UpdatePostDto,
+    @Req() req: Request,
     @Res() res: Response
   ) {
-    const userId = res.locals.jwtPayload.userId;
+    const userId = req.user.jwtPayload.userId;
 
     if (await this.postService.checkUser(userId, postId)) {
       const result = await this.postService.updatePost(postId, updatePostDto);
@@ -90,8 +92,12 @@ export class PostController {
     description: "게시글을 삭제합니다"
   })
   @UseBefore(checkAccessToken)
-  public async delete(@Param("postId") postId: string, @Res() res: Response) {
-    const userId = res.locals.jwtPayload.userId;
+  public async delete(
+    @Param("postId") postId: string,
+    @Res() res: Response,
+    @Req() req: Request
+  ) {
+    const userId = req.user.jwtPayload.userId;
     if (await this.postService.checkUser(userId, postId)) {
       const result = await this.postService.deletePost(postId);
       if (result) {
@@ -118,8 +124,12 @@ export class PostController {
     description: "게시글을 추천합니다"
   })
   @UseBefore(checkAccessToken)
-  public async like(@Param("postId") postId: string, @Res() res: Response) {
-    const userId = res.locals.jwtPayload.userId;
+  public async like(
+    @Param("postId") postId: string,
+    @Res() res: Response,
+    @Req() req: Request
+  ) {
+    const userId = req.user.jwtPayload.userId;
     const result = await this.postService.likePost(userId, postId);
     if (result) {
       return {

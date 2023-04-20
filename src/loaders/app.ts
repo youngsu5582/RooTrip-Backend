@@ -14,8 +14,8 @@ import { useSentry } from "./sentry";
 import { CustomJwtPayload } from "../common";
 import bodyParser from "body-parser";
 declare module "express" {
-  interface Response {
-    locals: {
+  interface Request {
+    user: {
       jwtPayload: CustomJwtPayload;
       token: string;
     };

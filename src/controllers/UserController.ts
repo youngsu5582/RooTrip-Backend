@@ -4,12 +4,12 @@ import {
   JsonController,
   Param,
   Post,
-  Res,
+  Req,
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { UserService } from "../services";
-import { Response } from "express";
+import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 
 @JsonController("/user")
@@ -24,9 +24,9 @@ export class UserController {
   })
   public async follow(
     @Param("followingId") followingId: string,
-    @Res() res: Response
+    @Req() req: Request
   ) {
-    const followerId = res.locals.jwtPayload.userId;
+    const followerId = req.user.jwtPayload.userId;
     return this._userService.followUser(followerId, followingId);
   }
 
@@ -38,9 +38,9 @@ export class UserController {
   })
   public async unfollow(
     @Param("followingId") followingId: string,
-    @Res() res: Response
+    @Req() req: Request
   ) {
-    const followerId = res.locals.jwtPayload.userId;
+    const followerId = req.user.jwtPayload.userId;
     return this._userService.unfollowUser(followingId, followerId);
   }
 
