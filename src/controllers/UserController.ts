@@ -54,3 +54,4 @@ export class UserController {
     return this._userService.followList(userId);
   }
 }
+  
