@@ -52,5 +52,8 @@ export const env = {
     accessKey: process.env.S3_ACCESS_KEY,
     secretKey: process.env.S3_SECRET_KEY,
     bucketName: String(process.env.S3_BUCKET_NAME)
+  },
+  machine : {
+    url : process.env.MACHINE_URL || "http://localhost:8123"
   }
 };
