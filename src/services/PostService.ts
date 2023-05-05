@@ -1,17 +1,20 @@
 import { Service } from "typedi";
-import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
+import { CreatePostDto, CreateRatingDto, UpdatePostDto } from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
 import { Post } from "../entities/index";
+import { PostRatingRepository } from "../repositories/PostRatingRepository";
 
 @Service()
 export class PostService {
   constructor(
     private readonly postRepository: typeof PostRepository,
-    private readonly likeRepository: typeof LikeRepository
+    private readonly likeRepository: typeof LikeRepository,
+    private readonly postRatingRepository :typeof PostRatingRepository
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
+    this.postRatingRepository = PostRatingRepository;
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
@@ -35,5 +38,15 @@ export class PostService {
   public async likePost(userId: string, postId: string) {
     if (await this.likeRepository.checkDuplicate(userId, postId)) return false;
     else return await this.likeRepository.save({ userId, postId });
+  }
+  public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){
+    try{
+      
+      createRatingDtos.forEach((createRatingDto)=>{
+        this.postRatingRepository.save({...createRatingDto,userId})});
+    }
+    catch(err){
+    }
+    
   }
 }

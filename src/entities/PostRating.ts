@@ -8,10 +8,10 @@ export default class PostRating extends BaseEntity {
   id: number;
 
   @Column({name:"post_id"})
-  postId: number;
+  postId: string;
 
   @Column({name:"user_id"})
-  userId: number;
+  userId: string;
   
   @ManyToOne(() => Post, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })

@@ -14,7 +14,7 @@ import {
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { PostService, GeoService, PhotoService } from "../services";
-import { CreatePostDto, UpdatePostDto } from "../dtos/PostDto";
+import { CreatePostDto, CreateRatingDto, UpdatePostDto } from "../dtos/PostDto";
 import { Request, Response } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 
@@ -22,7 +22,7 @@ import { checkAccessToken } from "../middlewares/AuthMiddleware";
 @Service()
 export class PostController {
   constructor(
-    private postService: PostService,
+    private readonly _postService: PostService,
     private readonly _geoService: GeoService,
     private readonly _photoService: PhotoService
   ) {}
@@ -33,7 +33,7 @@ export class PostController {
     description: "해당 게시글을 조회합니다"
   })
   public async getOne(@Param("postId") postId: string) {
-    const result = await this.postService.getPostById(postId);
+    const result = await this._postService.getPostById(postId);
     return result;
   }
   @HttpCode(200)
@@ -49,16 +49,14 @@ export class PostController {
     const userId = req.user.jwtPayload.userId;
     const photos = await Promise.all(
       createPostDto.newPhotos.map(async (photo) => {
-        
         return {
           image_url: photo.image_url,
-          
           ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
         };
       })
     );
 
-    const post = await this.postService.createPost(createPostDto, userId);
+    const post = await this._postService.createPost(createPostDto, userId);
     return await this._photoService.createPhotos(photos, post.id);
   }
   @HttpCode(200)
@@ -75,8 +73,8 @@ export class PostController {
   ) {
     const userId = req.user.jwtPayload.userId;
 
-    if (await this.postService.checkUser(userId, postId)) {
-      const result = await this.postService.updatePost(postId, updatePostDto);
+    if (await this._postService.checkUser(userId, postId)) {
+      const result = await this._postService.updatePost(postId, updatePostDto);
       // 수정못할시도 구현해야함.
       return result;
     } else {
@@ -99,8 +97,8 @@ export class PostController {
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
-    if (await this.postService.checkUser(userId, postId)) {
-      const result = await this.postService.deletePost(postId);
+    if (await this._postService.checkUser(userId, postId)) {
+      const result = await this._postService.deletePost(postId);
       if (result) {
         return {
           status: "ok",
@@ -131,7 +129,7 @@ export class PostController {
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
-    const result = await this.postService.likePost(userId, postId);
+    const result = await this._postService.likePost(userId, postId);
     if (result) {
       return {
         status: true,
@@ -143,5 +141,18 @@ export class PostController {
         message: "추천 중복입니다!"
       };
     }
+  }
+  @HttpCode(201)
+  @Post("/interaction")
+  @OpenAPI({
+    summary:"유저-게시글 상호작용 반영",
+    description : "사용자 기반 머신러닝 추천 위한 유저-게시글 간 상호작용을 저장합니다.",
+    
+  })
+  @UseBefore(checkAccessToken)
+  public async interaction(@Body() createRatingDtos : CreateRatingDto[],@Req() req : Request){
+    const userId = req.user.jwtPayload.userId;
+    await this._postService.createPostRating(userId,createRatingDtos);
+    return true;
   }
 }

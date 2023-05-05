@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsObject, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
 type photoType = {
   id:number;
   feedOrder : number;
@@ -34,4 +34,15 @@ export class UpdatePostDto {
   @IsNotEmpty()
   @IsString()
   public content: string;
+}
+
+export class CreateRatingDto{
+
+  @IsNotEmpty()
+  @IsString()
+  public postId: string;
+  
+  @IsNotEmpty()
+  @IsNumber()
+  public rating : number;
 }
