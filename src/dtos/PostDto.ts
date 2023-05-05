@@ -1,22 +1,29 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
-import { CoordinateType } from "../common";
-
+import { IsArray, IsNotEmpty, IsObject, IsString } from "class-validator";
 type photoType = {
+  id:number;
+  feedOrder : number;
+  fileName:string;
   image_url: string;
-  coordinateType: CoordinateType;
+  dateTime : Date;
+  latitude : string;
+  longitude : string;
 };
+type articleType = {
+  title : string;
+  content : string;
+}
 export class CreatePostDto {
   @IsNotEmpty()
-  @IsString()
-  public title: string;
+  @IsObject()
+  public article: articleType;
 
   @IsNotEmpty()
-  @IsArray({})
-  public photos: photoType[];
+  @IsArray()
+  public newPhotos: photoType[];
 
   @IsNotEmpty()
-  @IsString()
-  public content: string;
+  @IsArray()
+  public routes : number[];
 }
 
 export class UpdatePostDto {

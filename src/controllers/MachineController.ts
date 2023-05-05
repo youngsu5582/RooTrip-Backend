@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { Body, Get, HttpCode, JsonController, Post, Res } from "routing-controllers";
+import { Get, HttpCode, JsonController } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 
 import { MachineService } from "../services";
@@ -24,4 +24,6 @@ export class MachineController {
     public async testConnection() {
         return await this._machineService.connect();
     }
+
+    
 }

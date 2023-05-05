@@ -6,7 +6,7 @@ const bucketName = env.s3.bucketName;
 export async function signedUrl(objectKeys: string[]) {
   return objectKeys.map((objectKey) =>
     client.getSignedUrl("putObject", {
-      //ACL : 'public-read',
+      ACL : 'public-read',
       Bucket: bucketName,
       Key: objectKey,
       Expires: 1800,

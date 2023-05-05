@@ -12,6 +12,7 @@ export class PhotoService {
     try {
       for (const createPhotoDto of createPhotoDtos) {
         await this._photoRepository.createPhoto(createPhotoDto, postId);
+        return true;
       }
     } catch (err) {
       logger.error(err);

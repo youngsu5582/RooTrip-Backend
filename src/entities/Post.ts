@@ -26,7 +26,15 @@ export default class Post extends defaultColumn {
   @Column({ type: "int", default: 0 })
   like: number;
 
+  @Column({type:"int",default : 0})
+  views : number;
+
+  @Column({type:"simple-array"})
+  routes:number[];
+
   // 차후 수정
   @OneToMany(() => Photo, (photo) => photo.post)
   photos: Photo[];
+  
+  
 }

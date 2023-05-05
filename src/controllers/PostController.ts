@@ -48,17 +48,18 @@ export class PostController {
   ) {
     const userId = req.user.jwtPayload.userId;
     const photos = await Promise.all(
-      createPostDto.photos.map(async (photo) => {
+      createPostDto.newPhotos.map(async (photo) => {
+        
         return {
           image_url: photo.image_url,
-          ...(await this._geoService.getAddress(photo.coordinateType))
+          
+          ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
         };
       })
     );
 
     const post = await this.postService.createPost(createPostDto, userId);
-    const result = await this._photoService.createPhotos(photos, post.id);
-    return result;
+    return await this._photoService.createPhotos(photos, post.id);
   }
   @HttpCode(200)
   @Patch("/:postId")

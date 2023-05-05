@@ -16,10 +16,11 @@ export class PostService {
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
     return await this.postRepository.save(
-      Post.create({ ...createPostDto, userId })
+      Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId })
     );
   }
   public async getPostById(postId: string) {
+    
     return await this.postRepository.getPostById(postId);
   }
   public async updatePost(postId: string, updatePostDto: UpdatePostDto) {
