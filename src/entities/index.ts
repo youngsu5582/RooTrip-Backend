@@ -3,6 +3,6 @@ import Post from "./Post";
 import District from "./District";
 import Photo from "./Photo";
 import Follower from "./Follower";
+import PostRating from "./PostRating";
 
-
-export { User, Post, District, Photo, Follower };
+export { User, Post, District, Photo, Follower , PostRating };
