@@ -20,6 +20,8 @@ import {
   checkRefreshToken
 } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
+import { isErrorCheck } from "../errors";
+import { createResponseForm } from "../interceptors/Transformer";
 @JsonController("/auth")
 @Service()
 export class AuthController {
@@ -37,7 +39,9 @@ export class AuthController {
   })
   public async register(@Body() userDto: LocalUserDto) {
     const result = await this.authService.register(userDto);
-    return result;
+    if(isErrorCheck(result))
+      return result;
+    return createResponseForm(undefined);
   }
 
   @HttpCode(201)

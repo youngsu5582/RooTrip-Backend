@@ -4,6 +4,8 @@ import { UserRepository } from "../repositories";
 import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
 import { addBlacklist } from "../utils/Redis";
 import { User } from "../entities";
+import typia from "typia";
+import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED } from "../errors/auth-error";
 @Service()
 export class AuthService {
   private readonly _userRepository: typeof UserRepository;
@@ -11,21 +13,18 @@ export class AuthService {
     this._userRepository = UserRepository;
   }
   public async register(createUserDto: LocalUserDto) {
-    let result: ResponseType;
     const email = createUserDto.email;
-    if (await this._userRepository.getByEmail(email)) {
-      result = {
-        status: false,
-        message: "이메일이 중복입니다."
-      };
-      return result;
+    if (await this._userRepository.getByEmail(email) && email !==null) {
+      return typia.random<ALREADY_EXISTED_EMAIL>();
     }
-    const user = await this._userRepository
+    try{
+      await this._userRepository
       .save(User.create({ ...createUserDto }))
-      .catch(() => null);
-    if (user) result = { status: true, message: "회원가입 성공" };
-    else result = { status: false, message: "회원가입에 실패했습니다." };
-    return result;
+      return true;
+    }
+    catch{
+      return typia.random<LOCAL_REGISTER_FAILED>();
+    }
   }
 
   public async validateUserToken(id: string, refreshToken: string) {

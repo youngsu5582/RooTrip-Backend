@@ -1,24 +1,43 @@
 {
-   "compilerOptions": {
-    "module": "CommonJS",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    
-    "esModuleInterop": true,
-    "target": "es2020",
-    "sourceMap": true,
-    "outDir": "./dist",
-//    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "strict": true,
-   },
-   "exclude": ["node_modules", "build","test"]
+  "compilerOptions": {
+   "module": "CommonJS",
+   "declaration": true,
+   "removeComments": true,
+   "emitDecoratorMetadata": true,
+   "experimentalDecorators": true,
+   "allowSyntheticDefaultImports": true,
+   "esModuleInterop": true,
+   "target": "es2020",
+   "sourceMap": true,
+   "outDir": "./dist",
+   "incremental": true,
+   "skipLibCheck": true,
+   "strictNullChecks": false,
+   "noImplicitAny": false,
+   "strictBindCallApply": false,
+   "forceConsistentCasingInFileNames": false,
+   "noFallthroughCasesInSwitch": false,
+   "strict": true,
+    "plugins": [
+      {
+        "transform": "typia/lib/transform",
+        "validate": "assert",
+        /**
+         * Validate JSON typed response body.
+         *
+         *   - "assert": Use typia.assertStringify() function
+         *   - "is": Use typia.isStringify() function
+         *   - "validate": Use typia.validateStringify() function
+         *   - "stringify": Use typia.stringify() function, but dangerous
+         *   - null: Just use JSON.stringify() function, without boosting
+         */
+        "stringify": "assert"
+      }
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "test"
+  ]
 }

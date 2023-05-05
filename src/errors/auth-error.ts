@@ -24,3 +24,7 @@ export interface NOT_EXISTED_EMAIL extends ERROR {
   status: false;
   message: "해당 이메일이 없습니다.";
 }
+export interface NOT_MATCH_PARAMETER extends ERROR {
+  status : false;
+  message : "입력값이 유효하지 않습니다.";
+}

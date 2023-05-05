@@ -14,6 +14,7 @@ import { defaultColumn } from "./common/default-column";
 
 @Entity({ name: "user" })
 export default class User extends defaultColumn {
+  
   @Column({ length: 100, nullable: true })
   email: string;
 

@@ -1,4 +1,4 @@
-import { Try } from "src/types";
+import { Try } from "../types";
 export function createResponseForm<T>(data: T, message?: string): Try<T> {
   return {
     status: true,
