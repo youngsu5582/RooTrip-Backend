@@ -22,6 +22,8 @@ import {
 import { checkType } from "../common";
 import { isErrorCheck } from "../errors";
 import { createResponseForm } from "../interceptors/Transformer";
+import typia from "typia";
+import { TOKEN_NOT_MATCH_USER } from "../errors/auth-error";
 @JsonController("/auth")
 @Service()
 export class AuthController {
@@ -60,13 +62,10 @@ export class AuthController {
     const userId = req.user.jwtPayload.userId;
     const refreshToken = req.user.token;
     const user = await this.authService.validateUserToken(userId, refreshToken);
-    if (!user) {
-      return res.status(401).send({
-        status: false,
-        message: "유저 정보와 RefreshToken이 일치하지 않습니다."
-      });
-    }
+    if (!user) 
+      return res.status(403).json(typia.random<TOKEN_NOT_MATCH_USER>());
     const accessToken = generateAccessToken(user);
+    // 차후 createresponseform 과 data 로 수정해야함.
     return {
       expire: 15 * this.minute,
       accessToken
@@ -94,11 +93,12 @@ export class AuthController {
     description: "로그아웃을 합니다."
   })
   public async logout(@Req() req: Request) {
+    const {jwtPayload,token} = req.user;
     const result = await this.authService.logout(
-      req.user.jwtPayload,
-      req.user.token
+      jwtPayload,token
     );
-    if (result) return true;
-    else return false;
+    if(isErrorCheck(result))
+      return result;
+    return createResponseForm(undefined);
   }
 }

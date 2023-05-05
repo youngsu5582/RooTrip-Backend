@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { decodeAccessToken, decodeRefreshToken } from "../utils/jwToken";
 import { checkBlacklist } from "../utils/Redis";
+import typia from "typia";
+import { INVALID_OR_MISSING_TOKEN } from "../errors/auth-error";
 /**
  * 헤더에서 AccessToken을 추출한다.
  * @param req
@@ -74,7 +76,7 @@ export const checkRefreshToken = (
       token
     };
   } catch (error) {
-    return res.status(401).send({ message: "Invalid or Missing JWT token" });
+    return res.status(401).send(typia.random<INVALID_OR_MISSING_TOKEN>());
   }
 
   next();

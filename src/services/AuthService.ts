@@ -5,7 +5,7 @@ import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
 import { addBlacklist } from "../utils/Redis";
 import { User } from "../entities";
 import typia from "typia";
-import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED } from "../errors/auth-error";
+import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED, LOGOUT_FAILED } from "../errors/auth-error";
 @Service()
 export class AuthService {
   private readonly _userRepository: typeof UserRepository;
@@ -55,9 +55,14 @@ export class AuthService {
   }
   public async logout(jwtPayload: CustomJwtPayload, token: string) {
     const expiresIn = jwtPayload.exp - jwtPayload.iat;
-    await addBlacklist(token, expiresIn);
-
-    return await this._userRepository.deleteRefreshTokenById(jwtPayload.userId);
+    try{
+      await addBlacklist(token, expiresIn);
+      await this._userRepository.deleteRefreshTokenById(jwtPayload.userId);
+      return true;  
+    }
+    catch{
+      return typia.random<LOGOUT_FAILED>();
+    }
   }
   public async changePassword(email: string, newPassword: string) {
     const user = await this._userRepository.findOne({ where: { email } });

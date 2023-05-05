@@ -8,6 +8,10 @@ export interface TOKEN_NOT_MATCH_USER extends ERROR {
   status: false;
   message: "토큰 정보가 사용자 정보와 일치하지 않습니다.";
 }
+export interface INVALID_OR_MISSING_TOKEN extends ERROR {
+  status : false;
+  message : "토큰 정보가 부정확합니다.";
+}
 export interface ALREADY_EXISTED_EMAIL extends ERROR {
   status: false;
   message: "중복된 이메일이 있습니다.";
@@ -27,4 +31,8 @@ export interface NOT_EXISTED_EMAIL extends ERROR {
 export interface NOT_MATCH_PARAMETER extends ERROR {
   status : false;
   message : "입력값이 유효하지 않습니다.";
+}
+export interface LOGOUT_FAILED extends ERROR {
+  status : false;
+  message :"로그아웃에 실패했습니다.";
 }
