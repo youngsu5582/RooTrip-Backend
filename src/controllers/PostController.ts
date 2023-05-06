@@ -9,14 +9,18 @@ import {
   Patch,
   Post,
   Req,
-  Res,
+  
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { PostService, GeoService, PhotoService } from "../services";
 import { CreatePostDto, CreateRatingDto, UpdatePostDto } from "../dtos/PostDto";
-import { Request, Response } from "express";
+import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
+import typia from "typia";
+import { ALREADY_EXISTED_COMMENT, POST_CREATE_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import { createResponseForm } from "../interceptors/Transformer";
+import { isErrorCheck } from "../errors";
 
 @JsonController("/post")
 @Service()
@@ -47,17 +51,22 @@ export class PostController {
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
-    const photos = await Promise.all(
-      createPostDto.newPhotos.map(async (photo) => {
-        return {
-          image_url: photo.image_url,
-          ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
-        };
-      })
-    );
-
-    const post = await this._postService.createPost(createPostDto, userId);
-    return await this._photoService.createPhotos(photos, post.id);
+      try{
+        const photos = await Promise.all(
+          createPostDto.newPhotos.map(async (photo) => {
+            return {
+              image_url: photo.image_url,
+              ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
+            };
+          })
+        );
+        const post = await this._postService.createPost(createPostDto, userId);
+        await this._photoService.createPhotos(photos, post.id);
+        return createResponseForm(undefined);
+      }
+      catch{
+        return typia.random<POST_CREATE_FAILED>();
+      }
   }
   @HttpCode(200)
   @Patch("/:postId")
@@ -69,19 +78,19 @@ export class PostController {
     @Param("postId") postId: string,
     @Body() updatePostDto: UpdatePostDto,
     @Req() req: Request,
-    @Res() res: Response
   ) {
     const userId = req.user.jwtPayload.userId;
 
     if (await this._postService.checkUser(userId, postId)) {
-      const result = await this._postService.updatePost(postId, updatePostDto);
-      // 수정못할시도 구현해야함.
-      return result;
+      try{
+        await this._postService.updatePost(postId, updatePostDto);
+      }
+      catch{
+        return typia.random<POST_UPDATE_FAILED>();
+      }
+      
     } else {
-      res.status(401).send({
-        status: "nok",
-        message: "로그인 유저와 게시글 작성자가 일치하지 않습니다."
-      });
+      return typia.random<POST_NOT_MATCH_USER>();
     }
   }
 
@@ -93,28 +102,16 @@ export class PostController {
   @UseBefore(checkAccessToken)
   public async delete(
     @Param("postId") postId: string,
-    @Res() res: Response,
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
     if (await this._postService.checkUser(userId, postId)) {
-      const result = await this._postService.deletePost(postId);
-      if (result) {
-        return {
-          status: "ok",
-          message: "삭제 성공했습니다."
-        };
-      } else {
-        return {
-          status: "nok",
-          message: "삭제 실패했습니다."
-        };
-      }
+      const result = this._postService.deletePost(postId);
+      if(isErrorCheck(result))
+        return result;
+      return createResponseForm(undefined);
     } else {
-      res.status(401).send({
-        status: "nok",
-        message: "로그인 유저와 게시글 작성자가 일치하지 않습니다."
-      });
+      return typia.random<POST_NOT_MATCH_USER>();
     }
   }
   @HttpCode(200)
@@ -125,21 +122,14 @@ export class PostController {
   @UseBefore(checkAccessToken)
   public async like(
     @Param("postId") postId: string,
-    @Res() res: Response,
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
     const result = await this._postService.likePost(userId, postId);
     if (result) {
-      return {
-        status: true,
-        message: "게시글 추천을 완료했습니다."
-      };
+      createResponseForm(undefined);
     } else {
-      return {
-        status: false,
-        message: "추천 중복입니다!"
-      };
+        return typia.random<ALREADY_EXISTED_COMMENT>();
     }
   }
   @HttpCode(201)
@@ -152,7 +142,9 @@ export class PostController {
   @UseBefore(checkAccessToken)
   public async interaction(@Body() createRatingDtos : CreateRatingDto[],@Req() req : Request){
     const userId = req.user.jwtPayload.userId;
-    await this._postService.createPostRating(userId,createRatingDtos);
-    return true;
+    const result = await this._postService.createPostRating(userId,createRatingDtos);
+    if(isErrorCheck(result))
+      return result;
+    return createResponseForm(undefined);
   }
 }

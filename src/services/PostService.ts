@@ -4,6 +4,8 @@ import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
 import { Post } from "../entities/index";
 import { PostRatingRepository } from "../repositories/PostRatingRepository";
+import typia from "typia";
+import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
 
 @Service()
 export class PostService {
@@ -33,7 +35,13 @@ export class PostService {
     return await this.postRepository.checkUserIdByPostId(userId, postId);
   }
   public async deletePost(postId: string) {
-    return await this.postRepository.delete(postId);
+    try{
+      await this.postRepository.delete(postId);
+      return true;
+    }
+    catch{
+      return typia.random<POST_DELETE_FAILED>();
+    }
   }
   public async likePost(userId: string, postId: string) {
     if (await this.likeRepository.checkDuplicate(userId, postId)) return false;
@@ -41,11 +49,12 @@ export class PostService {
   }
   public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){
     try{
-      
       createRatingDtos.forEach((createRatingDto)=>{
         this.postRatingRepository.save({...createRatingDto,userId})});
+        return true;
     }
     catch(err){
+        return typia.random<RATING_UPLOAD_FAILED>();
     }
     
   }
