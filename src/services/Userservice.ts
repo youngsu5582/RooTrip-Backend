@@ -11,6 +11,9 @@ export class UserService {
     this._userRepository = UserRepository;
     this._followerRepository = FollowerRepository;
   }
+  public async getRandomUser(){
+    return (await this._userRepository.createQueryBuilder().orderBy('RAND()').limit(1).getOne()).id;
+  }
 
   public async followUser(followerId: string, followingId: string) {
     const follower = await this._userRepository.findOne({

@@ -1,17 +1,6 @@
 import { IsArray, IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
-type photoType = {
-  id:number;
-  feedOrder : number;
-  fileName:string;
-  image_url: string;
-  dateTime : Date;
-  latitude : string;
-  longitude : string;
-};
-type articleType = {
-  title : string;
-  content : string;
-}
+import { articleType, photoType } from "../types";
+
 export class CreatePostDto {
   @IsNotEmpty()
   @IsObject()
@@ -25,6 +14,9 @@ export class CreatePostDto {
   @IsArray()
   public routes : number[];
 }
+
+
+
 
 export class UpdatePostDto {
   @IsNotEmpty()

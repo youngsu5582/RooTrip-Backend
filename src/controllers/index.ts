@@ -1,6 +1,6 @@
 import { AuthController } from "./AuthController";
 import { PostController } from "./PostController";
-import { TestController } from "./TestController";
+import { TestDataController } from "./TestController";
 import { PhotoController } from "./PhotoController";
 import { EmailController } from "./EmailController";
 import { MachineController } from "./MachineController";
@@ -10,7 +10,7 @@ export class Controllers {
     return {
       AuthController,
       PostController,
-      TestController,
+      TestDataController,
       PhotoController,
       EmailController,
       MachineController,
@@ -18,4 +18,4 @@ export class Controllers {
   }
 }
 
-export { AuthController, PostController, TestController, PhotoController ,MachineController};
+export { AuthController, PostController, TestDataController, PhotoController ,MachineController};

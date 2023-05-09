@@ -13,8 +13,8 @@ import {
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { PostService, GeoService, PhotoService } from "../services";
-import { CreatePostDto, CreateRatingDto, UpdatePostDto } from "../dtos/PostDto";
+import { PostService, GeoService, PhotoService, MachineService } from "../services";
+import { CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
@@ -28,7 +28,8 @@ export class PostController {
   constructor(
     private readonly _postService: PostService,
     private readonly _geoService: GeoService,
-    private readonly _photoService: PhotoService
+    private readonly _photoService: PhotoService,
+    private readonly _machineService : MachineService,
   ) {}
   @HttpCode(200)
   @Get("/:postId")
@@ -147,4 +148,17 @@ export class PostController {
       return result;
     return createResponseForm(undefined);
   }
+  @Get("")
+  @HttpCode(200)
+  @OpenAPI({
+    description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
+  })
+  @UseBefore(checkAccessToken)
+  public async getMany(@Req() req : Request){
+    const userId = req.user.jwtPayload.userId;
+    const posts = await this._machineService.getPostsByUserId(userId);
+    const refined_posts = await this._postService.refinePost(posts);
+    return refined_posts;
+  }
+
 }

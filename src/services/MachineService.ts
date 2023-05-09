@@ -13,4 +13,9 @@ export class MachineService {
     else
         return false
   }
+  public async getPostsByUserId(userId:string){
+    const result = await axios.post(`${machine.url}/machine/getPosts`,{userId}) as string[];
+    
+    return result;
+  }
 }

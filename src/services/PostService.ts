@@ -1,11 +1,12 @@
 import { Service } from "typedi";
-import { CreatePostDto, CreateRatingDto, UpdatePostDto } from "../dtos/PostDto";
+import { CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
 import { Post } from "../entities/index";
 import { PostRatingRepository } from "../repositories/PostRatingRepository";
 import typia from "typia";
 import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
+import { In, IsNull } from "typeorm";
 
 @Service()
 export class PostService {
@@ -56,6 +57,14 @@ export class PostService {
     catch(err){
         return typia.random<RATING_UPLOAD_FAILED>();
     }
-    
+  }
+
+  public async refinePost(posts:string[]){
+    return await this.postRepository.find({
+      where:{
+        id:In(posts),
+        deletedAt:IsNull()
+      }
+    })
   }
 }
