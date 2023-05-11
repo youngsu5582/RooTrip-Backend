@@ -53,6 +53,7 @@ export class PostController {
   ) {
     const userId = req.user.jwtPayload.userId;
       try{
+        
         const photos = await Promise.all(
           createPostDto.newPhotos.map(async (photo) => {
             return {
@@ -138,7 +139,6 @@ export class PostController {
   @OpenAPI({
     summary:"유저-게시글 상호작용 반영",
     description : "사용자 기반 머신러닝 추천 위한 유저-게시글 간 상호작용을 저장합니다.",
-    
   })
   @UseBefore(checkAccessToken)
   public async interaction(@Body() createRatingDtos : CreateRatingDto[],@Req() req : Request){

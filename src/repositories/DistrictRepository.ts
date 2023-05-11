@@ -4,6 +4,7 @@ import { logger } from "../utils/Logger";
 
 export const DistrictRepository = database.getRepository(District).extend({
   async getAddressByPoint(coordinate: string) {
+    //console.log(coordinate);
     return await this.query(
       `
         SELECT *
