@@ -1,12 +1,12 @@
 import { Service } from "typedi";
-import { Body, HttpCode, JsonController, Post, Res } from "routing-controllers";
+import { Body, HttpCode, JsonController, Post } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { Response } from "express";
 import { LoginUserDto } from "../dtos/UserDto";
-import { SocialLoginType } from "../common";
 import { generateToken } from "../utils/jwToken";
 import { SocialDto } from "../dtos/AuthDto";
 import { AuthService, LoginService } from "../services";
+import { createResponseForm } from "../interceptors/Transformer";
+import { isErrorCheck } from "../errors";
 @JsonController("/auth")
 @Service()
 export class LoginController {
@@ -25,55 +25,50 @@ export class LoginController {
       "201": {}
     }
   })
-  public async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
+  public async login(@Body() loginUserDto: LoginUserDto) {
     const result = await this.loginService.localLogin(loginUserDto);
-    if (result.status === false) {
-      return res.status(200).send(result);
-    }
-    const user = result.data!;
+    if(isErrorCheck(result))
+      return result;
+    const user = result.data;
     const { accessToken, refreshToken } = generateToken(user);
     await this.authService.saveRefreshToken(user.id, refreshToken);
-    return {
-      status: result.status,
+    const data = {
       expire: 15 * this.minute,
       accessToken,
       refreshToken
     };
+    return createResponseForm(data);
   }
+  
   @HttpCode(201)
   @Post("/social")
   @OpenAPI({
     description: "소셜을 통해 로그인을 합니다."
   })
-  public async socialLogin(@Body() socialDto: SocialDto, @Res() res: Response) {
-    let data: SocialLoginType;
+  public async socialLogin(@Body() socialDto: SocialDto) {
+    let userInfo;
     const { code, provider } = socialDto;
-    if (provider === "kakao") data = await this.loginService.kakaoLogin(code);
+    if (provider === "kakao") userInfo = await this.loginService.kakaoLogin(code);
     else if (provider === "naver")
-      data = await this.loginService.naverLogin(code);
-    else data = await this.loginService.googleLogin(code);
-    if (!data) {
-      return res.status(401).send({
-        status: false,
-        message: "소설 로그인을 다시 진행해주세요."
-      });
-    }
+      userInfo = await this.loginService.naverLogin(code);
+    else userInfo = await this.loginService.googleLogin(code);
+    if(isErrorCheck(userInfo))
+      return userInfo;
     let user;
-    user = await this.authService.getUserById(data.id);
+    user = await this.authService.getUserById(userInfo.id);
     if (!user) {
-      const result = await this.authService.socialRegister(data);
-      if (!result.status) {
-        return res.status(200).send(result.message);
-      }
+      const result = await this.authService.socialRegister(userInfo);
+      if(isErrorCheck(result))
+        return result;
       user = result.data!;
     }
     const { accessToken, refreshToken } = generateToken(user);
     await this.authService.saveRefreshToken(user.id, refreshToken);
-    return {
-      status: true,
+    const data = {
       expire: 15 * this.minute,
       accessToken,
       refreshToken
     };
+    return createResponseForm(data);
   }
 }

@@ -1,11 +1,11 @@
 import { Service } from "typedi";
 import { LocalUserDto } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
-import { CustomJwtPayload, ResponseType, SocialLoginType } from "../common";
+import { CustomJwtPayload, SocialLoginType } from "../common";
 import { addBlacklist } from "../utils/Redis";
 import { User } from "../entities";
 import typia from "typia";
-import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED, LOGOUT_FAILED } from "../errors/auth-error";
+import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED, LOGOUT_FAILED, SOCIAL_REGISTER_FAILED } from "../errors/auth-error";
 @Service()
 export class AuthService {
   private readonly _userRepository: typeof UserRepository;
@@ -48,10 +48,10 @@ export class AuthService {
     const user = await this._userRepository.save(
       User.create({ ...createUserDto })
     );
-    let result: ResponseType;
-    if (user) result = { status: true, data: user };
-    else result = { status: false, message: "회원가입에 실패했습니다." };
-    return result;
+    
+    if (user) 
+      return { status: true, data: user };
+    else return typia.random<SOCIAL_REGISTER_FAILED>();
   }
   public async logout(jwtPayload: CustomJwtPayload, token: string) {
     const expiresIn = jwtPayload.exp - jwtPayload.iat;

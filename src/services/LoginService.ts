@@ -6,10 +6,11 @@ import {
   LoginUserDto
 } from "../dtos/UserDto";
 import { UserRepository } from "../repositories";
-import { ResponseType } from "../common";
 import { env } from "../loaders/env";
 import axios from "axios";
 import { encrypt } from "../utils/Crypto";
+import typia from "typia";
+import { NOT_CORRECT_PASSWORD, NOT_EXISTED_EMAIL, SOCIAL_LOGIN_FAILED } from "../errors/auth-error";
 const key = env.key;
 
 @Service()
@@ -21,15 +22,13 @@ export class LoginService {
   public async localLogin(loginUserDto: LoginUserDto) {
     const { email, password } = loginUserDto;
     const user = await this._userRepository.findOne({ where: { email } });
-    let result: ResponseType;
+    
     if (user) {
       if (await user.comparePassword(password))
-        result = { status: true, data: user };
-      else result = { status: false, message: "비밀번호가 일치하지 않습니다." };
-    } else {
-      result = { status: false, message: "해당 이메일이 없습니다." };
-    }
-    return result;
+        return {data:user};
+      else return typia.random<NOT_CORRECT_PASSWORD>();
+    } else return typia.random<NOT_EXISTED_EMAIL>();
+    
   }
   public async kakaoLogin(code: string) {
     const accessToken = await axios
@@ -62,7 +61,7 @@ export class LoginService {
         }
       )
       .then((res) => res.data)
-      .catch(() => null);
+      .catch(() => typia.random<SOCIAL_LOGIN_FAILED>());
     const result: KakaoUserDto = {
       id: userInfo.id,
       name: userInfo.properties.nickname
@@ -82,7 +81,7 @@ export class LoginService {
         }
       })
       .then((res) => res.data.response)
-      .catch(() => null);
+      .catch(() => typia.random<SOCIAL_LOGIN_FAILED>());
     const id = encrypt(userInfo.id);
     const result: NaverUserDto = {
       id,

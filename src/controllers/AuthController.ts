@@ -20,7 +20,7 @@ import {
   checkRefreshToken
 } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
-import { isErrorCheck } from "../errors";
+import { DB_CONNECT_FAILED, isErrorCheck } from "../errors";
 import { createResponseForm } from "../interceptors/Transformer";
 import typia from "typia";
 import { TOKEN_NOT_MATCH_USER } from "../errors/auth-error";
@@ -65,11 +65,11 @@ export class AuthController {
     if (!user) 
       return res.status(403).json(typia.random<TOKEN_NOT_MATCH_USER>());
     const accessToken = generateAccessToken(user);
-    // 차후 createresponseform 과 data 로 수정해야함.
-    return {
+    const data = {
       expire: 15 * this.minute,
       accessToken
     };
+    return createResponseForm(data);
   }
   @HttpCode(200)
   @Get("/check")
@@ -80,11 +80,14 @@ export class AuthController {
     @QueryParam("type") type: checkType,
     @QueryParam("data") data: string
   ) {
+  let isDuplicated : boolean;
     if (type === "email")
-      return await this.authService.checkDuplicateEmail(data);
+      isDuplicated =  await this.authService.checkDuplicateEmail(data);
     else if (type === "nickname")
-      return await this.authService.checkDuplicateNickname(data);
-    else return;
+      isDuplicated = await this.authService.checkDuplicateNickname(data);
+    else typia.random<DB_CONNECT_FAILED>();
+    
+    return createResponseForm({isDuplicated});
   }
   @HttpCode(201)
   @Post("/logout")
