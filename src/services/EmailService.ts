@@ -4,6 +4,8 @@ import mailer from "nodemailer";
 import emailConfig from "../../config/emailConfig";
 import { addVerify, getVerify } from "../utils/Redis";
 import { EmailVerifyDto } from "../dtos/AuthDto";
+import typia from "typia";
+import { NOT_COORECT_NUMBER } from "../errors/email-error";
 
 @Service()
 export class EmailService {
@@ -26,7 +28,7 @@ export class EmailService {
     await addVerify(email, verifyNum);
     const result = await transporter.sendMail(mailOptions);
     if (result) return true;
-    else return false;
+    else return typia.random<NOT_COORECT_NUMBER>();
   }
   public async authVerify(emailVerifyDto: EmailVerifyDto) {
     const { email, verifyNumber } = emailVerifyDto;
