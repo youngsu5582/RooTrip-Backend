@@ -49,7 +49,7 @@ export class LocalUserDto extends UserDto {
   @IsString()
   @MinLength(8)
   @Matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()/])[A-Za-z\d`~!@#$%^&*()/]{8,16}$/,
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d`-~!@#$%^&*()/]{8,16}$/,
     { message: "password too weak" }
   )
   public password: string;

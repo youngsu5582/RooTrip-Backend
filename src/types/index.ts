@@ -3,7 +3,7 @@ import { ERROR } from "../errors";
 export interface ResponseForm<T> {
     status: true;
     message?: string;
-    //requestToResponse : `${number}ms`;
+    requestToResponse ?: `${number}ms`;
     data: T;
   }
   

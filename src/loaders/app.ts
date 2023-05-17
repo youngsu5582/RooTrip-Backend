@@ -20,6 +20,9 @@ declare module "express" {
       token: string;
     };
   }
+  interface Response{
+    timestamp : number;
+  }
 }
 
 export class App {
