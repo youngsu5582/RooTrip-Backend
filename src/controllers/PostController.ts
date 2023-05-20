@@ -13,8 +13,8 @@ import {
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { PostService, GeoService, PhotoService, MachineService } from "../services";
-import { CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
+import { PostService, GeoService, PhotoService, MachineService, CommentService } from "../services";
+import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
@@ -30,6 +30,7 @@ export class PostController {
     private readonly _geoService: GeoService,
     private readonly _photoService: PhotoService,
     private readonly _machineService : MachineService,
+    private readonly _commentService : CommentService,
   ) {}
   @HttpCode(200)
   @Get("/:postId")
@@ -160,5 +161,13 @@ export class PostController {
     const refined_posts = await this._postService.refinePost(posts);
     return refined_posts;
   }
-
+  
+  @HttpCode(201)
+  @Post("/:postId/comment")
+  @UseBefore(checkAccessToken)
+  public async createCommnet(@Param("postId") postId: string,@Body() createCommentDto : CreateCommentDto,@Req() req:Request){
+      const userId = req.user.jwtPayload.userId;
+      await this._commentService.create(createCommentDto,postId,userId);
+        
+  }
 }

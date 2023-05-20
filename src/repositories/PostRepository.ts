@@ -3,7 +3,7 @@ import database from "../loaders/database";
 
 export const PostRepository = database.getRepository(Post).extend({
   async getPostById(postId: string) {
-    return await this.findOne({ where: { id: postId } });
+    return await this.findOne({ where: { id: postId },loadEagerRelations:true });
   },
   async checkUserIdByPostId(userId: string, postId: string) {
     return Boolean(

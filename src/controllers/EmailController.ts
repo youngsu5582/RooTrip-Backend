@@ -11,7 +11,7 @@ import { EmailVerifyDto } from "../dtos/AuthDto";
 import { AuthService } from "../services";
 import { EmailService } from "../services/EmailService";
 import { UUID } from "../utils/Uuid";
-import { createResponseForm } from "../interceptors/Transformer";
+import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import typia from "typia";
 import { EMAIL_SEND_FAILED, NOT_COORECT_NUMBER } from "../errors/email-error";
 import { isErrorCheck } from "../errors";
@@ -32,8 +32,9 @@ export class EmailController {
   })
   public async sendVerifyEmail(@BodyParam("email") email: string , @BodyParam("type")type:"register"|"account") {
     //이메일이 있다는거
-    if(!await this._authService.checkDuplicateEmail(email) && type==='register') 
-      return typia.random<ALREADY_EXISTED_EMAIL>();
+    if(type==='register' && !await this._authService.checkDuplicateEmail(email))
+      return createErrorForm(typia.random<ALREADY_EXISTED_EMAIL>());
+      
     const result = await this._emailService.sendVerify(email);
     if(isErrorCheck(result))
       return result;

@@ -3,10 +3,12 @@ import { UserRepository } from "./UserRepository";
 import { DistrictRepository } from "./DistrictRepository";
 import { PhotoRepository } from "./PhotoRepository";
 import { FollowerRepository } from "./FollowerRepository";
+import { CommentRepository } from "./CommentRepository";
 export {
   PostRepository,
   UserRepository,
   DistrictRepository,
   PhotoRepository,
-  FollowerRepository
+  FollowerRepository,
+  CommentRepository
 };

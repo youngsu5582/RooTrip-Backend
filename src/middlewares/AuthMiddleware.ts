@@ -56,7 +56,7 @@ export const checkAccessToken = async (
 
   next();
 };
-
+  
 /**
  * JWT RefreshToken을 체크한다.
  * @param req

@@ -3,12 +3,17 @@ import { ERROR } from "../errors";
 export interface ResponseForm<T> {
     status: true;
     message?: string;
-    requestToResponse ?: `${number}ms`;
     data: T;
   }
-  
 export type Try<T> = ResponseForm<T>;
-export type TryCatch<T, E extends ERROR> = ResponseForm<T> | E;
+
+
+export interface ErrorForm<T> {
+  status:false;
+  message ?:string;
+}
+export type Catch<T> = ErrorForm<T>;
+export type TryCatch<T, E extends ERROR> = ResponseForm<T> | ErrorForm<E>;
 
 
 

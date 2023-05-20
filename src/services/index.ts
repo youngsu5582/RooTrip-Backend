@@ -6,6 +6,7 @@ import { UserService } from "./Userservice";
 import { LoginService } from "./LoginService";
 import { PhotoService } from "./PhotoService";
 import { MachineService } from "./MachineService";
+import { CommentService } from "./CommentService";
 export {
   PostService,
   TestService,
@@ -14,5 +15,6 @@ export {
   UserService,
   LoginService,
   PhotoService,
-  MachineService
+  MachineService,
+  CommentService,
 };

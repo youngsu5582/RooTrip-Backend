@@ -38,3 +38,9 @@ export class CreateRatingDto{
   @IsNumber()
   public rating : number;
 }
+
+export class CreateCommentDto{
+  @IsNotEmpty()
+  @IsString()
+  public comment : string;
+}

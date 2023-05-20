@@ -4,10 +4,14 @@ export interface SOCIAL_REGISTER_FAILED extends ERROR {
   status: false;
   message: "소셜 회원가입에 실패했습니다.";
 }
+
+
 export interface SOCIAL_LOGIN_FAILED extends ERROR {
   status : false;
   message : "소셜 로그인에 실패했습니다.";
 }
+
+
 export interface TOKEN_NOT_MATCH_USER extends ERROR {
   status: false;
   message: "토큰 정보가 사용자 정보와 일치하지 않습니다.";

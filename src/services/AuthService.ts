@@ -18,9 +18,6 @@ export class AuthService {
       return typia.random<ALREADY_EXISTED_EMAIL>();
     }
     try{
-      await this._userRepository
-      .save(User.create({ ...createUserDto }))
-      return true;
     }
     catch{
       return typia.random<LOCAL_REGISTER_FAILED>();
@@ -38,7 +35,7 @@ export class AuthService {
   }
   public async checkDuplicateNickname(nickname: string) {
     return Boolean(
-      !(await this._userRepository.findOne({ where: { nickname: nickname } }))
+      !(await this._userRepository.findOne({ where: { nickname } }))
     );
   }
   public async getUserById(id: string) {

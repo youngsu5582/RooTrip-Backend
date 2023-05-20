@@ -64,11 +64,15 @@ export class LoginController {
     }
     const { accessToken, refreshToken } = generateToken(user);
     await this.authService.saveRefreshToken(user.id, refreshToken);
+
     const data = {
       expire: 15 * this.minute,
       accessToken,
       refreshToken
     };
-    return createResponseForm(data);
+    return createResponseForm(data,"로그인 성공했습니다.");
+
+
+    
   }
 }

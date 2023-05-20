@@ -21,9 +21,10 @@ import {
 } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
 import { DB_CONNECT_FAILED, isErrorCheck } from "../errors";
-import { createResponseForm } from "../interceptors/Transformer";
+import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import typia from "typia";
-import { TOKEN_NOT_MATCH_USER } from "../errors/auth-error";
+import { ALREADY_EXISTED_EMAIL, TOKEN_NOT_MATCH_USER } from "../errors/auth-error";
+import { TryCatch } from "../types";
 @JsonController("/auth")
 @Service()
 export class AuthController {
@@ -39,10 +40,10 @@ export class AuthController {
       "201": {}
     }
   })
-  public async register(@Body() userDto: LocalUserDto) {
+  public async register(@Body() userDto: LocalUserDto) : Promise<TryCatch<undefined,ALREADY_EXISTED_EMAIL>> {
     const result = await this.authService.register(userDto);
     if(isErrorCheck(result))
-      return result;
+      return createErrorForm(result);
     return createResponseForm(undefined);
   }
 
@@ -81,13 +82,15 @@ export class AuthController {
     @QueryParam("data") data: string
   ) {
   let isDuplicated : boolean;
+  
     if (type === "email")
       isDuplicated =  await this.authService.checkDuplicateEmail(data);
     else if (type === "nickname")
       isDuplicated = await this.authService.checkDuplicateNickname(data);
-    else typia.random<DB_CONNECT_FAILED>();
+    else return createErrorForm(typia.random<DB_CONNECT_FAILED>());
+    //else createErrorForm<DB_CONNECT_FAILED>();
+    return {status:isDuplicated,message:isDuplicated?undefined:"중복입니다."};
     
-    return createResponseForm({isDuplicated});
   }
   @HttpCode(201)
   @Post("/logout")
