@@ -39,6 +39,7 @@ export class PostController {
     description: "해당 게시글을 조회합니다"
   })
   public async getOne(@Param("postId") postId: string) {
+    
     const result = await this._postService.getPostById(postId);
     return result;
   }
@@ -158,6 +159,7 @@ export class PostController {
   public async getMany(@Req() req : Request){
     const userId = req.user.jwtPayload.userId;
     const posts = await this._machineService.getPostsByUserId(userId);
+    
     const refined_posts = await this._postService.refinePost(posts);
     return refined_posts;
   }
@@ -168,6 +170,5 @@ export class PostController {
   public async createCommnet(@Param("postId") postId: string,@Body() createCommentDto : CreateCommentDto,@Req() req:Request){
       const userId = req.user.jwtPayload.userId;
       await this._commentService.create(createCommentDto,postId,userId);
-        
   }
 }

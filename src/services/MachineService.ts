@@ -14,7 +14,7 @@ export class MachineService {
         return false
   }
   public async getPostsByUserId(userId:string){
-    const result = await axios.post(`${machine.url}/machine/getPosts`,{userId}) as string[];
+    const result = await axios.post(`${machine.url}/machine/getPosts`,{userId}).catch(()=>null) as string[];
     return result;
   }
 }

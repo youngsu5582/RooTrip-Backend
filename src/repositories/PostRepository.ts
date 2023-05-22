@@ -16,5 +16,8 @@ export const PostRepository = database.getRepository(Post).extend({
       .where("post.created_at >=today", { today })
       .limit(6)
       .getMany();
+  },
+  async getRecentPosts(){
+    return await this.createQueryBuilder("post").orderBy("created_at").getMany();
   }
 });

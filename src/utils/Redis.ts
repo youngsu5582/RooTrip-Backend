@@ -50,3 +50,11 @@ export async function getVerify(email: string) {
     throw Error;
   }
 }
+export async function increasePostView(postId:string){
+  const key = `post_view : ${postId}`;
+  return await redisClient.INCR(key);
+}
+export async function getPostView(postId:string){
+  const key = `post_view : ${postId}`;
+  return await redisClient.get(key);
+}

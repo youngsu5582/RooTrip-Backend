@@ -59,12 +59,17 @@ export class PostService {
     }
   }
 
+
   public async refinePost(posts:string[]){
-    return await this.postRepository.find({
+    const recommendPost = await this.postRepository.getRecentPosts();
+    
+    const refinePost = await this.postRepository.find({
       where:{
         id:In(posts),
         deletedAt:IsNull()
       }
-    })
+    }).catch(()=>null);
+    return [...recommendPost,...(refinePost||[])];
   }
+
 }

@@ -36,5 +36,8 @@ export default class Post extends defaultColumn {
   @OneToMany(() => Photo, (photo) => photo.post)
   photos: Photo[];
   
-  
+  @Column({type:"int",default:0})
+  point : number;
+
+
 }

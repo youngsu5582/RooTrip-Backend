@@ -38,7 +38,6 @@ export const checkAccessToken = async (
   next: NextFunction
 ) => {
   const token = extractAccessToken(req);
-
   try {
     if (token) {
       const jwtPayload = decodeAccessToken(token);
