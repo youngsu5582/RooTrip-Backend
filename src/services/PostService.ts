@@ -7,6 +7,7 @@ import { PostRatingRepository } from "../repositories/PostRatingRepository";
 import typia from "typia";
 import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
 import { In, IsNull } from "typeorm";
+import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
 
 @Service()
 export class PostService {
@@ -70,6 +71,31 @@ export class PostService {
       }
     }).catch(()=>null);
     return [...recommendPost,...(refinePost||[])];
+  }
+  /**
+   * @summary Reddit 의 Nazar Consumer 와 유사한 기능
+   * @description postId 와 userId 를 받아서 , 해당 조회가 조회수를 올릴때 유효한지 검증
+   * 
+   * @param postId 
+   * @param userId 
+   */
+  public async nazar(postId:string,userId:string){
+    return checkPostViews(postId,userId);
+  }
+  /**
+   * 
+   * @summary Reddit 의 Abacus Consumer 와 유사한 기능
+   * @description postId 와 userId를 받아서 , 조회수를 증가시키고 , set 에 userId 저장
+   * 
+   * @param postId 
+   * @param userId 
+   * @returns 
+   */
+  public async abacus(postId:string,userId:string){
+    return increasePostViews(postId,userId);
+  }
+  public async getPostViews(postId:string){
+    return getPostViews(postId);
   }
 
 }

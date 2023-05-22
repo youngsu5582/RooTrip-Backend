@@ -50,11 +50,17 @@ export async function getVerify(email: string) {
     throw Error;
   }
 }
-export async function increasePostView(postId:string){
-  const key = `post_view : ${postId}`;
-  return await redisClient.INCR(key);
+export async function checkPostViews(postId:string,userId:string){
+  const key = `postViewed:${userId}`;
+  return await redisClient.sIsMember(key,postId);
 }
-export async function getPostView(postId:string){
-  const key = `post_view : ${postId}`;
-  return await redisClient.get(key);
+export async function increasePostViews(postId:string,userId:string){
+  const key = `postViews:${postId}`;
+  const log = `postViewed:${userId}`;
+  await redisClient.pfAdd(key,userId);
+    await redisClient.sAdd(log,postId);
+}
+export async function getPostViews(postId:string){
+  const key = `postViews:${postId}`;
+    return await redisClient.pfCount(key);
 }

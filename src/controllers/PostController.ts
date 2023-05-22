@@ -38,10 +38,13 @@ export class PostController {
   @OpenAPI({
     description: "해당 게시글을 조회합니다"
   })
-  public async getOne(@Param("postId") postId: string) {
-    
-    const result = await this._postService.getPostById(postId);
-    return result;
+  public async getOne(@Param("postId") postId: string,@Req() req:Request) {
+    const userId = req.user.jwtPayload.userId;
+    const flag = await this._postService.nazar(postId,userId);
+    if(!flag) await this._postService.abacus(postId,userId);
+    const postViews = await this._postService.getPostViews(postId);
+    const post = await this._postService.getPostById(postId);
+    return createResponseForm({postViews,post});
   }
   @HttpCode(200)
   @Post()
