@@ -22,8 +22,9 @@ export class PostService {
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
+    const thumbnailImage = createPostDto.newPhotos[0].image_url;
     return await this.postRepository.save(
-      Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId })
+      Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId,thumbnailImage })
     );
   }
   public async getPostById(postId: string) {

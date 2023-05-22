@@ -64,3 +64,14 @@ export async function getPostViews(postId:string){
   const key = `postViews:${postId}`;
     return await redisClient.pfCount(key);
 }
+export async function deletePostViews(postId:string){
+  const key = `postViews:${postId}`;
+  if(await redisClient.exists(key)){
+    return await redisClient.del(key);
+  }
+}
+export async function deletePostSets(){
+  const keys = await redisClient.keys('postViews:*');
+  if(keys)return await redisClient.del(keys);
+
+}
