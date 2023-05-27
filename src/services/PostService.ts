@@ -48,13 +48,19 @@ export class PostService {
     }
   }
   public async likePost(userId: string, postId: string) {
+    const post = await this.postRepository.getPostById(postId);
     if (await this.likeRepository.checkDuplicate(userId, postId)) return false;
-    else return await this.likeRepository.save({ userId, postId });
+    else {
+      await this.likeRepository.save(this.likeRepository.create({ userId, postId}))
+      post.like++;
+      await this.postRepository.save(post);
+      return true;
+    }
   }
   public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){
     try{
       createRatingDtos.forEach((createRatingDto)=>{
-        this.postRatingRepository.save({...createRatingDto,userId})});
+        this.postRatingRepository.save(this.postRatingRepository.create({...createRatingDto,userId}))});
         return true;
     }
     catch(err){

@@ -148,7 +148,7 @@ export class PostController {
     const userId = req.user.jwtPayload.userId;
     const result = await this._postService.likePost(userId, postId);
     if (result) {
-      createResponseForm(undefined);
+      return createResponseForm(undefined);
     } else {
         return typia.random<ALREADY_EXISTED_COMMENT>();
     }

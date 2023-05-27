@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  BeforeInsert
+  BaseEntity
 } from "typeorm";
 import { Service } from "typedi";
 import Post from "./Post";
@@ -12,27 +12,29 @@ import User from "./User";
 
 @Service()
 @Entity({ name: "like" })
-export default class Like {
-  constructor() {}
+export default class Like extends BaseEntity{
+  
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ name: "post_id" })
-  postId: string;
 
-  @ManyToOne(() => Post, (post) => post.id, {
+  @Column({ name: "post_id" })
+  postId:string;
+
+  @ManyToOne(() => Post, (post) => post.like, {
     cascade: true,
     onDelete: "CASCADE"
   })
   @JoinColumn({ name: "post_id" })
   post: Post;
 
+
+
   @ManyToOne(() => User, (user) => user.id, {
     cascade: false
   })
+  @JoinColumn({name:"user_id"})
+
+  @Column({name:"user_id"})
   userId: string;
-  @BeforeInsert()
-  async incrementLike() {
-    this.post.like++;
-  }
 }
