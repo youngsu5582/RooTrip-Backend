@@ -70,6 +70,7 @@ export class LoginController {
       accessToken,
       refreshToken
     };
+    console.log(accessToken);
     return createResponseForm(data,"로그인 성공했습니다.");
     
   }

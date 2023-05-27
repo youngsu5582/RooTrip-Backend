@@ -13,9 +13,15 @@ export class CommentService {
         this.commentRepository = CommentRepository;
     }
     public async create(createCommentDto:CreateCommentDto,postId : string , userId:string){
-        this.commentRepository.save(Comment.create({...createCommentDto,postId,userId}));
+        return await this.commentRepository.save(Comment.create({...createCommentDto,postId,userId}));
     }    
     public async getCommentsByPostId(postId:string){
-        this.commentRepository.find({where:{postId}});
+        return await this.commentRepository.find({where:{postId}});
+    }
+    public async delete(commentId:string){
+        return await this.commentRepository.delete(commentId);
+    }
+    public async checkUserIdWithPostId(userId:string,commentId:string,postId:string){
+        return await this.commentRepository.findOne({where:{userId,id:commentId,postId}});
     }
 }

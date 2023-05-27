@@ -11,7 +11,7 @@ export default class Comment extends defaultColumn {
     cascade: true,
     onDelete: "CASCADE"
   })
-  @Column({ name: "post_id" })
+  @Column({ name: "post_id" ,select:false})
   postId: string;
 
   @JoinColumn({ name: "post_id" })
@@ -24,7 +24,7 @@ export default class Comment extends defaultColumn {
     cascade: true,
     onDelete: "CASCADE"
   })
-  @Column({ name: "user_id" })
+  @Column({ name: "user_id",select:false})
   userId: string;
 
   @JoinColumn({ name: "user_id" })

@@ -1,6 +1,7 @@
 import { Service } from "typedi";
 import {
   Body,
+  BodyParam,
   Delete,
   Get,
   HttpCode,
@@ -18,7 +19,7 @@ import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
-import { ALREADY_EXISTED_COMMENT, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import { ALREADY_EXISTED_COMMENT, COMMENT_CREATE_FAILED, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
 
@@ -49,7 +50,7 @@ export class PostController {
       const post = await this._postService.getPostById(postId);
       const comments = await this._commentService.getCommentsByPostId(postId);
       const photos = await this._photoService.getPhotosByPostId(postId);
-      return createResponseForm({postViews,post,comments,photos});
+      return createResponseForm({...{postViews,post},comments,photos});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());
@@ -99,10 +100,11 @@ export class PostController {
     @Req() req: Request,
   ) {
     const userId = req.user.jwtPayload.userId;
-
+    
     if (await this._postService.checkUser(userId, postId)) {
       try{
         await this._postService.updatePost(postId, updatePostDto);
+        return createResponseForm(undefined);
       }
       catch{
         return typia.random<POST_UPDATE_FAILED>();
@@ -184,6 +186,28 @@ export class PostController {
   @UseBefore(checkAccessToken)
   public async createCommnet(@Param("postId") postId: string,@Body() createCommentDto : CreateCommentDto,@Req() req:Request){
       const userId = req.user.jwtPayload.userId;
-      await this._commentService.create(createCommentDto,postId,userId);
+      try{
+        await this._commentService.create(createCommentDto,postId,userId);
+        return createResponseForm(undefined);
+      }
+      catch {
+        return typia.random<COMMENT_CREATE_FAILED>();
+      }
+
+  }
+  @HttpCode(201)
+  @Delete("/:postId/comment")
+  @UseBefore(checkAccessToken)
+  public async deleteCommnet(@Param("postId") postId: string,@Req() req:Request,@BodyParam("commentId")commentId:string){
+      const userId = req.user.jwtPayload.userId;
+      try{
+        if(await this._commentService.checkUserIdWithPostId(userId,commentId,postId))
+          await this._commentService.delete(commentId);
+        return createResponseForm(undefined);
+      }
+      catch {
+        return typia.random<COMMENT_CREATE_FAILED>();
+      }
+
   }
 }

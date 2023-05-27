@@ -27,3 +27,7 @@ export interface POST_GET_FAILED extends ERROR {
     status : false;
     message : "게시글 받는걸 실패했습니다.";
 }
+export interface COMMENT_CREATE_FAILED extends ERROR{
+    status : false;
+    message : "댓글 생성에 실패했습니다.";
+}
