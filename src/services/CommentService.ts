@@ -15,4 +15,7 @@ export class CommentService {
     public async create(createCommentDto:CreateCommentDto,postId : string , userId:string){
         this.commentRepository.save(Comment.create({...createCommentDto,postId,userId}));
     }    
+    public async getCommentsByPostId(postId:string){
+        this.commentRepository.find({where:{postId}});
+    }
 }

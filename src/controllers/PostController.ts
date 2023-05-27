@@ -47,8 +47,9 @@ export class PostController {
       if(!flag) await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
-      
-      return createResponseForm({postViews,post});
+      const comments = await this._commentService.getCommentsByPostId(postId);
+      const photos = await this._photoService.getPhotosByPostId(postId);
+      return createResponseForm({postViews,post,comments,photos});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());

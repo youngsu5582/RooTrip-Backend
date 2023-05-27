@@ -72,8 +72,7 @@ export async function increasePostViews(postId:string,userId:string){
     return redisClient.disconnect();
     
   }
-  catch(err){
-    console.log(err);
+  catch{
     throw Error
   }
 }
