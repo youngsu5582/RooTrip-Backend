@@ -37,7 +37,7 @@ export default class Post extends defaultColumn {
   @Column({type:"int",default:0})
   point : number;
 
-  @Column({})
+  @Column({length:500})
   thumbnailImage : string;
 
 

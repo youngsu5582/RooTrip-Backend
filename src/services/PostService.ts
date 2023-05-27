@@ -22,7 +22,8 @@ export class PostService {
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
-    const thumbnailImage = createPostDto.newPhotos[0].image_url;
+    const thumbnailImage = createPostDto.newPhotos[0].url;
+    
     return await this.postRepository.save(
       Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId,thumbnailImage })
     );
@@ -66,6 +67,7 @@ export class PostService {
     const recommendPost = await this.postRepository.getRecentPosts();
     
     const refinePost = await this.postRepository.find({
+      
       where:{
         id:In(posts),
         deletedAt:IsNull()

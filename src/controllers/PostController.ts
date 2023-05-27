@@ -39,6 +39,7 @@ export class PostController {
     description: "해당 게시글을 조회합니다"
   })
   public async getOne(@Param("postId") postId: string,@Req() req:Request) {
+    
     const userId = req.user.jwtPayload.userId;
     const flag = await this._postService.nazar(postId,userId);
     if(!flag) await this._postService.abacus(postId,userId);
@@ -62,11 +63,12 @@ export class PostController {
         const photos = await Promise.all(
           createPostDto.newPhotos.map(async (photo) => {
             return {
-              image_url: photo.image_url,
+              image_url: photo.url,
               ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
             };
           })
         );
+        
         const post = await this._postService.createPost(createPostDto, userId);
         await this._photoService.createPhotos(photos, post.id);
         return createResponseForm(undefined);

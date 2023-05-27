@@ -6,7 +6,7 @@ import { defaultColumn } from "./common/default-column";
 @Service()
 @Entity({ name: "photo" })
 export default class Photo extends defaultColumn {
-  @Column({})
+  @Column({length:500})
   image_url: string;
 
   @Column({ name: "post_id" })

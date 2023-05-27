@@ -1,7 +1,6 @@
 import { Service } from "typedi";
 import { CreatePhotoDto } from "../dtos/PhotoDto";
 import { PhotoRepository } from "../repositories";
-import { logger } from "../utils/Logger";
 
 @Service()
 export class PhotoService {
@@ -10,12 +9,11 @@ export class PhotoService {
   }
   public async createPhotos(createPhotoDtos: CreatePhotoDto[], postId: string) {
     try {
-      for (const createPhotoDto of createPhotoDtos) {
+      for (const createPhotoDto of createPhotoDtos)
         await this._photoRepository.createPhoto(createPhotoDto, postId);
-        return true;
-      }
-    } catch (err) {
-      logger.error(err);
+      return true;
+    } catch {
+      throw Error;
     }
   }
 }
