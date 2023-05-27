@@ -23,3 +23,7 @@ export interface RATING_UPLOAD_FAILED extends ERROR {
     status : false;
     message : "사용자-게시글 상호작용 업로드를 실패했습니다."
 }
+export interface POST_GET_FAILED extends ERROR {
+    status : false;
+    message : "게시글 받는걸 실패했습니다.";
+}

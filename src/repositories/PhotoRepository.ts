@@ -13,6 +13,7 @@ export const PhotoRepository = database.getRepository(Photo).extend({
   },
   async createPhoto(createPhotoDto: CreatePhotoDto, postId: string) {
     const { city, coordinate, first, second, image_url } = createPhotoDto;
+    
     return await this.query(
       `INSERT INTO photo (id, image_url, post_id, coordinate, city, first, second) VALUES ("${await UUID()}", "${image_url}", "${postId}", ST_GeomFromText("POINT(${
         coordinate.y

@@ -52,26 +52,68 @@ export async function getVerify(email: string) {
 }
 export async function checkPostViews(postId:string,userId:string){
   const key = `postViewed:${userId}`;
-  return await redisClient.sIsMember(key,postId);
+  try{
+    redisClient.connect();
+    const result =  await redisClient.sIsMember(key,postId);
+    redisClient.disconnect();
+    return result;
+  }
+  catch {
+    throw Error
+  }
 }
 export async function increasePostViews(postId:string,userId:string){
-  const key = `postViews:${postId}`;
-  const log = `postViewed:${userId}`;
-  await redisClient.pfAdd(key,userId);
+  try{
+    redisClient.connect();
+    const key = `postViews:${postId}`;
+    const log = `postViewed:${userId}`;
+    await redisClient.pfAdd(key,userId);
     await redisClient.sAdd(log,postId);
+    return redisClient.disconnect();
+    
+  }
+  catch(err){
+    console.log(err);
+    throw Error
+  }
 }
 export async function getPostViews(postId:string){
-  const key = `postViews:${postId}`;
-    return await redisClient.pfCount(key);
+  try{
+    redisClient.connect();
+    const key = `postViews:${postId}`;
+    const result = await redisClient.pfCount(key);
+    redisClient.disconnect();
+    return result;
+  }
+  catch{
+    throw Error
+  }
+
 }
 export async function deletePostViews(postId:string){
+  try{
+    redisClient.connect();
   const key = `postViews:${postId}`;
   if(await redisClient.exists(key)){
-    return await redisClient.del(key);
+    await redisClient.del(key);
+  }
+  redisClient.disconnect();
+  return;
+  }
+  catch{
+    throw Error
   }
 }
 export async function deletePostSets(){
-  const keys = await redisClient.keys('postViews:*');
-  if(keys)return await redisClient.del(keys);
+  try{
+    redisClient.connect();
+    const keys = await redisClient.keys('postViews:*');
+    if(keys)await redisClient.del(keys);
+    redisClient.disconnect();
+    return;
+  }
+  catch{
+    throw Error
+  }
 
 }

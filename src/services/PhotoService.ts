@@ -9,10 +9,9 @@ export class PhotoService {
   }
   public async createPhotos(createPhotoDtos: CreatePhotoDto[], postId: string) {
     try {
-      for (const createPhotoDto of createPhotoDtos)
-        await this._photoRepository.createPhoto(createPhotoDto, postId);
-      return true;
-    } catch {
+      return await Promise.all(createPhotoDtos.map(async (createPhotoDto)=>(await this._photoRepository.createPhoto(createPhotoDto, postId))));
+    } catch(err) {
+      console.log(err);
       throw Error;
     }
   }

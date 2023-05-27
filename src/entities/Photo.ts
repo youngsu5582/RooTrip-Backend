@@ -20,7 +20,7 @@ export default class Photo extends defaultColumn {
   post: Post;
 
   @Index({ spatial: true })
-  @Column({
+  @Column({ 
     type: "geometry",
     spatialFeatureType: "Point",
     srid: 4326,

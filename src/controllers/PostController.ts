@@ -18,8 +18,8 @@ import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
-import { ALREADY_EXISTED_COMMENT, POST_CREATE_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
-import { createResponseForm } from "../interceptors/Transformer";
+import { ALREADY_EXISTED_COMMENT, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
 
 @JsonController("/post")
@@ -41,11 +41,18 @@ export class PostController {
   public async getOne(@Param("postId") postId: string,@Req() req:Request) {
     
     const userId = req.user.jwtPayload.userId;
-    const flag = await this._postService.nazar(postId,userId);
-    if(!flag) await this._postService.abacus(postId,userId);
-    const postViews = await this._postService.getPostViews(postId);
-    const post = await this._postService.getPostById(postId);
-    return createResponseForm({postViews,post});
+    try{
+
+      const flag = await this._postService.nazar(postId,userId);
+      if(!flag) await this._postService.abacus(postId,userId);
+      const postViews = await this._postService.getPostViews(postId);
+      const post = await this._postService.getPostById(postId);
+      
+      return createResponseForm({postViews,post});
+    }
+    catch{
+      return createErrorForm(typia.random<POST_GET_FAILED>());
+    }
   }
   @HttpCode(200)
   @Post()
@@ -60,7 +67,7 @@ export class PostController {
     const userId = req.user.jwtPayload.userId;
       try{
         
-        const photos = await Promise.all(
+        const createPhotoDto = await Promise.all(
           createPostDto.newPhotos.map(async (photo) => {
             return {
               image_url: photo.url,
@@ -70,7 +77,9 @@ export class PostController {
         );
         
         const post = await this._postService.createPost(createPostDto, userId);
-        await this._photoService.createPhotos(photos, post.id);
+        
+        await this._photoService.createPhotos(createPhotoDto, post.id);
+        
         return createResponseForm(undefined);
       }
       catch{

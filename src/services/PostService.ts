@@ -83,7 +83,7 @@ export class PostService {
    * @param userId 
    */
   public async nazar(postId:string,userId:string){
-    return checkPostViews(postId,userId);
+    return await checkPostViews(postId,userId);
   }
   /**
    * 
@@ -95,10 +95,10 @@ export class PostService {
    * @returns 
    */
   public async abacus(postId:string,userId:string){
-    return increasePostViews(postId,userId);
+    return await increasePostViews(postId,userId);
   }
   public async getPostViews(postId:string){
-    return getPostViews(postId);
+    return await getPostViews(postId);
   }
 
 }

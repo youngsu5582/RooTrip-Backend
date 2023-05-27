@@ -63,6 +63,7 @@ export class LoginController {
       user = result.data!;
     }
     const { accessToken, refreshToken } = generateToken(user);
+    console.log(accessToken);
     await this.authService.saveRefreshToken(user.id, refreshToken);
     const data = {
       expire: 15 * this.minute,
