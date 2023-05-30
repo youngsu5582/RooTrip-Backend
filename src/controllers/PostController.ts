@@ -10,11 +10,10 @@ import {
   Patch,
   Post,
   Req,
-  
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { PostService, GeoService, PhotoService, MachineService, CommentService } from "../services";
+import { PostService, GeoService, PhotoService, CommentService } from "../services";
 import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
@@ -22,17 +21,20 @@ import typia from "typia";
 import { ALREADY_EXISTED_COMMENT, COMMENT_CREATE_FAILED, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
+import {env} from '../loaders/env';
 
 @JsonController("/post")
 @Service()
 export class PostController {
+  private readonly s3URL = env.s3.bucketUrl;
   constructor(
     private readonly _postService: PostService,
     private readonly _geoService: GeoService,
     private readonly _photoService: PhotoService,
-    private readonly _machineService : MachineService,
     private readonly _commentService : CommentService,
-  ) {}
+  ) {
+    
+  }
   @HttpCode(200)
   @Get("/:postId")
   @UseBefore(checkAccessToken)
@@ -44,13 +46,17 @@ export class PostController {
     const userId = req.user.jwtPayload.userId;
     try{
 
-      const flag = await this._postService.nazar(postId,userId);
-      if(!flag) await this._postService.abacus(postId,userId);
+      /**
+       * 2023.05.28 Redis 의 pfAdd & pfCount 를 사용할 시 , 중복 Check를 할 필요가 없는거 같아 주석.
+       */
+      await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
-      const comments = await this._commentService.getCommentsByPostId(postId);
-      const photos = await this._photoService.getPhotosByPostId(postId);
-      return createResponseForm({...{postViews,post},comments,photos});
+      post.user = {
+        id : post.user.id,
+        name : post.user.nickname?post.user.nickname:post.user.name
+      } as any;
+      return createResponseForm({...{postViews,post}});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());
@@ -68,21 +74,17 @@ export class PostController {
   ) {
     const userId = req.user.jwtPayload.userId;
       try{
-        
         const createPhotoDto = await Promise.all(
           createPostDto.newPhotos.map(async (photo) => {
             return {
-              image_url: photo.url,
+              image_url: `${this.s3URL}/${photo.fileName}`,
               ...(await this._geoService.getAddress({latitude : photo.latitude,longitude : photo.longitude})),
             };
           })
         );
-        
         const post = await this._postService.createPost(createPostDto, userId);
-        
         await this._photoService.createPhotos(createPhotoDto, post.id);
-        
-        return createResponseForm(undefined);
+        return createResponseForm(undefined,"게시글 작성 완료");
       }
       catch{
         return typia.random<POST_CREATE_FAILED>();
@@ -109,7 +111,6 @@ export class PostController {
       catch{
         return typia.random<POST_UPDATE_FAILED>();
       }
-      
     } else {
       return typia.random<POST_NOT_MATCH_USER>();
     }
@@ -173,14 +174,16 @@ export class PostController {
     description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
   })
   @UseBefore(checkAccessToken)
-  public async getMany(@Req() req : Request){
-    const userId = req.user.jwtPayload.userId;
-    const posts = await this._machineService.getPostsByUserId(userId);
+  public async getMany(){
+    const posts = await this._postService.getRecoomendPost();
     
-    const refined_posts = await this._postService.refinePost(posts);
-    return refined_posts;
+    const refinePosts = await Promise.all(posts.map(async (post) => {
+      const id = post.id;  
+      const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
+        return {postId : id,...thumbnailImage};
+    }));
+    return createResponseForm(refinePosts);
   }
-  
   @HttpCode(201)
   @Post("/:postId/comment")
   @UseBefore(checkAccessToken)
@@ -210,4 +213,5 @@ export class PostController {
       }
 
   }
+  
 }

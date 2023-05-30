@@ -6,8 +6,8 @@ import { defaultColumn } from "./common/default-column";
 @Service()
 @Entity({ name: "photo" })
 export default class Photo extends defaultColumn {
-  @Column({length:500})
-  image_url: string;
+  @Column({length:500,name:"image_url"})
+  imageUrl: string;
 
   @Column({ name: "post_id" })
   postId: string;
@@ -23,8 +23,7 @@ export default class Photo extends defaultColumn {
   @Column({ 
     type: "geometry",
     spatialFeatureType: "Point",
-    srid: 4326,
-    select: false
+    srid: 4326
   })
   coordinate: string;
 
@@ -36,6 +35,9 @@ export default class Photo extends defaultColumn {
 
   @Column({ nullable: true })
   second: string;
+
+  @Column({type:"smallint",name:"photo_order",select:false})
+  order : number;
 
   // @Column({nullable:true})
   // third!: string;

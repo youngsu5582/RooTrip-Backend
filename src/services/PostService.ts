@@ -6,30 +6,30 @@ import { Post } from "../entities/index";
 import { PostRatingRepository } from "../repositories/PostRatingRepository";
 import typia from "typia";
 import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
-import { In, IsNull } from "typeorm";
 import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
+import { UserRepository } from "../repositories";
 
 @Service()
 export class PostService {
   constructor(
     private readonly postRepository: typeof PostRepository,
     private readonly likeRepository: typeof LikeRepository,
-    private readonly postRatingRepository :typeof PostRatingRepository
+    private readonly postRatingRepository :typeof PostRatingRepository,
+    private readonly userRepoisotry : typeof UserRepository,
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
     this.postRatingRepository = PostRatingRepository;
+    this.userRepoisotry = UserRepository;
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
-    const thumbnailImage = createPostDto.newPhotos[0].url;
     
     return await this.postRepository.save(
-      Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId,thumbnailImage })
+      Post.create({ ...createPostDto.article,routes : createPostDto.routes, userId })
     );
   }
   public async getPostById(postId: string) {
-    
     return await this.postRepository.getPostById(postId);
   }
   public async updatePost(postId: string, updatePostDto: UpdatePostDto) {
@@ -68,19 +68,24 @@ export class PostService {
     }
   }
 
-
-  public async refinePost(posts:string[]){
-    const recommendPost = await this.postRepository.getRecentPosts();
-    
-    const refinePost = await this.postRepository.find({
-      
-      where:{
-        id:In(posts),
-        deletedAt:IsNull()
-      }
-    }).catch(()=>null);
-    return [...recommendPost,...(refinePost||[])];
+  public async getRecoomendPost(){
+    return await this.postRepository.getRecentPosts();
   }
+  /**
+   * 2023.05.28 Prototype 완성 기한으로 인한 주석
+   */
+  // public async refinePost(posts:string[]){
+  //   const recommendPost = await this.postRepository.getRecentPosts();
+
+  //   const refinePost = await this.postRepository.find({
+      
+  //     where:{
+  //       id:In(posts),
+  //       deletedAt:IsNull()
+  //     }
+  //   }).catch(()=>null);
+  //   return [...recommendPost,...(refinePost||[])];
+  // }
   /**
    * @summary Reddit 의 Nazar Consumer 와 유사한 기능
    * @description postId 와 userId 를 받아서 , 해당 조회가 조회수를 올릴때 유효한지 검증
@@ -91,6 +96,7 @@ export class PostService {
   public async nazar(postId:string,userId:string){
     return await checkPostViews(postId,userId);
   }
+  
   /**
    * 
    * @summary Reddit 의 Abacus Consumer 와 유사한 기능
@@ -104,7 +110,10 @@ export class PostService {
     return await increasePostViews(postId,userId);
   }
   public async getPostViews(postId:string){
-    return await getPostViews(postId);
+    const todayCount = await getPostViews(postId);
+    const totalCount = (await this.postRepository.getTotalCount(postId)).viewCount;
+    return todayCount +totalCount;
+    
   }
 
 }

@@ -11,6 +11,7 @@ import { OpenAPI } from "routing-controllers-openapi";
 import { GeoService } from "../services";
 import { CoordinateType } from "../common";
 import { signedUrl } from "../utils/s3";
+import { createResponseForm } from "../interceptors/Transformer";
 
 @JsonController("/photo")
 @Service()
@@ -30,12 +31,14 @@ export class PhotoController {
       latitude: latitude,
       longitude: longitude
     };
-    return await this.geoservice.getAddress(coordinate);
+    const result = await this.geoservice.getAddress(coordinate)
+    return createResponseForm(result);
   }
 
   @HttpCode(201)
   @Post("/signed")
   public async getSigned(@Body() fileNames: string[]) {
-    return await signedUrl(fileNames);
+    const result = await signedUrl(fileNames);
+    return createResponseForm(result);
   }
 }

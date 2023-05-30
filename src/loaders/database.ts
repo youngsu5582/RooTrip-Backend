@@ -13,6 +13,7 @@ export default new DataSource({
   synchronize: true,
   connectTimeout: 20000,
   acquireTimeout: 20000,
+  legacySpatialSupport:false,
   entities: [__dirname + "/../entities/*{.ts,.js}"]
 });
 

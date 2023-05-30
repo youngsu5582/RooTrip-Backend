@@ -3,16 +3,17 @@ import User from "./User";
 import { Service } from "typedi";
 import Photo from "./Photo";
 import { defaultColumn } from "./common/default-column";
+import Comment from "./Comment";
 
 @Entity({ name: "post" })
 @Service()
 export default class Post extends defaultColumn {
-  @Column({ name: "user_id" })
+  @Column({ name: "user_id" , select:false })
   userId: string;
 
   @ManyToOne(() => User, (user) => user.posts, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
   })
   @JoinColumn({ name: "user_id" })
   user: User;
@@ -27,18 +28,24 @@ export default class Post extends defaultColumn {
   like: number;
 
 
+  @Column({name:"view_count",type:"int" , default:0})
+  viewCount : number;
+
   @Column({type:"simple-array"})
   routes:number[];
 
-  // 차후 수정
-  @OneToMany(() => Photo, (photo) => photo.post)
-  photos: Photo[];
   
-  @Column({type:"int",default:0})
-  point : number;
+  @OneToMany(() => Photo, (photo) => photo.post)
+  @JoinColumn()
+  photos: Photo[];
 
-  @Column({length:500})
-  thumbnailImage : string;
+  @OneToMany(() => Comment, (comment) => comment.post)
+  @JoinColumn()
+  comments: Comment[];
+  
+  // 차후 수정
+  @Column({type:"int",default:0,select:false})
+  point : number;
 
 
 }

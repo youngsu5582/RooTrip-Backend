@@ -7,13 +7,14 @@ import { defaultColumn } from "./common/default-column";
 @Service()
 @Entity({ name: "comment" })
 export default class Comment extends defaultColumn {
-  @ManyToOne(() => Post, (post) => post.id, {
-    cascade: true,
-    onDelete: "CASCADE"
-  })
+  
   @Column({ name: "post_id" ,select:false})
   postId: string;
 
+  @ManyToOne(() => Post, (post) => post.comments, {
+    cascade: true,
+    onDelete: "CASCADE"
+  })
   @JoinColumn({ name: "post_id" })
   post: Post;
 

@@ -21,7 +21,6 @@ export interface photoType {
   id:number;
   feedOrder : number;
   fileName:string;
-  url: string;
   dateTime : Date;
   latitude : string;
   longitude : string;

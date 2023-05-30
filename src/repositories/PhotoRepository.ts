@@ -11,13 +11,12 @@ export const PhotoRepository = database.getRepository(Photo).extend({
       .take(2)
       .getMany();
   },
-  async createPhoto(createPhotoDto: CreatePhotoDto, postId: string) {
+  async createPhoto(createPhotoDto: CreatePhotoDto, postId: string,order:number) {
     const { city, coordinate, first, second, image_url } = createPhotoDto;
-    
     return await this.query(
-      `INSERT INTO photo (id, image_url, post_id, coordinate, city, first, second) VALUES ("${await UUID()}", "${image_url}", "${postId}", ST_GeomFromText("POINT(${
+      `INSERT INTO photo (id, image_url, post_id, coordinate, city, first, second,photo_order) VALUES ("${await UUID()}", "${image_url}", "${postId}", ST_GeomFromText("POINT(${
         coordinate.y
-      } ${coordinate.x})", 4326),"${city}", "${first}","${second}")`
+      } ${coordinate.x})", 4326),"${city}", "${first}","${second}","${order}")`
     );
   }
 });
