@@ -18,6 +18,7 @@ export class AuthService {
       return typia.random<ALREADY_EXISTED_EMAIL>();
     }
     try{
+      return await this._userRepository.save(this._userRepository.create(createUserDto));
     }
     catch{
       return typia.random<LOCAL_REGISTER_FAILED>();
