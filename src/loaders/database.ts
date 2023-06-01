@@ -14,7 +14,8 @@ export default new DataSource({
   connectTimeout: 20000,
   acquireTimeout: 20000,
   legacySpatialSupport:false,
-  entities: [__dirname + "/../entities/*{.ts,.js}"]
+  entities: [__dirname + "/../entities/*{.ts,.js}"],
+  charset:'utf8mb4'
 });
 
 const redisClient = createClient();

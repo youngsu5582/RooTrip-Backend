@@ -7,7 +7,6 @@ import { PostRatingRepository } from "../repositories/PostRatingRepository";
 import typia from "typia";
 import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
 import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
-import { UserRepository } from "../repositories";
 
 @Service()
 export class PostService {
@@ -15,12 +14,12 @@ export class PostService {
     private readonly postRepository: typeof PostRepository,
     private readonly likeRepository: typeof LikeRepository,
     private readonly postRatingRepository :typeof PostRatingRepository,
-    private readonly userRepoisotry : typeof UserRepository,
+    
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
     this.postRatingRepository = PostRatingRepository;
-    this.userRepoisotry = UserRepository;
+    
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
@@ -115,5 +114,8 @@ export class PostService {
     return todayCount +totalCount;
     
   }
+  public async checkUserLikePost(postId:string,userId:string){
+      return Boolean(await this.likeRepository.findOne({where:{postId,userId}}));
 
+  }
 }

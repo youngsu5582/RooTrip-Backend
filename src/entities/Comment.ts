@@ -18,7 +18,7 @@ export default class Comment extends defaultColumn {
   @JoinColumn({ name: "post_id" })
   post: Post;
 
-  @Column({ length: 300 })
+  @Column({ type: 'text',  charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci' })
   comment: string;
 
   @ManyToOne(() => User, (user) => user.id, {

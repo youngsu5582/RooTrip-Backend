@@ -52,11 +52,14 @@ export class PostController {
       await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
+      const isLiked = await this._postService.checkUserLikePost(postId,userId);
       post.user = {
         id : post.user.id,
-        name : post.user.nickname?post.user.nickname:post.user.name
-      } as any;
-      return createResponseForm({...{postViews,post}});
+        name : post.user.nickname?post.user.nickname:post.user.name,
+        profileImage : post.user.profileImage,
+      }  as any;
+      
+      return createResponseForm({...{postViews,post,isLiked}});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());
@@ -209,6 +212,7 @@ export class PostController {
         return createResponseForm(undefined);
       }
       catch {
+        
         return typia.random<COMMENT_CREATE_FAILED>();
       }
 

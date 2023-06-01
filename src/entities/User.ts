@@ -42,6 +42,9 @@ export default class User extends defaultColumn {
   @ManyToMany(() => User)
   followers: User[];
 
+  @Column({nullable:true,type:String,default:""})
+  profileImage:string;
+
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword() {
