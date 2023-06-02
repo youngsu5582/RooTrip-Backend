@@ -27,4 +27,8 @@ export class MypageService {
     return await this._userRepository.updateNickname(userId, nickname);
   }
 
+  public async deleteUser(userId: string) {
+    return await this._userRepository.withdrawal(userId);
+  }
+
 }

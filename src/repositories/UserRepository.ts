@@ -13,5 +13,8 @@ export const UserRepository = database.getRepository(User).extend({
   },
   async updateNickname(id: string, nickname: string) {
     return await this.update(id, {nickname: nickname});
+  },
+  async withdrawal(id: string) {
+    return await this.delete(id);
   }
 });
