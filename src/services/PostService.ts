@@ -50,10 +50,32 @@ export class PostService {
     const post = await this.postRepository.getPostById(postId);
     if (await this.likeRepository.checkDuplicate(userId, postId)) return false;
     else {
-      await this.likeRepository.save(this.likeRepository.create({ userId, postId}))
-      post.like++;
-      await this.postRepository.save(post);
-      return true;
+      try{
+        await this.likeRepository.save(this.likeRepository.create({ userId, postId}))
+        post.like++;
+        await this.postRepository.save(post);
+        return true;
+      }
+      catch{
+        return false;
+      }
+      
+    }
+  }
+  public async unLikePost(userId: string, postId: string) {
+    const post = await this.postRepository.getPostById(postId);
+    if (!await this.likeRepository.checkDuplicate(userId, postId)) return false;
+    else {
+      try{
+        await this.likeRepository.delete({userId,postId});
+        post.like--;
+        await this.postRepository.save(post);
+        return true;
+      }
+      catch{
+        return false;
+      }
+      
     }
   }
   public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){

@@ -18,7 +18,7 @@ import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
-import { ALREADY_EXISTED_COMMENT, COMMENT_CREATE_FAILED, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import { ALREADY_EXISTED_LIKE, COMMENT_CREATE_FAILED, NOT_EXISTED_LIKE, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
 import {env} from '../loaders/env';
@@ -58,7 +58,6 @@ export class PostController {
         name : post.user.nickname?post.user.nickname:post.user.name,
         profileImage : post.user.profileImage,
       }  as any;
-      
       return createResponseForm({...{postViews,post,isLiked}});
     }
     catch{
@@ -130,6 +129,7 @@ export class PostController {
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
+    
     if (await this._postService.checkUser(userId, postId)) {
       const result = this._postService.deletePost(postId);
       if(isErrorCheck(result))
@@ -154,9 +154,33 @@ export class PostController {
     if (result) {
       return createResponseForm(undefined);
     } else {
-        return typia.random<ALREADY_EXISTED_COMMENT>();
+        return typia.random<ALREADY_EXISTED_LIKE>();
     }
   }
+
+
+  /***
+   * 2023.06.03 Like 와 isLike 합쳐서 코드 짜는 방안으로 수정 계획 중 (미정)
+   */
+  @HttpCode(201)
+  @Post("/:postId/unLike")
+  @OpenAPI({
+    description: "게시글 추천을 취소합니다"
+  })
+  @UseBefore(checkAccessToken)
+  public async unLike(
+    @Param("postId") postId: string,
+    @Req() req: Request
+  ) {
+    const userId = req.user.jwtPayload.userId;
+    const result = await this._postService.likePost(userId, postId);
+    if (result) {
+      return createResponseForm(undefined);
+    } else {
+        return typia.random<NOT_EXISTED_LIKE>();
+    }
+  }
+
   @HttpCode(201)
   @Post("/interaction")
   @OpenAPI({
