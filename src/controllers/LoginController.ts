@@ -70,8 +70,7 @@ export class LoginController {
       accessToken,
       refreshToken
     };
-    return createResponseForm(data,"로그인 성공했습니다.");
-    
+    return createResponseForm(data,"로그인 성공했습니다.")
   }
 }
  

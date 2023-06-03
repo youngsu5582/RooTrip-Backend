@@ -65,3 +65,9 @@ export class LoginUserDto {
   @IsString()
   public password: string;
 }
+
+export class UpdateNicknameDto{
+  @IsNotEmpty()
+  @IsString()
+  public nickname: string;
+}

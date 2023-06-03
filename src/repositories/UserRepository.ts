@@ -10,5 +10,11 @@ export const UserRepository = database.getRepository(User).extend({
   },
   async deleteRefreshTokenById(id: string) {
     return await this.update(id, { refreshToken: undefined });
+  },
+  async updateNickname(id: string, nickname: string) {
+    return await this.update(id, {nickname: nickname});
+  },
+  async withdrawal(id: string) {
+    return await this.delete(id);
   }
 });
