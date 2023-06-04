@@ -8,7 +8,7 @@ import {
   } from "routing-controllers";
   import { Service } from "typedi";
   import { OpenAPI } from "routing-controllers-openapi";
-  import { UpdateNicknameDto } from "../dtos/UserDto";
+  import { UpdateNicknameDto, UpdateGenderDto, UpdatePasswordDto } from "../dtos/UserDto";
   import { Request } from "express";
   import {
     checkAccessToken
@@ -29,6 +29,30 @@ export class MypageController {
         const userId = req.user.jwtPayload.userId;
         const nickname = updateNicknameDto.nickname;
         return await this._mypageService.changeNickname(userId,nickname);
+    }
+
+    @HttpCode(201)
+    @Post("/account/edit/gender")
+    @UseBefore(checkAccessToken)
+    @OpenAPI({
+      description: "사용자의 성별을 수정합니다."
+    })
+    public async changeGender(@Req() req:Request, @Body() updateGenderDto: UpdateGenderDto) {
+        const userId = req.user.jwtPayload.userId;
+        const gender = updateGenderDto.gender;
+        return await this._mypageService.changeGender(userId,gender);
+    }
+
+    @HttpCode(201)
+    @Post("/account/edit/password")
+    @UseBefore(checkAccessToken)
+    @OpenAPI({
+      description: "사용자의 성별을 수정합니다."
+    })
+    public async changePassword(@Req() req:Request, @Body() updatePasswordDto: UpdatePasswordDto) {
+        const userId = req.user.jwtPayload.userId;
+        const password = updatePasswordDto.password;
+        return await this._mypageService.changePassword(userId,password);
     }
 
     @HttpCode(201)
