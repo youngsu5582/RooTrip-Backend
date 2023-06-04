@@ -1,7 +1,6 @@
 import { Service } from "typedi";
 import {
   Body,
-  BodyParam,
   Delete,
   Get,
   HttpCode,
@@ -13,12 +12,12 @@ import {
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { PostService, GeoService, PhotoService, CommentService } from "../services";
-import { CreateCommentDto, CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
+import { PostService, GeoService, PhotoService } from "../services";
+import {  CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
-import { ALREADY_EXISTED_LIKE, COMMENT_CREATE_FAILED, NOT_EXISTED_LIKE, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import { ALREADY_EXISTED_LIKE, NOT_EXISTED_LIKE, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
 import {env} from '../loaders/env';
@@ -31,9 +30,7 @@ export class PostController {
     private readonly _postService: PostService,
     private readonly _geoService: GeoService,
     private readonly _photoService: PhotoService,
-    private readonly _commentService : CommentService,
   ) {
-    
   }
   @HttpCode(200)
   @Get("/:postId")
@@ -202,57 +199,16 @@ export class PostController {
     description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
   })
   @UseBefore(checkAccessToken)
-  public async getMany(){
+  public async getMany  ( ){
     const posts = await this._postService.getRecoomendPost();
     
     const refinePosts = await Promise.all(posts.map(async (post) => {
-      const id = post.id;  
+      const id = post.id;
       const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
         return {postId : id,...thumbnailImage};
     }));
     return createResponseForm(refinePosts);
   }
-  @HttpCode(201)
-  @Post("/:postId/comment")
-  @UseBefore(checkAccessToken)
-  public async createCommnet(@Param("postId") postId: string,@Body() createCommentDto : CreateCommentDto,@Req() req:Request){
-      const userId = req.user.jwtPayload.userId;
-      try{
-        await this._commentService.create(createCommentDto,postId,userId);
-        return createResponseForm(undefined);
-      }
-      catch {
-        return typia.random<COMMENT_CREATE_FAILED>();
-      }
 
-  }
-  @HttpCode(201)
-  @Delete("/:postId/comment")
-  @UseBefore(checkAccessToken)
-  public async deleteCommnet(@Param("postId") postId: string,@Req() req:Request,@BodyParam("commentId")commentId:string){
-      const userId = req.user.jwtPayload.userId;
-      try{
-        if(await this._commentService.checkUserIdWithPostId(userId,commentId,postId))
-          await this._commentService.delete(commentId);
-        return createResponseForm(undefined);
-      }
-      catch {
-        
-        return typia.random<COMMENT_CREATE_FAILED>();
-      }
-  }
-  @HttpCode(201)
-  @Post("/:postId/:commentId/like")
-  @UseBefore(checkAccessToken)
-  public async likeCommnet(@Param("postId") postId: string,@Req() req:Request,@Param("commentId")commentId:string){
-      const userId = req.user.jwtPayload.userId;
-      
-      const result = await this._commentService.likeComment(commentId,userId);
-      if(result)
-        return createResponseForm(undefined);
-      else
-        return typia.random<ALREADY_EXISTED_LIKE>();
-  }
-  
   
 }
