@@ -52,13 +52,14 @@ export class PostController {
       await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
+      const commentCount = await this._postService.getCommentCountByPostId(postId);
       const isLiked = await this._postService.checkUserLikePost(postId,userId);
       post.user = {
         id : post.user.id,
         name : post.user.nickname?post.user.nickname:post.user.name,
         profileImage : post.user.profileImage,
       }  as any;
-      return createResponseForm({...{postViews,post,isLiked}});
+      return createResponseForm({...{postViews,post,commentCount,isLiked}});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());
@@ -173,7 +174,7 @@ export class PostController {
     @Req() req: Request
   ) {
     const userId = req.user.jwtPayload.userId;
-    const result = await this._postService.likePost(userId, postId);
+    const result = await this._postService.unLikePost(userId, postId);
     if (result) {
       return createResponseForm(undefined);
     } else {
@@ -239,7 +240,19 @@ export class PostController {
         
         return typia.random<COMMENT_CREATE_FAILED>();
       }
-
   }
+  @HttpCode(201)
+  @Post("/:postId/:commentId/like")
+  @UseBefore(checkAccessToken)
+  public async likeCommnet(@Param("postId") postId: string,@Req() req:Request,@Param("commentId")commentId:string){
+      const userId = req.user.jwtPayload.userId;
+      
+      const result = await this._commentService.likeComment(commentId,userId);
+      if(result)
+        return createResponseForm(undefined);
+      else
+        return typia.random<ALREADY_EXISTED_LIKE>();
+  }
+  
   
 }

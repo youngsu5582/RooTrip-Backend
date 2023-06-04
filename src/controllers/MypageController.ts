@@ -1,6 +1,5 @@
 import {
     Body,
-    Get,
     HttpCode,
     JsonController,
     Post,
@@ -10,7 +9,7 @@ import {
   import { Service } from "typedi";
   import { OpenAPI } from "routing-controllers-openapi";
   import { UpdateNicknameDto } from "../dtos/UserDto";
-  import { Request, Response } from "express";
+  import { Request } from "express";
   import {
     checkAccessToken
   } from "../middlewares/AuthMiddleware";

@@ -29,5 +29,8 @@ export default class Comment extends defaultColumn {
   userId: string;
 
   @JoinColumn({ name: "user_id" })
-  user: User;
+  user: User; 
+
+  @Column({ type: "int", default: 0 })
+  like : number;
 }

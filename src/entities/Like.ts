@@ -17,7 +17,6 @@ export default class Like extends BaseEntity{
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-
   @Column({ name: "post_id" })
   postId:string;
 

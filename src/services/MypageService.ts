@@ -1,14 +1,6 @@
 import { Service } from "typedi";
 import { UserRepository} from "../repositories";
 import {
-    Body,
-    Get,
-    HttpCode,
-    JsonController,
-    Post,
-    QueryParam,
-    Req,
-    Res,
     UseBefore
 } from "routing-controllers";
 import {
