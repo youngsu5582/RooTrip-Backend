@@ -20,11 +20,12 @@ import {
   checkRefreshToken
 } from "../middlewares/AuthMiddleware";
 import { checkType } from "../common";
-import { DB_CONNECT_FAILED, isErrorCheck } from "../errors";
+import {  isErrorCheck } from "../errors";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import typia from "typia";
 import { ALREADY_EXISTED_EMAIL, TOKEN_NOT_MATCH_USER } from "../errors/auth-error";
 import { TryCatch } from "../types";
+import { DB_CONNECT_FAILED } from "../errors/common-error";
 @JsonController("/auth")
 @Service()
 export class AuthController {

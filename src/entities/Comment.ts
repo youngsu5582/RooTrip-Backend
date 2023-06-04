@@ -21,13 +21,14 @@ export default class Comment extends defaultColumn {
   @Column({ type: 'text',  charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci' })
   comment: string;
 
-  @ManyToOne(() => User, (user) => user.id, {
+
+  @Column({ name: "user_id"})
+  userId: string;
+
+  @ManyToOne(() => User, (user) => user, {
     cascade: true,
     onDelete: "CASCADE"
   })
-  @Column({ name: "user_id",select:false})
-  userId: string;
-
   @JoinColumn({ name: "user_id" })
   user: User; 
 

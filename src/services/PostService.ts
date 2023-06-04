@@ -81,16 +81,19 @@ export class PostService {
       
     }
   }
-  public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){
-    try{
-      createRatingDtos.forEach((createRatingDto)=>{
-        this.postRatingRepository.save(this.postRatingRepository.create({...createRatingDto,userId}))});
-        return true;
-    }
-    catch(err){
-        return typia.random<RATING_UPLOAD_FAILED>();
-    }
-  }
+  /**
+   * 2023.06.04 Prototype 완성 기한으로 인한 주석
+   */
+  // public async createPostRating(userId : string,createRatingDtos : CreateRatingDto[]){
+  //   try{
+  //     createRatingDtos.forEach((createRatingDto)=>{
+  //       this.postRatingRepository.save(this.postRatingRepository.create({...createRatingDto,userId}))});
+  //       return true;
+  //   }
+  //   catch(err){
+  //       return typia.random<RATING_UPLOAD_FAILED>();
+  //   }
+  // }
 
   public async getRecoomendPost(){
     return await this.postRepository.getRecentPosts();

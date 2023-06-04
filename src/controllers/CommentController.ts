@@ -6,17 +6,27 @@ import { createResponseForm } from "../interceptors/Transformer";
 import typia from "typia";
 import { CreateCommentDto } from "../dtos/PostDto";
 import { Request } from "express";
-import { ALREADY_EXISTED_LIKE, COMMENT_CREATE_FAILED } from "../errors/post-error";
+import { ALREADY_EXISTED_LIKE, DB_CONNECT_FAILED } from "../errors/common-error";
+import { COMMENT_DELETE_FAILED , COMMENT_CREATE_FAILED } from "../errors/comment-error";
 
 @JsonController("/post/:postId/comment")
+@UseBefore(checkAccessToken)
 @Service()
 export class CommentController {
     constructor(private readonly _commentService : CommentService,){}
     @HttpCode(200)
     @UseBefore(checkAccessToken)
     @Get()
-    public async getComment(@Param("postId")postId : string){
-      const result = await this._commentService.getCommentsByPostId(postId);
+    public async getComments(@Param("postId")postId : string){
+      const comments = await this._commentService.getCommentsByPostId(postId);
+      const result = comments.map(comment=>{
+        const {user,...data} = comment;
+        return{
+          ...data,
+          name:comment.user.nickname?comment.user.nickname:comment.user.name,
+          profileImage:user.profileImage,
+        }
+      });
       return createResponseForm(result);
     }
   
@@ -40,13 +50,14 @@ export class CommentController {
     public async deleteCommnet(@Param("postId") postId: string,@Req() req:Request,@BodyParam("commentId")commentId:string){
         const userId = req.user.jwtPayload.userId;
         try{
-          if(await this._commentService.checkUserIdWithPostId(userId,commentId,postId))
+          if(await this._commentService.checkUserIdWithPostId(userId,commentId,postId)){
             await this._commentService.delete(commentId);
-          return createResponseForm(undefined);
+            return createResponseForm(undefined);
+          }
+          else return typia.random<COMMENT_DELETE_FAILED>();
         }
         catch {
-          
-          return typia.random<COMMENT_CREATE_FAILED>();
+          return typia.random<DB_CONNECT_FAILED>();
         }
     }
     @HttpCode(201)
