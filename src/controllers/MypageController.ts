@@ -8,7 +8,7 @@ import {
   } from "routing-controllers";
   import { Service } from "typedi";
   import { OpenAPI } from "routing-controllers-openapi";
-  import { UpdateNicknameDto, UpdateGenderDto, UpdatePasswordDto } from "../dtos/UserDto";
+  import { UpdateNicknameDto, UpdateGenderDto, UpdatePasswordDto, ProfileImgUrlDto } from "../dtos/UserDto";
   import { Request } from "express";
   import {
     checkAccessToken
@@ -18,6 +18,22 @@ import { MypageService } from "../services/MypageService";
 @Service()
 export class MypageController {
   constructor(private readonly _mypageService: MypageService) {}
+
+  @HttpCode(201)
+  @Post("/account/edit/profile/image")
+  @UseBefore(checkAccessToken)
+  @OpenAPI({
+    description: "사용자의 프로필 사진을을 등록합니다."
+  })
+  public async uploadProfileImage(
+    @Req() req: Request,
+    @Body() ProfileImgUrlDto: ProfileImgUrlDto
+  ) {
+    const userId = req.user.jwtPayload.userId;
+    const profileImgUrl = ProfileImgUrlDto.imgUrl;
+    return await this._mypageService.uploadProfileImage(userId, profileImgUrl);
+  }
+
   @HttpCode(201)
   @Post("/account/edit/nickname")
   @UseBefore(checkAccessToken)
@@ -29,7 +45,6 @@ export class MypageController {
     @Body() updateNicknameDto: UpdateNicknameDto
   ) {
     const userId = req.user.jwtPayload.userId;
-    console.log(userId);
     const nickname = updateNicknameDto.nickname;
     return await this._mypageService.changeNickname(userId, nickname);
   }
@@ -47,21 +62,6 @@ export class MypageController {
     const userId = req.user.jwtPayload.userId;
     const gender = updateGenderDto.gender;
     return await this._mypageService.changeGender(userId, gender);
-  }
-
-  @HttpCode(201)
-  @Post("/account/edit/password")
-  @UseBefore(checkAccessToken)
-  @OpenAPI({
-    description: "사용자의 비밀번호를 수정합니다."
-  })
-  public async changePassword(
-    @Req() req: Request,
-    @Body() updatePasswordDto: UpdatePasswordDto
-  ) {
-    const userId = req.user.jwtPayload.userId;
-    const password = updatePasswordDto.password;
-    return await this._mypageService.changePassword(userId, password);
   }
 
   @HttpCode(201)
@@ -84,6 +84,21 @@ export class MypageController {
   public async uploadPostList(@Req() req: Request) {
     const userId = req.user.jwtPayload.userId;
     return await this._mypageService.uploadPostList(userId);
+  }
+
+  @HttpCode(201)
+  @Post("/account/personal_info/change_password")
+  @UseBefore(checkAccessToken)
+  @OpenAPI({
+    description: "사용자의 비밀번호를 수정합니다."
+  })
+  public async changePassword(
+    @Req() req: Request,
+    @Body() updatePasswordDto: UpdatePasswordDto
+  ) {
+    const userId = req.user.jwtPayload.userId;
+    const password = updatePasswordDto.password;
+    return await this._mypageService.changePassword(userId, password);
   }
 
   @HttpCode(201)

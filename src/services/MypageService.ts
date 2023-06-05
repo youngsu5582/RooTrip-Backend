@@ -7,7 +7,6 @@ import {
 import { UseBefore } from "routing-controllers";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import { GenderType } from "../common";
-import { LocalUserDto } from "../dtos/UserDto";
 
 @Service()
 @UseBefore(checkAccessToken)
@@ -20,6 +19,10 @@ export class MypageService {
     this._likeRepository = LikeRepository;
     this._postRepository = PostRepository;
   }
+
+  public async uploadProfileImage(userId:string, imgUrl:string) {
+    return await this._userRepository.uploadProfileImage(userId,imgUrl)
+  } 
 
   public async changeNickname(userId: string, nickname: string) {
     return await this._userRepository.updateNickname(userId, nickname);

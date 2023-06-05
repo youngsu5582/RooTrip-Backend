@@ -86,3 +86,9 @@ export class UpdatePasswordDto{
   )
   public password: string;
 }
+
+export class ProfileImgUrlDto {
+  @IsNotEmpty()
+  @IsString()
+  public imgUrl: string;
+}
