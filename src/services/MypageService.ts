@@ -14,11 +14,11 @@ import { LocalUserDto } from "../dtos/UserDto";
 export class MypageService {
   private readonly _userRepository: typeof UserRepository;
   private readonly _likeRepository: typeof LikeRepository;
-  private readonly _postReposiotry: typeof PostRepository;
+  private readonly _postRepository: typeof PostRepository;
   constructor() {
     this._userRepository = UserRepository;
     this._likeRepository = LikeRepository;
-    this._postReposiotry = PostRepository;
+    this._postRepository = PostRepository;
   }
 
   public async changeNickname(userId: string, nickname: string) {
@@ -44,10 +44,14 @@ export class MypageService {
     const postList = [];
 
     for (const post of likedList) {
-      const postContext = await this._postReposiotry.getPostById(post.postId);
+      const postContext = await this._postRepository.getPostById(post.postId);
       postList.push(postContext);
     }
     return postList;
+  }
+
+  public async uploadPostList(userId: string) {
+    return await this._postRepository.getPostListById(userId);
   }
 
   public async deleteUser(userId: string) {

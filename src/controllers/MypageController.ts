@@ -68,11 +68,22 @@ export class MypageController {
   @Post("/activity/likes")
   @UseBefore(checkAccessToken)
   @OpenAPI({
-    description: "사용자가 추천한 게시글을 보여줍니다."
+    description: "사용자가 추천한 게시글들을 보여줍니다."
   })
   public async likedPostList(@Req() req: Request) {
     const userId = req.user.jwtPayload.userId;
     return await this._mypageService.likedPostList(userId);
+  }
+
+  @HttpCode(201)
+  @Post("/activity/upload_post")
+  @UseBefore(checkAccessToken)
+  @OpenAPI({
+    description: "사용자가 작성한 게시글들을 보여줍니다."
+  })
+  public async uploadPostList(@Req() req: Request) {
+    const userId = req.user.jwtPayload.userId;
+    return await this._mypageService.uploadPostList(userId);
   }
 
   @HttpCode(201)
