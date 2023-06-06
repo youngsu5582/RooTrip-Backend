@@ -5,5 +5,6 @@ import Photo from "./Photo";
 import Follower from "./Follower";
 import PostRating from "./PostRating";
 import Comment from "./Comment";
+import Trip from "./Trip";
 
-export { User, Post, District, Photo, Follower , PostRating ,Comment};
+export { User, Post, District, Photo, Follower , PostRating ,Comment, Trip};

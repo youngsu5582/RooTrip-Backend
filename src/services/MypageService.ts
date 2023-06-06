@@ -2,6 +2,7 @@ import { Service } from "typedi";
 import {
   LikeRepository,
   PostRepository,
+  TripRepository,
   UserRepository
 } from "../repositories";
 import { UseBefore } from "routing-controllers";
@@ -17,11 +18,14 @@ export class MypageService {
   private readonly _likeRepository: typeof LikeRepository;
   private readonly _postRepository: typeof PostRepository;
   private readonly _profileRepository: typeof ProfileRepository;
+  private readonly _tripRepository: typeof TripRepository;
+
   constructor() {
     this._userRepository = UserRepository;
     this._likeRepository = LikeRepository;
     this._postRepository = PostRepository;
     this._profileRepository = ProfileRepository;
+    this._tripRepository = TripRepository;
   }
 
   public async uploadProfileImage(userId:string, profileDto:ProfileDto) {
@@ -55,6 +59,17 @@ export class MypageService {
       postList.push(postContext);
     }
     return postList;
+  }
+
+  public async savedTripList(userId: string) {
+    const TripList = await this._tripRepository.getSavedTrip(userId);
+    const savedList = [];
+
+    for (const post of TripList) {
+      const postContext = await this._postRepository.getPostById(post.postId);
+      savedList.push(postContext);
+    }
+    return savedList;
   }
 
   public async uploadPostList(userId: string) {

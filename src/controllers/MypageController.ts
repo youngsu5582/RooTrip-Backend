@@ -76,6 +76,17 @@ export class MypageController {
   }
 
   @HttpCode(201)
+  @Post("/activity/saved/trip-posts")
+  @UseBefore(checkAccessToken)
+  @OpenAPI({
+    description: "사용자가 저장한 게시글들을 보여줍니다."
+  })
+  public async savedTripList(@Req() req: Request) {
+    const userId = req.user.jwtPayload.userId;
+    return await this._mypageService.savedTripList(userId);
+  }
+
+  @HttpCode(201)
   @Post("/activity/upload_post")
   @UseBefore(checkAccessToken)
   @OpenAPI({

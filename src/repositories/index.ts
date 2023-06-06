@@ -5,6 +5,7 @@ import { PhotoRepository } from "./PhotoRepository";
 import { FollowerRepository } from "./FollowerRepository";
 import { CommentRepository } from "./CommentRepository";
 import { LikeRepository } from "./LikeRepository";
+import { TripRepository } from "./TripRepository";
 export {
   PostRepository,
   UserRepository,
@@ -13,4 +14,5 @@ export {
   FollowerRepository,
   CommentRepository,
   LikeRepository,
+  TripRepository,
 };
