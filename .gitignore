@@ -8,3 +8,6 @@ logs/*
 
 
 .package-lock.json
+
+
+nohup.out

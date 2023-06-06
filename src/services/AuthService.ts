@@ -6,9 +6,12 @@ import { addBlacklist } from "../utils/Redis";
 import { User } from "../entities";
 import typia from "typia";
 import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED, LOGOUT_FAILED, SOCIAL_REGISTER_FAILED } from "../errors/auth-error";
+import { ProfileRepository } from "../repositories/ProfileRepository";
+import Profile from "../entities/Profile";
 @Service()
 export class AuthService {
   private readonly _userRepository: typeof UserRepository;
+  private readonly _profileRepository: typeof ProfileRepository;
   constructor() {
     this._userRepository = UserRepository;
   }
@@ -18,7 +21,11 @@ export class AuthService {
       return typia.random<ALREADY_EXISTED_EMAIL>();
     }
     try{
-      return await this._userRepository.save(this._userRepository.create(createUserDto));
+      const result = await this._userRepository.save(this._userRepository.create(createUserDto));
+      const profile = new Profile();
+      profile.userId = result.id;
+      profile.save();
+      return result;
     }
     catch{
       return typia.random<LOCAL_REGISTER_FAILED>();

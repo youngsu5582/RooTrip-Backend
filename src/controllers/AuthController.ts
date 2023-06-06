@@ -41,7 +41,8 @@ export class AuthController {
       "201": {}
     }
   })
-  public async register(@Body() userDto: LocalUserDto) : Promise<TryCatch<undefined,ALREADY_EXISTED_EMAIL>> {
+  public async register(@Body() userDto: LocalUserDto) : Promise<TryCatch<undefined,ALREADY_EXISTED_EMAIL>> 
+  {
     const result = await this.authService.register(userDto);
     if(isErrorCheck(result))
       return createErrorForm(result);

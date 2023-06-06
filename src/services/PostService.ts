@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { CreatePostDto,  UpdatePostDto} from "../dtos/PostDto";
+import { CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
 import { Post } from "../entities/index";

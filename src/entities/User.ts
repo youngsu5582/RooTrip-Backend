@@ -4,9 +4,12 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
-  ManyToMany
+  ManyToMany,
+  OneToOne,
+  JoinColumn
 } from "typeorm";
 import Post from "./Post";
+import Profile from "./Profile";
 
 import { GenderType } from "../common";
 import { hashSync, compareSync } from "bcrypt";
@@ -42,8 +45,9 @@ export default class User extends defaultColumn {
   @ManyToMany(() => User)
   followers: User[];
 
-  // @Column({nullable:true,type:String,default:""})
-  // profileImage:string;
+  @OneToOne(() => Profile, profile => profile.user, { cascade: true })
+  @JoinColumn()
+  profile: Profile;
 
   @BeforeInsert()
   @BeforeUpdate()

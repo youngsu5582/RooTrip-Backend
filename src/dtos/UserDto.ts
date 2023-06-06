@@ -71,3 +71,24 @@ export class UpdateNicknameDto{
   @IsString()
   public nickname: string;
 }
+
+export class UpdateGenderDto{
+  public gender: GenderType;
+}
+
+export class UpdatePasswordDto{
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(8)
+  @Matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d`-~!@#$%^&*()/]{8,16}$/,
+    { message: "password too weak" }
+  )
+  public password: string;
+}
+
+export class ProfileImgUrlDto {
+  @IsNotEmpty()
+  @IsString()
+  public imgUrl: string;
+}
