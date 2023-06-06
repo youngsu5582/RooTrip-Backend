@@ -1,0 +1,1225 @@
+
+> test@1.0.0 dev
+> nodemon
+
+
+> test@1.0.0 dev
+> nodemon
+
+[33m[nodemon] 2.0.21[39m
+[33m[nodemon] 2.0.21[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): src/**/*[39m
+[33m[nodemon] watching extensions: ts[39m
+[33m[nodemon] watching path(s): src/**/*[39m
+[33m[nodemon] watching extensions: ts[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:34:04 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1006364) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:34:04 [32minfo[39m: Mysql Connect!
+2023-06-06 20:34:04 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1006365) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:34:05 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+Terminated
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+
+> test@1.0.0 dev
+> nodemon
+
+[33m[nodemon] 2.0.21[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): src/**/*[39m
+[33m[nodemon] watching extensions: ts[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:35:04 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1006540) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:35:04 [32minfo[39m: Mysql Connect!
+2023-06-06 20:38:10 [32minfo[39m: ::ffff:172.20.47.203 - - [06/Jun/2023:11:38:10 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:38:10 [32minfo[39m: ::ffff:172.20.47.203 - - [06/Jun/2023:11:38:10 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+Killed
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:48:03 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1007951) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:48:03 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1007949) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:48:03 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1007948) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:48:03 [32minfo[39m: Mysql Connect!
+2023-06-06 20:48:03 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 20:48:03 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:49:09 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1008490) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:49:10 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008488) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:49:10 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008486) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:49:10 [32minfo[39m: Mysql Connect!
+2023-06-06 20:49:10 [32minfo[39m: Mysql Connect!
+2023-06-06 20:49:10 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 20:52:11 [32minfo[39m: ::ffff:172.20.47.203 - - [06/Jun/2023:11:52:11 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:52:11 [32minfo[39m: ::ffff:172.20.47.203 - - [06/Jun/2023:11:52:11 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:08 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:08 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:08 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:08 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:09 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:09 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:09 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:09 +0000] "GET /api/post HTTP/1.1" 200 768 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:11 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:11 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:12 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:12 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 200 653 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:12 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:12 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:13 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:13 +0000] "OPTIONS /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:13 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:13 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 200 1755 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:14 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:14 +0000] "OPTIONS /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:14 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:14 +0000] "GET /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:15 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:15 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:16 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:16 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:16 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:16 +0000] "POST /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 200 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:18 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:18 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:19 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:19 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:19 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:19 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 200 652 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:19 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:19 +0000] "OPTIONS /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:19 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:19 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:21 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:21 +0000] "OPTIONS /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8/unLike HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:21 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:21 +0000] "POST /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8/unLike HTTP/1.1" 201 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:22 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:22 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:23 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:23 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 200 1756 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:48 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:48 +0000] "OPTIONS /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:48 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:48 +0000] "GET /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:58 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:58 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:53:58 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:53:58 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:54:20 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:54:20 +0000] "OPTIONS /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:54:20 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:54:20 +0000] "GET /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:54:21 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:54:21 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:54:21 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:54:21 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:54:22 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:54:22 +0000] "GET /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:54:46 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1008674) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:54:46 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008675) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:54:46 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008677) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:54:47 [32minfo[39m: Mysql Connect!
+2023-06-06 20:54:47 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 20:54:47 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:55:13 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1008876) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:55:13 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+2023-06-06 20:55:13 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008875) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1008872) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:55:13 [32minfo[39m: Mysql Connect!
+2023-06-06 20:55:13 [32minfo[39m: Mysql Connect!
+2023-06-06 20:55:13 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 20:56:34 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:34 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:34 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:34 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:35 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:35 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:35 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:35 +0000] "GET /api/post HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:37 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:37 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:37 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:37 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:37 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:37 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:37 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:37 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:39 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:39 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/unLike HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:39 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:39 +0000] "POST /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/unLike HTTP/1.1" 201 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:40 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:40 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:40 [32minfo[39m: ::ffff:165.229.86.137 - - [06/Jun/2023:11:56:40 +0000] "POST /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 200 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:42 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:42 +0000] "OPTIONS /api/auth/social HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:43 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:43 +0000] "POST /api/auth/social HTTP/1.1" 201 428 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:43 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:43 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:43 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:43 +0000] "GET /api/post HTTP/1.1" 200 768 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:52 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:52 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:52 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:52 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:52 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:52 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 200 653 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:52 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:52 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:53 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:53 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:53 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:53 +0000] "POST /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/like HTTP/1.1" 200 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:56 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:56 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:56 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:56 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:57 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:57 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:57 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:57 +0000] "GET /api/post HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:59 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:59 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:59 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:59 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:59 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:59 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 200 652 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:56:59 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:56:59 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:00 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:00 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/unLike HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:00 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:00 +0000] "POST /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940/unLike HTTP/1.1" 201 15 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:02 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:02 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:02 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:02 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:02 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:02 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:02 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:02 +0000] "GET /api/post HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:04 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:04 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:04 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:04 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:04 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:04 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 200 653 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:04 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:04 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:07 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:07 +0000] "OPTIONS /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:07 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:07 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 200 1756 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:12 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:12 +0000] "OPTIONS /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:12 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:12 +0000] "GET /api/post/12f20569-d879-4bd0-8718-8fcde2e4fda3 HTTP/1.1" 200 1756 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:17 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:17 +0000] "OPTIONS /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:18 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:18 +0000] "GET /api/post/487a72d7-4fef-4ddf-8a1e-502e9f0070d8 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:18 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:18 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 20:57:18 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:11:57:18 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:58:23 [31merror[39m: ⨯ Unable to compile TypeScript:
+src/services/RouteService.ts(14,118): error TS2304: Cannot find name 'first'.
+src/services/RouteService.ts(16,118): error TS2304: Cannot find name 'second'.
+src/services/RouteService.ts(17,16): error TS2304: Cannot find name 'second_result'.
+
+(node:1009319) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:24 [32minfo[39m: Mysql Connect!
+2023-06-06 20:58:24 [31merror[39m: ⨯ Unable to compile TypeScript:
+src/services/RouteService.ts(14,118): error TS2304: Cannot find name 'first'.
+src/services/RouteService.ts(16,118): error TS2304: Cannot find name 'second'.
+src/services/RouteService.ts(17,16): error TS2304: Cannot find name 'second_result'.
+
+(node:1009322) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:24 [31merror[39m: ⨯ Unable to compile TypeScript:
+src/services/RouteService.ts(14,118): error TS2304: Cannot find name 'first'.
+src/services/RouteService.ts(16,118): error TS2304: Cannot find name 'second'.
+src/services/RouteService.ts(17,16): error TS2304: Cannot find name 'second_result'.
+
+(node:1009321) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:24 [32minfo[39m: Mysql Connect!
+2023-06-06 20:58:24 [32minfo[39m: Mysql Connect!
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:58:45 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1009480) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:45 [32minfo[39m: Mysql Connect!
+2023-06-06 20:58:45 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1009478) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:45 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1009477) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:58:45 [32minfo[39m: Mysql Connect!
+2023-06-06 20:58:45 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 20:59:30 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1009828) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:59:30 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1009831) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:59:30 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1009832) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 20:59:30 [32minfo[39m: Mysql Connect!
+2023-06-06 20:59:30 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 20:59:30 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 21:01:33 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1010116) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:01:33 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010117) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:01:33 [32minfo[39m: Mysql Connect!
+2023-06-06 21:01:33 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010118) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:01:33 [32minfo[39m: Mysql Connect!
+2023-06-06 21:01:33 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 21:02:35 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1010239) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:02:35 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010241) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:02:35 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010238) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:02:35 [32minfo[39m: Mysql Connect!
+2023-06-06 21:02:35 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+2023-06-06 21:02:35 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 21:03:10 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1010467) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:03:10 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010463) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:03:10 [31merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8000
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (node:net:1740:16)
+    at listenInCluster (node:net:1788:12)
+    at Server.listen (node:net:1876:7)
+    at Function.listen (/home/web/backend/youngsu/RooTrip-Backend/node_modules/express/lib/application.js:635:24)
+    at App.init (/home/web/backend/youngsu/RooTrip-Backend/src/loaders/app.ts:55:16)
+    at Object.<anonymous> (/home/web/backend/youngsu/RooTrip-Backend/src/server.ts:9:7)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module.m._compile (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+    at Object.require.extensions.<computed> [as .ts] (/home/web/backend/youngsu/RooTrip-Backend/node_modules/ts-node/src/index.ts:1621:12)
+(node:1010466) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:03:10 [32minfo[39m: Mysql Connect!
+2023-06-06 21:03:10 [32minfo[39m: Mysql Connect!
+2023-06-06 21:03:10 [32minfo[39m: Mysql Connect!
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+Terminated
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+
+> test@1.0.0 dev
+> nodemon
+
+[33m[nodemon] 2.0.21[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): src/**/*[39m
+[33m[nodemon] watching extensions: ts[39m
+[32m[nodemon] starting `ts-node src/server.ts --watch`[39m
+2023-06-06 21:03:36 [32minfo[39m: Server is running on http://localhost:8000/api-docs
+(node:1010737) NOTE: We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the migration guide at https://a.co/7PzMCcy
+(Use `node --trace-warnings ...` to show where the warning was created)
+2023-06-06 21:03:36 [32minfo[39m: Mysql Connect!
+2023-06-06 21:03:37 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:37 +0000] "OPTIONS /api/auth/token/reissue HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:37 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:37 +0000] "POST /api/auth/token/reissue HTTP/1.1" 201 211 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:39 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:39 +0000] "OPTIONS /api/post HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:39 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:39 +0000] "GET /api/post HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:42 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:42 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:42 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:42 +0000] "OPTIONS /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 204 0 "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:42 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:42 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+2023-06-06 21:03:42 [32minfo[39m: ::ffff:118.41.235.242 - - [06/Jun/2023:12:03:42 +0000] "GET /api/post/168bba6a-29bc-46e6-8adb-e1efb861b940 HTTP/1.1" 304 - "http://165.229.86.126:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+

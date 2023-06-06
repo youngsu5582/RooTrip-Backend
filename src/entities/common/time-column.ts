@@ -6,7 +6,7 @@ import {
 } from "typeorm";
 
 export abstract class CreatedAtColumn extends BaseEntity {
-  @CreateDateColumn({ name: "created_at",select:false })
+  @CreateDateColumn({ name: "created_at",select:true  })
   public readonly createdAt!: Date;
   @UpdateDateColumn({ name: "updated_at" ,select:false})
   public readonly updatedAt!: Date | string;

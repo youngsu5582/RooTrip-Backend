@@ -23,8 +23,7 @@ export class CommentController {
         const {user,...data} = comment;
         return{
           ...data,
-          name:comment.user.nickname?comment.user.nickname:comment.user.name,
-          profileImage:user.profileImage,
+          name:user.nickname?user.nickname:user.name,
         }
       });
       return createResponseForm(result);
