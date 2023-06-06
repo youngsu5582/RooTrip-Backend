@@ -47,6 +47,8 @@ export default class Post extends defaultColumn {
   @Column({type:"int",default:0,select:false})
   point : number;
 
+  @Column({type:'enum',enum:['public','friend','private'],default:'public'})  
+  visibility : 'public'|'friend'|'private';
 
 
 }

@@ -1,9 +1,9 @@
-import { IsArray, IsEnum, IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
+import { IsArray,  IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
 import { articleType, photoType } from "../types";
 
 export class CreatePostDto {
   @IsNotEmpty()
-  @IsObject()
+  @IsObject({each:true})
   public article: articleType;
 
   @IsNotEmpty()
@@ -14,6 +14,7 @@ export class CreatePostDto {
   @IsArray()
   public routes : number[];
 
+  
 }
 
 

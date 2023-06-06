@@ -28,4 +28,5 @@ export interface photoType {
 export interface articleType  {
   title : string;
   content : string;
+  visibility : 'public'|'friend'|'private';
 }
