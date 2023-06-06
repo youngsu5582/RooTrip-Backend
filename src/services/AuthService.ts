@@ -7,25 +7,23 @@ import { User } from "../entities";
 import typia from "typia";
 import { ALREADY_EXISTED_EMAIL, LOCAL_REGISTER_FAILED, LOGOUT_FAILED, SOCIAL_REGISTER_FAILED } from "../errors/auth-error";
 import { ProfileRepository } from "../repositories/ProfileRepository";
-import Profile from "../entities/Profile";
 @Service()
 export class AuthService {
   private readonly _userRepository: typeof UserRepository;
   private readonly _profileRepository: typeof ProfileRepository;
   constructor() {
     this._userRepository = UserRepository;
+    this._profileRepository = ProfileRepository;
   }
   public async register(createUserDto: LocalUserDto) {
-    const email = createUserDto.email;
+    const {email,password,...profile} = createUserDto;
     if (await this._userRepository.getByEmail(email) && email !==null) {
       return typia.random<ALREADY_EXISTED_EMAIL>();
     }
     try{
-      const result = await this._userRepository.save(this._userRepository.create(createUserDto));
-      const profile = new Profile();
-      profile.userId = result.id;
-      profile.save();
-      return result;
+      const user = await this._userRepository.save(this._userRepository.create({email:email,password}));
+      await this._profileRepository.save(this._profileRepository.create({userId:user.id,...profile}));
+      return user;
     }
     catch{
       return typia.random<LOCAL_REGISTER_FAILED>();
@@ -40,19 +38,22 @@ export class AuthService {
   }
   public async checkDuplicateEmail(email: string) {
     return Boolean(!(await this._userRepository.getByEmail(email)));
-  }
+  } 
   public async checkDuplicateNickname(nickname: string) {
     return Boolean(
-      !(await this._userRepository.findOne({ where: { nickname } }))
+      !(await this._profileRepository.findOne({ where: { nickname } }))
     );
   }
   public async getUserById(id: string) {
     return await this._userRepository.getById(id);
   }
   public async socialRegister(createUserDto: SocialLoginType) {
+    const {id,name} = createUserDto;
     const user = await this._userRepository.save(
-      User.create({ ...createUserDto })
+      User.create({id})
     );
+     await this._profileRepository.save(this._profileRepository.create({userId:user.id,name}));
+    
     
     if (user) 
       return { status: true, data: user };

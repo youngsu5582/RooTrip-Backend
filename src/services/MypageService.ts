@@ -33,7 +33,7 @@ export class MypageService {
   } 
 
   public async changeNickname(userId: string, nickname: string) {
-    return await this._userRepository.updateNickname(userId, nickname);
+    return await this._profileRepository.updateNickname(userId, nickname);
   }
 
   public async changePassword(userId: string, newPassword: string) {
@@ -47,7 +47,7 @@ export class MypageService {
   }
 
   public async changeGender(userId: string, gender: GenderType) {
-    return await this._userRepository.updateGender(userId, gender);
+    return await this._profileRepository.updateGender(userId, gender);
   }
 
   public async likedPostList(userId: string) {

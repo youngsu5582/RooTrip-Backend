@@ -48,4 +48,5 @@ export default class Post extends defaultColumn {
   point : number;
 
 
+
 }

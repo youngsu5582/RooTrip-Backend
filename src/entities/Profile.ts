@@ -1,6 +1,7 @@
 import { Entity, Column, OneToOne, JoinColumn} from "typeorm";
 import { Service } from "typedi";
 import User from "./User";
+import { GenderType } from "../common";
 import { defaultColumn } from "./common/default-column";
 
 @Service()
@@ -19,4 +20,13 @@ export default class Profile extends defaultColumn {
 
     @Column({nullable:true,type:String,default:""})
     tagLine:string;
+  @Column()
+  name: string;
+
+  @Column({ nullable: true, type: String })
+  nickname: string | null;
+
+  @Column({ nullable: true, type: String })
+  gender: GenderType | null;
+
 }

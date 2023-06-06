@@ -12,7 +12,7 @@ import {
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
-import { PostService, GeoService, PhotoService } from "../services";
+import { PostService, GeoService, PhotoService, UserService } from "../services";
 import {  CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
@@ -32,6 +32,7 @@ export class PostController {
     private readonly _postService: PostService,
     private readonly _geoService: GeoService,
     private readonly _photoService: PhotoService,
+    private readonly _userService:UserService,
   ) {
   }
   @HttpCode(200)
@@ -50,17 +51,21 @@ export class PostController {
       await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
+      const profile = await this._userService.getProfile(userId);
+      /**
+       * 2023.06.06 Redis 로 수정해야함.
+       */
       const commentCount = await this._postService.getCommentCountByPostId(postId);
       const isLiked = await this._postService.checkUserLikePost(postId,userId);
       post.user = {
         id : post.user.id,
-        name : post.user.nickname?post.user.nickname:post.user.name,
-        profile : post.user.profile.profileImage
+        name : profile.nickname?profile.nickname:profile.name,
+        profile : profile.profileImage
       }  as any;
       return createResponseForm({...{postViews,post,commentCount,isLiked}});
     }
     catch{
-      return createErrorForm(typia.random<POST_GET_FAILED>());
+      return createErrorForm(typia.random<POST_GET_FAILED>());  
     }
   }
   @HttpCode(200)

@@ -1,15 +1,17 @@
 import { UserRepository, FollowerRepository } from "../repositories";
-import { Follower } from "../entities";
 import { Service } from "typedi";
+import { ProfileRepository } from "../repositories/ProfileRepository";
 
 @Service()
 export class UserService {
   constructor(
     private readonly _userRepository: typeof UserRepository,
-    private readonly _followerRepository: typeof FollowerRepository
+    private readonly _followerRepository: typeof FollowerRepository,
+    private readonly _profileRepository : typeof ProfileRepository,
   ) {
     this._userRepository = UserRepository;
     this._followerRepository = FollowerRepository;
+    this._profileRepository = ProfileRepository;
   }
   public async getRandomUser(){
     return (await this._userRepository.createQueryBuilder().orderBy('RAND()').limit(1).getOne()).id;
@@ -40,21 +42,21 @@ export class UserService {
       };
     }
 
-    const follow = new Follower();
-    follow.follower = follower;
-    follow.following = following;
-    const followInfo = await this._followerRepository.save(follow);
-    if (followInfo) {
-      return {
-        status: true,
-        message: `${followInfo.follower.name}님이 ${followInfo.following.name}님을 팔로우 합니다.`
-      };
-    } else {
-      return {
-        status: false,
-        message: `팔로우 실패`
-      };
-    }
+    // const follow = new Follower();
+    // follow.follower = follower;
+    // follow.following = following;
+    // const followInfo = await this._followerRepository.save(follow);
+    // if (followInfo) {
+    //   return {
+    //     status: true,
+    //     message: `${followInfo.follower.name}님이 ${followInfo.following.name}님을 팔로우 합니다.`
+    //   };
+    // } else {
+    //   return {
+    //     status: false,
+    //     message: `팔로우 실패`
+    //   };
+    // }
   }
 
   public async unfollowUser(followingId: string, followerId: string) {
@@ -81,5 +83,9 @@ export class UserService {
 
   public async followList(userId: string) {
     return await this._followerRepository.checkFollowList(userId);
+  }
+  public async getProfile(userId:string){
+    return await this._profileRepository.getByUserId(userId);
+
   }
 }
