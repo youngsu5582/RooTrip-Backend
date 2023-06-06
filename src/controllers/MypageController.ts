@@ -8,12 +8,13 @@ import {
   } from "routing-controllers";
   import { Service } from "typedi";
   import { OpenAPI } from "routing-controllers-openapi";
-  import { UpdateNicknameDto, UpdateGenderDto, UpdatePasswordDto, ProfileImgUrlDto } from "../dtos/UserDto";
+  import { UpdateNicknameDto, UpdateGenderDto, UpdatePasswordDto } from "../dtos/UserDto";
   import { Request } from "express";
   import {
     checkAccessToken
   } from "../middlewares/AuthMiddleware";
 import { MypageService } from "../services/MypageService";
+import { ProfileDto } from "../dtos/ProfileDto";
 @JsonController("/mypage")
 @Service()
 export class MypageController {
@@ -27,11 +28,10 @@ export class MypageController {
   })
   public async uploadProfileImage(
     @Req() req: Request,
-    @Body() ProfileImgUrlDto: ProfileImgUrlDto
+    @Body() profileDto: ProfileDto
   ) {
     const userId = req.user.jwtPayload.userId;
-    const profileImgUrl = ProfileImgUrlDto.imgUrl;
-    return await this._mypageService.uploadProfileImage(userId, profileImgUrl);
+    return await this._mypageService.uploadProfileImage(userId, profileDto);
   }
 
   @HttpCode(201)

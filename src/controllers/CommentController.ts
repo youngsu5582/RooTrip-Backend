@@ -24,7 +24,7 @@ export class CommentController {
         return{
           ...data,
           name:comment.user.nickname?comment.user.nickname:comment.user.name,
-          profileImage:user.profileImage,
+          profileImage:user.profile.profileImage,
         }
       });
       return createResponseForm(result);

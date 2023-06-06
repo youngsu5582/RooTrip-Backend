@@ -1,11 +1,10 @@
 import { Service } from "typedi";
-import { CreatePostDto, CreateRatingDto, UpdatePostDto} from "../dtos/PostDto";
+import { CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
 import { Post } from "../entities/index";
-import { PostRatingRepository } from "../repositories/PostRatingRepository";
 import typia from "typia";
-import { POST_DELETE_FAILED, RATING_UPLOAD_FAILED } from "../errors/post-error";
+import { POST_DELETE_FAILED } from "../errors/post-error";
 import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
 import { CommentRepository } from "../repositories";
 
@@ -14,13 +13,11 @@ export class PostService {
   constructor(
     private readonly postRepository: typeof PostRepository,
     private readonly likeRepository: typeof LikeRepository,
-    private readonly postRatingRepository :typeof PostRatingRepository,
     private readonly commentRepository : typeof CommentRepository,
     
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
-    this.postRatingRepository = PostRatingRepository;
     this.commentRepository = CommentRepository;
     
   }

@@ -55,7 +55,7 @@ export class PostController {
       post.user = {
         id : post.user.id,
         name : post.user.nickname?post.user.nickname:post.user.name,
-        profileImage : post.user.profileImage,
+        profile : post.user.profile.profileImage
       }  as any;
       return createResponseForm({...{postViews,post,commentCount,isLiked}});
     }

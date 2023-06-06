@@ -12,9 +12,6 @@ export const UserRepository = database.getRepository(User).extend({
   async deleteRefreshTokenById(id: string) {
     return await this.update(id, { refreshToken: undefined });
   },
-  async uploadProfileImage(id: string, imgUrl: string) {
-    return await this.update(id, {profileImage:imgUrl});
-  },
   async updateNickname(id: string, nickname: string) {
     return await this.update(id, {nickname: nickname});
   },
