@@ -8,7 +8,7 @@ import Comment from "./Comment";
 @Entity({ name: "post" })
 @Service()
 export default class Post extends defaultColumn {
-  @Column({ name: "user_id" , select:false })
+  @Column({ name: "user_id"})
   userId: string;
 
   @ManyToOne(() => User, (user) => user.posts, {

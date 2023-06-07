@@ -6,7 +6,7 @@ import {
   BeforeUpdate,
   ManyToMany,
   OneToOne,
-  JoinColumn
+  JoinColumn,
 } from "typeorm";
 import Post from "./Post";
 import Profile from "./Profile";
@@ -39,8 +39,11 @@ export default class User extends defaultColumn {
   followers: User[];
 
   @OneToOne(() => Profile, profile => profile.user, { cascade: true })
-  @JoinColumn()
+  @JoinColumn({name:"profile_id"})
   profile: Profile;
+
+  @Column({name:"profile_id",nullable:true})
+  profileId:string;
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -49,6 +52,7 @@ export default class User extends defaultColumn {
       this.password = hashSync(this.password, 10);
     }
   }
+
 
   async comparePassword(unencryptedPassword: string) {
     return compareSync(unencryptedPassword, this.password!);

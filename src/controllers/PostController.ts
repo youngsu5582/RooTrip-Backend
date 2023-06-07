@@ -51,14 +51,14 @@ export class PostController {
       await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
-      const profile = await this._userService.getProfile(userId);
+      const profile = await this._userService.getProfile(post.userId);
       /**
        * 2023.06.06 Redis 로 수정해야함.
        */
       const commentCount = await this._postService.getCommentCountByPostId(postId);
       const isLiked = await this._postService.checkUserLikePost(postId,userId);
       post.user = {
-        id : post.user.id,
+        id : post.userId,
         name : profile.nickname?profile.nickname:profile.name,
         profile : profile.profileImage
       }  as any;

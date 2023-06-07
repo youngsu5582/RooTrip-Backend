@@ -16,13 +16,14 @@ export class AuthService {
     this._profileRepository = ProfileRepository;
   }
   public async register(createUserDto: LocalUserDto) {
-    const {email,password,...profile} = createUserDto;
+    const {email,password,...profileDto} = createUserDto;
     if (await this._userRepository.getByEmail(email) && email !==null) {
       return typia.random<ALREADY_EXISTED_EMAIL>();
     }
     try{
       const user = await this._userRepository.save(this._userRepository.create({email:email,password}));
-      await this._profileRepository.save(this._profileRepository.create({userId:user.id,...profile}));
+      await this._profileRepository.save(this._profileRepository.create({userId:user.id,...profileDto})).then(profile=>user.profile=profile);
+      user.save();
       return user;
     }
     catch{
@@ -52,7 +53,8 @@ export class AuthService {
     const user = await this._userRepository.save(
       User.create({id})
     );
-     await this._profileRepository.save(this._profileRepository.create({userId:user.id,name}));
+     await this._profileRepository.save(this._profileRepository.create({userId:user.id,name})).then(profile=>user.profile=profile);
+     user.save();
     
     
     if (user) 

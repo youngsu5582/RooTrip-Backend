@@ -3,7 +3,7 @@ import database from "../loaders/database";
 
 export const PostRepository = database.getRepository(Post).extend({
   async getPostById(postId: string) {
-    return await this.findOne({ where: { id: postId },relations:["user","photos",]});
+    return await this.findOne({ where: { id: postId },relations:["photos",]});
   },
   async getPostListById(userId: string) {
     return await this.find({ where: { userId },relations:["user","photos"]});

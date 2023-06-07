@@ -20,7 +20,7 @@ export class CommentService {
         return await this.commentRepository.save(Comment.create({...createCommentDto,postId,userId}));
     }    
     public async getCommentsByPostId(postId:string){
-        return await this.commentRepository.find({where:{postId},relations:["user"]});
+        return await this.commentRepository.find({where:{postId},relations:["user","user.profile"]});
     }
     public async delete(commentId:string){
         return await this.commentRepository.delete(commentId);
