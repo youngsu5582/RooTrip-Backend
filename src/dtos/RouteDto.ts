@@ -6,7 +6,7 @@ export type RegionType = "서울" | "대구" | "부산" | "충청남도" | "충�
 
 export class RouteDto {
     @IsArray()
-    @ArrayMinSize(2)
+    @ArrayMinSize(1)
     @ArrayMaxSize(3)
     cities: Array<RegionType>;
   }

@@ -15,7 +15,7 @@ export class RouteService {
         for(let i =1 ;i<cities.length;i++){
             matched = (await this.photoRepository.createQueryBuilder("photo").select("distinct post_id").where({city:cities[i]}).andWhere("post_id IN (:...matched)",{matched}).getRawMany()).map(packet=>packet.post_id); 
         }
-        
-        return matched;
+        const posts = await this.postRepository.createQueryBuilder("post").where("id In(:...matched)",{matched}).andWhere("visibility = 'public'").getMany();
+        return posts;
     }
-}       
+}
