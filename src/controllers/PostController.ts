@@ -51,6 +51,7 @@ export class PostController {
       await this._postService.abacus(postId,userId);
       const postViews = await this._postService.getPostViews(postId);
       const post = await this._postService.getPostById(postId);
+      const photos = await this._photoService.getPhotosByPostId(post.id);
       const profile = await this._userService.getProfile(post.userId);
       /**
        * 2023.06.06 Redis 로 수정해야함.
@@ -62,7 +63,7 @@ export class PostController {
         name : profile.nickname?profile.nickname:profile.name,
         profile : profile.profileImage
       }  as any;
-      return createResponseForm({...{postViews,post,commentCount,isLiked}});
+      return createResponseForm({...{postViews,post,photos,commentCount,isLiked}});
     }
     catch{
       return createErrorForm(typia.random<POST_GET_FAILED>());  

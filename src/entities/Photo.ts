@@ -36,7 +36,7 @@ export default class Photo extends defaultColumn {
   @Column({ nullable: true })
   second: string;
 
-  @Column({type:"smallint",name:"photo_order",select:false})
+  @Column({type:"smallint",name:"photo_order"})
   order : number;
 
   // @Column({nullable:true})

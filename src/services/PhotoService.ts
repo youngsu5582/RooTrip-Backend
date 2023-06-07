@@ -10,7 +10,7 @@ export class PhotoService {
   public async createPhotos(createPhotoDtos: CreatePhotoDto[], postId: string) {
     try {
       await Promise.all(createPhotoDtos.map(async (createPhotoDto,index)=>(await this._photoRepository.createPhoto(createPhotoDto, postId,index))));
-      return await this._photoRepository.find({where:{postId},order:{order:"desc"}});
+      return await this._photoRepository.find({where:{postId}});  
     } catch {
       throw Error;
     }
@@ -19,7 +19,7 @@ export class PhotoService {
     const result =  await this._photoRepository.findOne({where:{postId},select:["id","coordinate","imageUrl"]});
     return result;
   }
-  public async getPhotoslByPostId(postId:string){
-    return await this._photoRepository.find({where:{postId},order:{order:"desc"}});
+  public async getPhotosByPostId(postId:string){
+    return await this._photoRepository.find({where:{postId},order:{order:"asc"}});
   }
 }
