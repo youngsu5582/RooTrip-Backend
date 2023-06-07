@@ -194,6 +194,4 @@ export class PostController {
     }));
     return createResponseForm(refinePosts);
   }
-
-  
 }

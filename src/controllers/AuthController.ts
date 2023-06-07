@@ -90,7 +90,6 @@ export class AuthController {
     else if (type === "nickname")
       isDuplicated = await this.authService.checkDuplicateNickname(data);
     else return createErrorForm(typia.random<DB_CONNECT_FAILED>());
-    //else createErrorForm<DB_CONNECT_FAILED>();
     return {status:isDuplicated,message:isDuplicated?undefined:"중복입니다."};
     
   }
