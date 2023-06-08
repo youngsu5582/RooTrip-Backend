@@ -24,7 +24,8 @@ export class LoginService {
     const user = await this._userRepository.findOne({ where: { email } });
     
     if (user) {
-      if (await user.comparePassword(password))
+      const check = await user.comparePassword(password.toString())
+      if (check)
         return {data:user};
       else return typia.random<NOT_CORRECT_PASSWORD>();
     } else return typia.random<NOT_EXISTED_EMAIL>();

@@ -38,7 +38,7 @@ export default class User extends defaultColumn {
   @ManyToMany(() => User)
   followers: User[];
 
-  @OneToOne(() => Profile, profile => profile.user, { cascade: true })
+  @OneToOne(() => Profile, profile => profile.user)
   @JoinColumn({name:"profile_id"})
   profile: Profile;
 
