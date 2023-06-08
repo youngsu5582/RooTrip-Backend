@@ -15,6 +15,9 @@ import {
   } from "../middlewares/AuthMiddleware";
 import { MypageService } from "../services/MypageService";
 import { ProfileDto } from "../dtos/ProfileDto";
+import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
+import {CHANGE_PASSWORD_FAILED, GENDER_CHANGE_FAILED, LIKED_POST_GET_FAILED, NICKNAME_CHANGE_FAILED, PROFILE_IMAGE_UPLOAD_FAILED, SAVED_POST_GET_FAILED, UPLOAD_POST_GET_FAILED, WITHDRAWL_FAILED} from "../errors/mypage-error"
+import typia from "typia";
 @JsonController("/mypage")
 @Service()
 export class MypageController {
@@ -30,9 +33,16 @@ export class MypageController {
     @Req() req: Request,
     @Body() profileDto: ProfileDto
   ) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._mypageService.uploadProfileImage(userId, profileDto);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      await this._mypageService.uploadProfileImage(userId, profileDto);
+      return createResponseForm(undefined);
+    }
+    catch{
+      return createErrorForm(typia.random<PROFILE_IMAGE_UPLOAD_FAILED>());
+    }
   }
+  
 
   @HttpCode(201)
   @Post("/account/edit/nickname")
@@ -44,9 +54,15 @@ export class MypageController {
     @Req() req: Request,
     @Body() updateNicknameDto: UpdateNicknameDto
   ) {
-    const userId = req.user.jwtPayload.userId;
-    const nickname = updateNicknameDto.nickname;
-    return await this._mypageService.changeNickname(userId, nickname);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const nickname = updateNicknameDto.nickname;
+      await this._mypageService.changeNickname(userId, nickname);
+      return createResponseForm(undefined);
+    }
+    catch {
+      return createErrorForm(typia.random<NICKNAME_CHANGE_FAILED>());
+    }
   }
 
   @HttpCode(201)
@@ -59,9 +75,15 @@ export class MypageController {
     @Req() req: Request,
     @Body() updateGenderDto: UpdateGenderDto
   ) {
-    const userId = req.user.jwtPayload.userId;
-    const gender = updateGenderDto.gender;
-    return await this._mypageService.changeGender(userId, gender);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const gender = updateGenderDto.gender;
+      await this._mypageService.changeGender(userId, gender);
+      return createResponseForm(undefined);
+    }
+    catch {
+      return createErrorForm(typia.random<GENDER_CHANGE_FAILED>());
+    }
   }
 
   @HttpCode(201)
@@ -71,8 +93,14 @@ export class MypageController {
     description: "사용자가 추천한 게시글들을 보여줍니다."
   })
   public async likedPostList(@Req() req: Request) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._mypageService.likedPostList(userId);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const likedPost = await this._mypageService.likedPostList(userId);
+      return createResponseForm(likedPost);
+    }
+    catch {
+      return createErrorForm(typia.random<LIKED_POST_GET_FAILED>());
+    }
   }
 
   @HttpCode(201)
@@ -82,8 +110,14 @@ export class MypageController {
     description: "사용자가 저장한 게시글들을 보여줍니다."
   })
   public async savedTripList(@Req() req: Request) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._mypageService.savedTripList(userId);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const savedPost = await this._mypageService.savedTripList(userId);
+      return createResponseForm(savedPost);
+    }
+    catch {
+      createErrorForm(typia.random<SAVED_POST_GET_FAILED>())
+    }
   }
 
   @HttpCode(201)
@@ -93,8 +127,14 @@ export class MypageController {
     description: "사용자가 작성한 게시글들을 보여줍니다."
   })
   public async uploadPostList(@Req() req: Request) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._mypageService.uploadPostList(userId);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const uploadPost = await this._mypageService.uploadPostList(userId);
+      return createResponseForm(uploadPost);
+    }
+    catch {
+      return createErrorForm(typia.random<UPLOAD_POST_GET_FAILED>());
+    }
   }
 
   @HttpCode(201)
@@ -107,9 +147,15 @@ export class MypageController {
     @Req() req: Request,
     @Body() updatePasswordDto: UpdatePasswordDto
   ) {
-    const userId = req.user.jwtPayload.userId;
-    const password = updatePasswordDto.password;
-    return await this._mypageService.changePassword(userId, password);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      const password = updatePasswordDto.password;
+      await this._mypageService.changePassword(userId, password);
+      return createResponseForm(undefined);
+    }
+    catch {
+      return createErrorForm(typia.random<CHANGE_PASSWORD_FAILED>());
+    }
   }
 
   @HttpCode(201)
@@ -119,7 +165,13 @@ export class MypageController {
     description: "회원탈퇴를 합니다."
   })
   public async deleteUser(@Req() req: Request) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._mypageService.deleteUser(userId);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      await this._mypageService.deleteUser(userId);
+      return createResponseForm(undefined);
+    }
+    catch {
+      return createErrorForm(typia.random<WITHDRAWL_FAILED>());
+    }
   }
 }

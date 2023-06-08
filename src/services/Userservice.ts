@@ -1,6 +1,8 @@
 import { UserRepository, FollowerRepository } from "../repositories";
 import { Service } from "typedi";
 import { ProfileRepository } from "../repositories/ProfileRepository";
+import typia from "typia";
+import { ALREADY_FOLLOWING, FOLLOW_FAILED, NOT_EXISTED_USER, NOT_FOLLOWING, UNFOLLOW_FAILED } from "../errors/user-error";
 
 @Service()
 export class UserService {
@@ -18,45 +20,29 @@ export class UserService {
   }
 
   public async followUser(followerId: string, followingId: string) {
-    const follower = await this._userRepository.findOne({
-      where: { id: followerId }
-    });
-    const following = await this._userRepository.findOne({
-      where: { id: followingId }
-    });
-    if (!follower || !following) {
-      return {
-        status: false,
-        message: `존재하지 않는 회원입니다.`
-      };
-    }
+    try {
+      const follower = await this._userRepository.findOne({
+        where: { id: followerId }
+      });
+      const following = await this._userRepository.findOne({
+        where: { id: followingId }
+      });
+      if (!follower || !following) {
+        return typia.random<NOT_EXISTED_USER>();
+      }
 
-    const followingState = await this._followerRepository.getByFollowingState(
-      followerId,
-      followingId
-    );
-    if (followingState) {
-      return {
-        status: true,
-        message: `이미 팔로우중입니다.`
-      };
-    }
+      const followingState = await this._followerRepository.getByFollowingState(
+        followerId,
+        followingId
+      );
 
-    // const follow = new Follower();
-    // follow.follower = follower;
-    // follow.following = following;
-    // const followInfo = await this._followerRepository.save(follow);
-    // if (followInfo) {
-    //   return {
-    //     status: true,
-    //     message: `${followInfo.follower.name}님이 ${followInfo.following.name}님을 팔로우 합니다.`
-    //   };
-    // } else {
-    //   return {
-    //     status: false,
-    //     message: `팔로우 실패`
-    //   };
-    // }
+      if (followingState) {
+        return typia.random<ALREADY_FOLLOWING>();
+      }
+    }
+    catch {
+      return typia.random<FOLLOW_FAILED>();
+    }
   }
 
   public async unfollowUser(followingId: string, followerId: string) {
@@ -65,19 +51,14 @@ export class UserService {
       followingId
     );
     if (!followingState) {
-      return {
-        status: false,
-        message: `팔로우중이 아닙니다.`
-      };
+      return typia.random<NOT_FOLLOWING>();
     }
+
     const unfollowState = await this._followerRepository.deleteFollowing(
       followingState.id
     );
-    if (unfollowState) {
-      return {
-        status: true,
-        message: `언팔로우 합니다.`
-      };
+    if (!unfollowState) {
+      return typia.random<UNFOLLOW_FAILED>();
     }
   }
 

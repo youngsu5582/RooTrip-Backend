@@ -11,6 +11,10 @@ import { OpenAPI } from "routing-controllers-openapi";
 import { UserService } from "../services";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
+import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
+import typia from "typia";
+import { SELECT_FOLLOWING_LIST_FAILED} from "../errors/user-error";
+import { isErrorCheck } from "../errors";
 
 @JsonController("/user")
 @Service()
@@ -26,9 +30,15 @@ export class UserController {
     @Param("followingId") followingId: string,
     @Req() req: Request
   ) {
+
     const followerId = req.user.jwtPayload.userId;
-    return this._userService.followUser(followerId, followingId);
-  }
+    const result = await this._userService.followUser(followerId, followingId);
+
+    if(isErrorCheck(result)) {
+      return createErrorForm(result);
+    }
+    return createResponseForm(undefined);
+    }
 
   @HttpCode(201)
   @Post("/:followingId/unfollow")
@@ -41,8 +51,13 @@ export class UserController {
     @Req() req: Request
   ) {
     const followerId = req.user.jwtPayload.userId;
-    return this._userService.unfollowUser(followingId, followerId);
-  }
+    const result = await this._userService.unfollowUser(followingId, followerId);
+
+    if(isErrorCheck(result)) {
+      return createErrorForm(result);
+    }
+    return createResponseForm(undefined);
+    }
 
   @HttpCode(201)
   @Post("/:userId/followlist")
@@ -51,7 +66,13 @@ export class UserController {
     description: "사용자들의 팔로우 목록을 조회합니다."
   })
   public async followList(@Param("userId") userId: string) {
-    return this._userService.followList(userId);
+    try {
+      const list = await this._userService.followList(userId);
+      return createResponseForm(list);
+    }
+    catch {
+      return createErrorForm(typia.random<SELECT_FOLLOWING_LIST_FAILED>());
+    }
   }
 }
   

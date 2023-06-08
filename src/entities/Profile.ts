@@ -11,7 +11,10 @@ export default class Profile extends defaultColumn {
     @Column({ name: "user_id" })
     userId: string;
 
-    @OneToOne(() => User, (user) => user.profile)
+    @OneToOne(() => User, (user) => user.profile, {
+      cascade: true,
+      onDelete: "CASCADE"
+    })
     @JoinColumn({name:"user_id"})
     user: User;
 
