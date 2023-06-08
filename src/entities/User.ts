@@ -3,7 +3,6 @@ import {
   Column,
   OneToMany,
   BeforeInsert,
-  BeforeUpdate,
   ManyToMany,
   OneToOne,
   JoinColumn,
@@ -46,7 +45,6 @@ export default class User extends defaultColumn {
   profileId:string;
 
   @BeforeInsert()
-  @BeforeUpdate()
   async hashPassword() {
     if (this.password) {
       this.password = hashSync(this.password, 10);
