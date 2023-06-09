@@ -17,7 +17,7 @@ import {  CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
-import {  NOT_EXISTED_LIKE, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED } from "../errors/post-error";
+import {  NOT_EXISTED_LIKE, POST_CREATE_FAILED, POST_GET_FAILED, POST_NOT_MATCH_USER, POST_UPDATE_FAILED, SAVE_POST_FAILED } from "../errors/post-error";
 import { createErrorForm, createResponseForm } from "../interceptors/Transformer";
 import { isErrorCheck } from "../errors";
 import {env} from '../loaders/env';
@@ -190,8 +190,14 @@ export class PostController {
     @Param("postId") postId: string,
     @Req() req: Request
   ) {
-    const userId = req.user.jwtPayload.userId;
-    return await this._postService.savePost(userId, postId);
+    try {
+      const userId = req.user.jwtPayload.userId;
+      await this._postService.savePost(userId, postId);
+      return createResponseForm(undefined);
+    }
+    catch {
+      createErrorForm(typia.random<SAVE_POST_FAILED>());
+    }
   }
 
   @Get("")

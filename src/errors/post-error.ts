@@ -28,3 +28,7 @@ export interface POST_GET_FAILED extends ERROR {
     status : false;
     message : "게시글 받는걸 실패했습니다.";
 }
+export interface SAVE_POST_FAILED extends ERROR {
+    status : false;
+    message : "게시글을 저장하는데 실패했습니다.";
+}
