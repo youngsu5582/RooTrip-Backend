@@ -29,3 +29,8 @@ export interface SELECT_FOLLOWING_LIST_FAILED extends ERROR {
     status: false;
     message: "팔로잉 목록 조회에 실패했습니다."
 }
+
+export interface SELECT_FOLLOWER_LIST_FAILED extends ERROR {
+    status: false;
+    message: "팔로워 목록 조회에 실패했습니다."
+}

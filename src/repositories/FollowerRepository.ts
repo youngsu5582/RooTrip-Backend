@@ -15,5 +15,11 @@ export const FollowerRepository = database.getRepository(Follower).extend({
       where: { follower: { id: userId } },
       relations: ["following"]
     });
+  },
+  async checkFollowersList(userId: string) {
+    return await this.find({
+      where: { following: {id:userId}},
+      relations: ["follower"]
+    })
   }
 });

@@ -74,5 +74,22 @@ export class UserController {
       return createErrorForm(typia.random<SELECT_FOLLOWING_LIST_FAILED>());
     }
   }
+
+  @HttpCode(201)
+  @Post("/:userId/followerslist")
+  @UseBefore(checkAccessToken)
+  @OpenAPI({
+    description: "사용자들의 팔로워 목록을 조회합니다."
+  })
+  public async followersList(@Param("userId") userId: string) {
+    try {
+      const list = await this._userService.followersList(userId);
+      return createResponseForm(list);
+    }
+    catch {
+      return createErrorForm(typia.random<SELECT_FOLLOWING_LIST_FAILED>());
+    }
+  }
+
 }
   
