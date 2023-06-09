@@ -180,6 +180,20 @@ export class PostController {
         return typia.random<NOT_EXISTED_LIKE>();
     }
   }
+
+  @HttpCode(201)
+  @Post("/:postId/save")
+  @OpenAPI({
+    description: "게시글을 저장합니다"
+  })
+  public async savePost(
+    @Param("postId") postId: string,
+    @Req() req: Request
+  ) {
+    const userId = req.user.jwtPayload.userId;
+    return await this._postService.savePost(userId, postId);
+  }
+
   @Get("")
   @HttpCode(200)
   @OpenAPI({

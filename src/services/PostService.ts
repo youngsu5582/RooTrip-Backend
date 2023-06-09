@@ -2,11 +2,11 @@ import { Service } from "typedi";
 import { CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
 import { LikeRepository } from "../repositories/LikeRepository";
 import { PostRepository } from "../repositories/PostRepository";
-import { Post } from "../entities/index";
+import { Post} from "../entities/index";
 import typia from "typia";
 import { POST_DELETE_FAILED } from "../errors/post-error";
 import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
-import { CommentRepository } from "../repositories";
+import { CommentRepository, TripRepository } from "../repositories";
 
 @Service()
 export class PostService {
@@ -14,12 +14,12 @@ export class PostService {
     private readonly postRepository: typeof PostRepository,
     private readonly likeRepository: typeof LikeRepository,
     private readonly commentRepository : typeof CommentRepository,
-    
+    private readonly tripRepository: typeof TripRepository,
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
     this.commentRepository = CommentRepository;
-    
+    this.tripRepository = TripRepository;
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
@@ -78,6 +78,11 @@ export class PostService {
       
     }
   }
+
+  async savePost(userId: string, postId: string) {
+    return await this.tripRepository.save({userId,postId});
+  }
+
   /**
    * 2023.06.04 Prototype 완성 기한으로 인한 주석
    */

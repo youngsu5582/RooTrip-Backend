@@ -10,6 +10,9 @@ import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import { GenderType } from "../common";
 import { ProfileRepository } from "../repositories/ProfileRepository";
 import { ProfileDto } from "../dtos/ProfileDto";
+import typia from "typia";
+import { NOT_EXISTED_USER } from "../errors/user-error";
+import { CHANGE_PASSWORD_FAILED } from "../errors/mypage-error";
 
 @Service()
 @UseBefore(checkAccessToken)
@@ -37,13 +40,18 @@ export class MypageService {
   }
 
   public async changePassword(userId: string, newPassword: string) {
-    const user = await this._userRepository.updatePassword(userId);
-    if (user) {
-      user.password = newPassword;
-      const result = await this._userRepository.save(user);
-      if (result) return true;
-      else return false;
-    } else return new Error("비밀번호 변경 실패!");
+    try {
+      const user = await this._userRepository.updatePassword(userId);
+      if (user) {
+        user.password = newPassword;
+        const result = await this._userRepository.save(user);
+        if (result) return true;
+        else return typia.random<CHANGE_PASSWORD_FAILED>();
+      } else return typia.random<NOT_EXISTED_USER>();
+    }
+    catch {
+      return typia.random<CHANGE_PASSWORD_FAILED>();
+    }
   }
 
   public async changeGender(userId: string, gender: GenderType) {
