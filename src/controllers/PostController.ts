@@ -89,8 +89,13 @@ export class PostController {
           })
         );
         const post = await this._postService.createPost(createPostDto, userId);
-        await this._photoService.createPhotos(createPhotoDto, post.id);
-        return createResponseForm(undefined,"게시글 작성 완료");
+        const photos = await this._photoService.createPhotos(createPhotoDto, post.id);
+        const thumbnailImage = {
+          id:photos[0].id,
+          coordinate:photos[0].coordinate,
+          imageUrl:photos[0].imageUrl,
+        }
+        return createResponseForm({postId:post.id,...thumbnailImage},"게시글 작성 완료");
       }
       catch{
         return typia.random<POST_CREATE_FAILED>();
@@ -206,8 +211,10 @@ export class PostController {
     description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
   })
   public async getMany  ( ){
-    const posts = await this._postService.getRecoomendPost();
-    
+    //const posts = await this._postService.getRecoomendPost();
+    // 2023.06.09 한 경로가 4곳을 이동 했을 거 와 같은 경우 우연히 겹치는 경우 생각해야함.
+    const postIds = await this._photoService.getPostIdByRegion();
+    const posts = await this._postService.getPostsByIds(postIds);
     const refinePosts = await Promise.all(posts.map(async (post) => {
       const id = post.id;
       const thumbnailImage = await this._photoService.getThumbnailByPostId(id);

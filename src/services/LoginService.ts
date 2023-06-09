@@ -88,7 +88,7 @@ export class LoginService {
       id,
       name: userInfo.name,
       gender: userInfo.gender,
-      email: "n_" + userInfo.email
+      email: "n_"+userInfo.email
     };
     return result;
   }

@@ -1,3 +1,4 @@
+import { In } from "typeorm";
 import { Post } from "../entities";
 import database from "../loaders/database";
 
@@ -7,6 +8,9 @@ export const PostRepository = database.getRepository(Post).extend({
   },
   async getPostListById(userId: string) {
     return await this.find({ where: { userId },relations:["user","photos"]});
+  },
+  async getPostsByIds(postIds:string[]){
+    return await this.find({where:{id:In(postIds)}})
   },
   async checkUserIdByPostId(userId: string, postId: string) {
     return Boolean(

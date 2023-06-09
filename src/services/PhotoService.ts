@@ -16,10 +16,13 @@ export class PhotoService {
     }
   }
   public async getThumbnailByPostId(postId:string){
-    const result =  await this._photoRepository.findOne({where:{postId},select:["id","coordinate","imageUrl"]});
+    const result =  await this._photoRepository.findOne({where:{postId,order:0},select:["id","coordinate","imageUrl"]});
     return result;
   }
   public async getPhotosByPostId(postId:string){
     return await this._photoRepository.find({where:{postId},order:{order:"asc"}});
+  }
+  public async getPostIdByRegion(){
+    return await this._photoRepository.getRandomPostIdEachCity();
   }
 }

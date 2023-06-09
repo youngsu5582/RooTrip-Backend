@@ -18,5 +18,16 @@ export const PhotoRepository = database.getRepository(Photo).extend({
         coordinate.y
       } ${coordinate.x})", 4326),"${city}", "${first}","${second}","${order}")`
     );
-  }
+  },
+  async getRandomPostIdEachCity(){
+    return await this.query(`
+    SELECT temp.post_id as id
+    FROM (
+        SELECT photo.city, post_id, ROW_NUMBER() OVER (PARTITION BY city ORDER BY RAND()) AS row_num
+        FROM photo
+    ) as temp
+    WHERE row_num = 1;`
+  ).then(result=>result.map(row=>row.id));
+
+  } 
 });

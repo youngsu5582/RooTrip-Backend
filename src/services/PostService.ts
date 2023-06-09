@@ -31,6 +31,9 @@ export class PostService {
   public async getPostById(postId: string) {
     return await this.postRepository.getPostById(postId);
   }
+  public async getPostsByIds(postIds:string[]){
+    return await this.postRepository.getPostsByIds(postIds);
+  }
   public async updatePost(postId: string, updatePostDto: UpdatePostDto) {
     return await this.postRepository.update(postId, updatePostDto);
   }
@@ -97,6 +100,7 @@ export class PostService {
   //   }
   // }
 
+  
   public async getRecoomendPost(){
     return await this.postRepository.getRecentPosts();
   }
