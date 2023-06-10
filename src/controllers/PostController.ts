@@ -214,7 +214,9 @@ export class PostController {
     //const posts = await this._postService.getRecoomendPost();
     // 2023.06.09 한 경로가 4곳을 이동 했을 거 와 같은 경우 우연히 겹치는 경우 생각해야함.
     const postIds = await this._photoService.getPostIdByRegion();
+    console.log(postIds);
     const posts = await this._postService.getPostsByIds(postIds);
+    console.log(posts);
     const refinePosts = await Promise.all(posts.map(async (post) => {
       const id = post.id;
       const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
