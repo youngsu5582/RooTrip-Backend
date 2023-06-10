@@ -32,33 +32,34 @@ export const PostRepository = database.getRepository(Post).extend({
   async getTotalCount(postId:string){
     return await this.findOne({where:{id:postId},select:["viewCount"]});
     //return Number(await this.createQueryBuilder("post").select(['view_count']).where('post.id = postId',{postId}).getOne());
-  }
+  },
 
-   // async getPublicPostsByIds(postIds:string[]) {
-  //   return await this.find({
-  //     where: [
-  //       {id:In(postIds)},
-  //       {visibility: 'public'}
-  //     ],
-  //   })
-  // },
+   async getPublicPostsByIds(postIds:string[]) {
+    return await this.find({
+      where: {
+        id: In(postIds),
+        visibility: 'public',
+      },
+    });
+   },
 
-   // async getPrivatePostsByIds(postIds:string[]) {
-  //   return await this.find({
-  //     where: [
-  //       {id:In(postIds)},
-  //       {visibility: 'private'}
-  //     ],
-  //   })
-  // },
+   async getPrivatePostsByIds(postIds:string[], userId:string) {
+    return await this.find({
+      where: {
+        id: In(postIds),
+        userId: userId,
+        visibility: 'private',
+      },
+    });
+   },
 
-   // async getFriendsPostsByIds(postIds:string[]) {
-  //   return await this.find({
-  //     where: [
-  //       {id:In(postIds)},
-  //       {visibility: 'friends'}
-  //     ],
-  //   })
-  // },
+   async getFriendsPostsByIds(postIds:string[]) {
+    return await this.find({
+      where: {
+        id: In(postIds),
+        visibility: 'friend',
+      },
+    });
+   },
   
 });

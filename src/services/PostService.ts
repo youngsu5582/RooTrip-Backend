@@ -154,4 +154,16 @@ export class PostService {
   public async getCommentCountByPostId(postId:string){
       return await this.commentRepository.count({where:{postId}});
   }
+
+  public async getPublicPostsByIds(postIds: string[]) {
+    return await this.postRepository.getPublicPostsByIds(postIds);
+  }
+  
+  public async getPrivatePostsByIds(postIds: string[], userId: string) {
+    return await this.postRepository.getPrivatePostsByIds(postIds, userId);
+  }
+
+  public async getFriendsPostsByIds(postIds: string[]) {
+    return await this.postRepository.getFriendsPostsByIds(postIds);
+  }
 }

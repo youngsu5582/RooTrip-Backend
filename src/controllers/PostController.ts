@@ -222,4 +222,31 @@ export class PostController {
     }));
     return createResponseForm(refinePosts);
   }
+
+  /*
+  게시글 공개 여부
+  전체 공개: public
+  친구 공개: friends
+  나만 보기: private
+  */
+  // @Get("/")
+  // @HttpCode(201)
+  // @OpenAPI({
+  //   description:"게시글 공개범위 설정 테스트용"
+  // })
+  // public async getMany2 (@Req() req:Request){
+  //   const userId = req.user.jwtPayload.userId;
+  //   const postIds = await this._photoService.getPostIdByRegion();
+  //   const publicPosts = await this._postService.getPublicPostsByIds(postIds);
+  //   const privatePosts = await this._postService.getPrivatePostsByIds(postIds,userId);
+    
+  //   const posts = await Promise.all([...publicPosts, ...privatePosts]);
+  //   const refinePosts = await Promise.all(posts.map(async (post) => {
+  //     const id = post.id;
+  //     const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
+  //       return {postId : id,...thumbnailImage};
+  //   }));
+  //   return createResponseForm(refinePosts);
+  // }
+
 }
