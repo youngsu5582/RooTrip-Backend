@@ -6,6 +6,7 @@ export const PostRepository = database.getRepository(Post).extend({
   async getPostById(postId: string) {
     return await this.findOne({ where: { id: postId }});
   },
+  
   async getPostListById(userId: string) {
     return await this.find({ where: { userId },relations:["user","photos"]});
   },
@@ -32,4 +33,32 @@ export const PostRepository = database.getRepository(Post).extend({
     return await this.findOne({where:{id:postId},select:["viewCount"]});
     //return Number(await this.createQueryBuilder("post").select(['view_count']).where('post.id = postId',{postId}).getOne());
   }
+
+   // async getPublicPostsByIds(postIds:string[]) {
+  //   return await this.find({
+  //     where: [
+  //       {id:In(postIds)},
+  //       {visibility: 'public'}
+  //     ],
+  //   })
+  // },
+
+   // async getPrivatePostsByIds(postIds:string[]) {
+  //   return await this.find({
+  //     where: [
+  //       {id:In(postIds)},
+  //       {visibility: 'private'}
+  //     ],
+  //   })
+  // },
+
+   // async getFriendsPostsByIds(postIds:string[]) {
+  //   return await this.find({
+  //     where: [
+  //       {id:In(postIds)},
+  //       {visibility: 'friends'}
+  //     ],
+  //   })
+  // },
+  
 });
