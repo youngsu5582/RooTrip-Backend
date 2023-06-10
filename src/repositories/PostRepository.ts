@@ -53,11 +53,12 @@ export const PostRepository = database.getRepository(Post).extend({
     });
    },
 
-   async getFriendsPostsByIds(postIds:string[]) {
+   async getFriendsPostsByIds(postIds:string[], following:string[]) {
     return await this.find({
       where: {
         id: In(postIds),
         visibility: 'friend',
+        userId: In(following)
       },
     });
    },

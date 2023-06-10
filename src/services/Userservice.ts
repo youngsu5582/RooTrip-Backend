@@ -62,6 +62,9 @@ export class UserService {
     }
   }
 
+  public async getFollowingId(userId: string) {
+    return await this._followerRepository.getFollowingUserId(userId);
+  }
   public async followList(userId: string) {
     return await this._followerRepository.checkFollowList(userId);
   }

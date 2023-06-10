@@ -163,7 +163,7 @@ export class PostService {
     return await this.postRepository.getPrivatePostsByIds(postIds, userId);
   }
 
-  public async getFriendsPostsByIds(postIds: string[]) {
-    return await this.postRepository.getFriendsPostsByIds(postIds);
+  public async getFriendsPostsByIds(postIds: string[], following: string[]) {
+    return await this.postRepository.getFriendsPostsByIds(postIds, following);
   }
 }

@@ -238,9 +238,11 @@ export class PostController {
   //   const userId = req.user.jwtPayload.userId;
   //   const postIds = await this._photoService.getPostIdByRegion();
   //   const publicPosts = await this._postService.getPublicPostsByIds(postIds);
+  //   const following = await this._userService.getFollowingId(userId);
+  //   const friendsPosts = await this._postService.getFriendsPostsByIds(postIds, following);
   //   const privatePosts = await this._postService.getPrivatePostsByIds(postIds,userId);
     
-  //   const posts = await Promise.all([...publicPosts, ...privatePosts]);
+  //   const posts = await Promise.all([...publicPosts, ...friendsPosts,...privatePosts]);
   //   const refinePosts = await Promise.all(posts.map(async (post) => {
   //     const id = post.id;
   //     const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
