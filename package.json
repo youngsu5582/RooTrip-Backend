@@ -5,12 +5,18 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon",
+    "dev": "NODE_ENV = development nodemon",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "ts": "tsc-watch --onSuccess \"node build/server.js\" ",
+    
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prepare": "ts-patch install",
-    "start": "ts-node src/server.ts"
+    "start": "ts-node src/server.ts",
+
+    "start:dev": "NODE_ENV=development ts-node --transpile-only src/server.ts --watch",
+    "start:production": "NODE_ENV=production ts-node src/server.ts"
+
+
   },
   "keywords": [],
   "author": "",
