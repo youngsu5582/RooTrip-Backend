@@ -1,7 +1,6 @@
 import { env } from "./env";
 import AWS from "aws-sdk";
 import { DataSource } from "typeorm";
-import { createClient } from "redis";
 const { database, s3 } = env;
 export default new DataSource({
   type: "mysql",
@@ -18,7 +17,6 @@ export default new DataSource({
   charset:'utf8mb4'
 });
 
-const redisClient = createClient();
 const s3Client = new AWS.S3({
   signatureVersion: "s3v4",
   region: "ap-northeast-2",
@@ -29,4 +27,4 @@ const s3Client = new AWS.S3({
   }
 });
 
-export { redisClient, s3Client };
+export {  s3Client };

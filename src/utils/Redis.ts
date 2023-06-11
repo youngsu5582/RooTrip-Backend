@@ -1,9 +1,10 @@
-import { redisClient } from "../loaders/database";
+import { createClient } from "redis";
 
 export async function addBlacklist(accessToken: string, expiresIn: number) {
   const key = `blacklist : ${accessToken}`;
 
   try {
+    const redisClient = createClient();
     await redisClient.connect();
     await redisClient.set(key, 1, {
       EX: expiresIn
@@ -17,6 +18,7 @@ export async function addBlacklist(accessToken: string, expiresIn: number) {
 }
 export async function checkBlacklist(accessToken: string) {
   try {
+    const redisClient = createClient();
     redisClient.connect();
     const key = `blacklist : ${accessToken}`;
     const result = Boolean(await redisClient.get(key));
@@ -30,6 +32,7 @@ export async function addVerify(email: string, randomNumber: string) {
   const key = `verify : ${email}`;
 
   try {
+    const redisClient = createClient();
     await redisClient.connect();
     await redisClient.set(key, randomNumber, {
       EX: 180
@@ -41,6 +44,7 @@ export async function addVerify(email: string, randomNumber: string) {
 }
 export async function getVerify(email: string) {
   try {
+    const redisClient = createClient();
     redisClient.connect();
     const key = `verify : ${email}`;
     const result = await redisClient.get(key);
@@ -53,6 +57,7 @@ export async function getVerify(email: string) {
 export async function checkPostViews(postId:string,userId:string){
   const key = `postViewed:${userId}`;
   try{
+    const redisClient = createClient();
     redisClient.connect();
     const result =  await redisClient.sIsMember(key,postId);
     redisClient.disconnect();
@@ -64,6 +69,7 @@ export async function checkPostViews(postId:string,userId:string){
 }
 export async function increasePostViews(postId:string,userId:string){
   try{
+    const redisClient = createClient();
     redisClient.connect();
     const key = `postViews:${postId}`;
     await redisClient.pfAdd(key,userId);
@@ -79,6 +85,7 @@ export async function increasePostViews(postId:string,userId:string){
 }
 export async function getPostViews(postId:string){
   try{
+    const redisClient = createClient();
     redisClient.connect();
     const key = `postViews:${postId}`;
     const result = await redisClient.pfCount(key);
@@ -91,6 +98,7 @@ export async function getPostViews(postId:string){
 }
 export async function deleteAllPostViews(keys:string[]){
   try{
+    const redisClient = createClient();
     redisClient.connect();
     await redisClient.del(keys);
     redisClient.disconnect();
@@ -102,6 +110,7 @@ export async function deleteAllPostViews(keys:string[]){
 }
 export async function getAllPostViews(){
   try{
+    const redisClient = createClient();
     const pattern ="postViews:*";
     redisClient.connect();
     const result = await redisClient.keys(pattern);

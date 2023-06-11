@@ -11,7 +11,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prepare": "ts-patch install",
     "start": "ts-node src/server.ts",
-    "start:dev": "NODE_ENV=development ts-node --transpile-only src/server.ts --watch",
+    "start:dev": "ts-node --transpile-only src/server.ts --watch",
     "start:production": "NODE_ENV=production ts-node src/server.ts"
   },
   "keywords": [],
