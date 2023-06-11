@@ -1,5 +1,6 @@
 import { IsArray,  IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
-import { articleType, photoType } from "../types";
+import {  articleType, photoType } from "../types";
+
 
 export class CreatePostDto {
   @IsNotEmpty()
@@ -14,8 +15,18 @@ export class CreatePostDto {
   @IsArray()
   public routes : number[];
 
+}
+export interface RegionType {
+  viewType: "region";
+}
+
+export interface CityType {
+  viewType: "city";
+  polygon: string;
+  markerCount : number;
   
 }
+export type GetPostsDto = RegionType | CityType;
 
 
 
@@ -46,6 +57,7 @@ export class CreateCommentDto{
   @IsString()
   public comment : string;
 }
+
 
 
 

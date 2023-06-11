@@ -1,4 +1,5 @@
 import { CreatePhotoDto } from "../dtos/PhotoDto";
+import { CityType } from "../dtos/PostDto";
 import Photo from "../entities/Photo";
 import database from "../loaders/database";
 import { UUID } from "../utils/Uuid";
@@ -29,5 +30,9 @@ export const PhotoRepository = database.getRepository(Photo).extend({
     WHERE row_num = 1;`
   ).then(result=>result.map(row=>row.id));
 
+  },
+  async getPostByPolygon(cityType:CityType){
+    const {polygon,markerCount} = cityType;
+    return await this.createQueryBuilder('photo').where(`ST_Within(photo.coordinate, ST_GeomFromText(:polygon, 4326))`, { polygon }).limit(markerCount).getMany();
   } 
 });

@@ -1,6 +1,8 @@
 import { Service } from "typedi";
 import { CreatePhotoDto } from "../dtos/PhotoDto";
 import { PhotoRepository } from "../repositories";
+import { GetPostsDto } from "../dtos/PostDto";
+import { isCityType } from "../interceptors/Guard";
 
 @Service()
 export class PhotoService {
@@ -22,7 +24,11 @@ export class PhotoService {
   public async getPhotosByPostId(postId:string){
     return await this._photoRepository.find({where:{postId},order:{order:"asc"}});
   }
-  public async getPostIdByRegion(){
-    return await this._photoRepository.getRandomPostIdEachCity();
+  public async getPostIdByType(getPostsDto : GetPostsDto){
+    
+    if(isCityType(getPostsDto))
+      return await this._photoRepository.getRandomPostIdEachCity();
+    else
+      return await this._photoRepository.getPostByPolygon(getPostsDto);
   }
 }

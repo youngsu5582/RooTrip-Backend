@@ -8,13 +8,13 @@ import {
   Param,
   Patch,
   Post,
-  QueryParam,
+  QueryParams,
   Req,
   UseBefore
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { PostService, GeoService, PhotoService, UserService } from "../services";
-import {  CreatePostDto, UpdatePostDto} from "../dtos/PostDto";
+import {  CreatePostDto, GetPostsDto, UpdatePostDto} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
@@ -211,10 +211,10 @@ export class PostController {
   @OpenAPI({
     description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
   })
-  public async getMany  ( ){
+  public async getMany(@QueryParams() getPostsDto:GetPostsDto){
     //const posts = await this._postService.getRecoomendPost();
     // 2023.06.09 한 경로가 4곳을 이동 했을 거 와 같은 경우 우연히 겹치는 경우 생각해야함.
-    const postIds = await this._photoService.getPostIdByRegion();
+    const postIds = await this._photoService.getPostIdByType(getPostsDto);
     const posts = await this._postService.getPostsByIds(postIds);
     const refinePosts = await Promise.all(posts.map(async (post) => {
       const id = post.id;

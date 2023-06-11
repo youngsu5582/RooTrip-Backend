@@ -30,3 +30,4 @@ export interface articleType  {
   content : string;
   visibility : 'public'|'friend'|'private';
 }
+export type ViewType = "region"|"city";
