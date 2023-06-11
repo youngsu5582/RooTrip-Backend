@@ -6,7 +6,7 @@ import { Post} from "../entities/index";
 import typia from "typia";
 import { POST_DELETE_FAILED } from "../errors/post-error";
 import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
-import { CommentRepository, TripRepository } from "../repositories";
+import { CommentRepository, FollowerRepository, TripRepository } from "../repositories";
 
 @Service()
 export class PostService {
@@ -15,11 +15,13 @@ export class PostService {
     private readonly likeRepository: typeof LikeRepository,
     private readonly commentRepository : typeof CommentRepository,
     private readonly tripRepository: typeof TripRepository,
+    private readonly followrRepository: typeof FollowerRepository,
   ) {
     this.postRepository = PostRepository;
     this.likeRepository = LikeRepository;
     this.commentRepository = CommentRepository;
     this.tripRepository = TripRepository;
+    this.followrRepository = FollowerRepository;
   }
 
   public async createPost(createPostDto: CreatePostDto, userId: string) {
@@ -155,15 +157,14 @@ export class PostService {
       return await this.commentRepository.count({where:{postId}});
   }
 
-  public async getPublicPostsByIds(postIds: string[]) {
-    return await this.postRepository.getPublicPostsByIds(postIds);
-  }
-  
-  public async getPrivatePostsByIds(postIds: string[], userId: string) {
-    return await this.postRepository.getPrivatePostsByIds(postIds, userId);
-  }
-
-  public async getFriendsPostsByIds(postIds: string[], following: string[]) {
-    return await this.postRepository.getFriendsPostsByIds(postIds, following);
+  public async getPosts(userId:string, visibility?: "public" | "friend" | "private") {
+    if(visibility==='public') {
+      return await this.postRepository.getPublicPosts(visibility);
+    }else if(visibility === 'friend') {
+      const followingId = await this.followrRepository.getFollowingUserId(userId);
+      return await this.postRepository.getFriendsPosts(followingId, visibility);
+    }else {
+      return await this.postRepository.getPrivatePosts(userId,visibility);
+    }
   }
 }

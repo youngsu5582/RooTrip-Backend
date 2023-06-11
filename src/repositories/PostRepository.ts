@@ -1,4 +1,3 @@
-import { In } from "typeorm";
 import { Post } from "../entities";
 import database from "../loaders/database";
 
@@ -34,31 +33,28 @@ export const PostRepository = database.getRepository(Post).extend({
     //return Number(await this.createQueryBuilder("post").select(['view_count']).where('post.id = postId',{postId}).getOne());
   },
 
-   async getPublicPostsByIds(postIds:string[]) {
+   async getPublicPosts(visibility?:  "public" | "friend" | "private") {
     return await this.find({
       where: {
-        id: In(postIds),
-        visibility: 'public',
+        visibility: visibility,
       },
     });
    },
 
-   async getPrivatePostsByIds(postIds:string[], userId:string) {
+   async getPrivatePosts(userId:string, visibility?:  "public" | "friend" | "private") {
     return await this.find({
       where: {
-        id: In(postIds),
         userId: userId,
-        visibility: 'private',
+        visibility: visibility,
       },
     });
    },
 
-   async getFriendsPostsByIds(postIds:string[], following:string[]) {
+   async getFriendsPosts(following:string[], visibility?:  "public" | "friend" | "private") {
     return await this.find({
       where: {
-        id: In(postIds),
-        visibility: 'friend',
-        userId: In(following)
+        userId: In(following),
+        visibility: visibility,
       },
     });
    },
