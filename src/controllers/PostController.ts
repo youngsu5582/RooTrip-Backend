@@ -14,7 +14,7 @@ import {
 } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { PostService, GeoService, PhotoService, UserService } from "../services";
-import {  CreatePostDto, GetPostsDto, UpdatePostDto} from "../dtos/PostDto";
+import {   CreatePostDto,    UpdatePostDto, ViewType} from "../dtos/PostDto";
 import { Request } from "express";
 import { checkAccessToken } from "../middlewares/AuthMiddleware";
 import typia from "typia";
@@ -209,19 +209,51 @@ export class PostController {
   @Get("")
   @HttpCode(200)
   @OpenAPI({
-    description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다."
+    description:"사용자의 아이디를 받아 사용자 기반 게시글을 전달합니다.",
+    parameters: [
+      {
+        name: 'viewType',
+        in: 'query',
+        required: true,
+        schema: {
+          type: 'string',
+          enum: ['region', 'city'],
+        },
+      },
+      {
+        name: 'polygon',
+        in: 'query',
+        required: false,
+        schema: {
+          type: 'string',
+        },
+      },
+      {
+        name:'markerCount',
+        in:'query',
+        required:false,
+        schema:{
+          type:'number'
+        }
+      }
+    ],
   })
-  public async getMany(@QueryParams() getPostsDto:GetPostsDto){
-    //const posts = await this._postService.getRecoomendPost();
+  public async getMany(@QueryParams() getPostsDto : ViewType){
+//const posts = await this._postService.getRecoomendPost();
     // 2023.06.09 한 경로가 4곳을 이동 했을 거 와 같은 경우 우연히 겹치는 경우 생각해야함.
+    try{
+      
     const postIds = await this._photoService.getPostIdByType(getPostsDto);
-    const posts = await this._postService.getPostsByIds(postIds);
-    const refinePosts = await Promise.all(posts.map(async (post) => {
-      const id = post.id;
-      const thumbnailImage = await this._photoService.getThumbnailByPostId(id);
-        return {postId : id,...thumbnailImage};
+    const refinePosts = await Promise.all(postIds.map(async (postId) => {
+      
+      const thumbnailImage = await this._photoService.getThumbnailByPostId(postId);
+        return {postId,...thumbnailImage};
     }));
     return createResponseForm(refinePosts);
+    }
+    catch{
+      return;
+    }
   }
 
   /*

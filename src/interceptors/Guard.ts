@@ -1,6 +1,5 @@
-import {  GetPostsDto, RegionType } from "../dtos/PostDto";
+import {  CityType  } from "../dtos/PostDto";
 
-
-export function isCityType(dto: GetPostsDto): dto is RegionType {
-    return dto.viewType === 'region';
+export function isCityType(dto: any): dto is CityType  {
+    return dto.viewType ==="city" ;
   }

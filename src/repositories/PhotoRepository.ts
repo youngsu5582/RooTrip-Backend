@@ -1,5 +1,6 @@
 import { CreatePhotoDto } from "../dtos/PhotoDto";
 import { CityType } from "../dtos/PostDto";
+//import { CityType } from "../dtos/PostDto";
 import Photo from "../entities/Photo";
 import database from "../loaders/database";
 import { UUID } from "../utils/Uuid";
@@ -22,17 +23,22 @@ export const PhotoRepository = database.getRepository(Photo).extend({
   },
   async getRandomPostIdEachCity(){
     return await this.query(`
-    SELECT temp.post_id as id
+    SELECT distinct temp.post_id as id
     FROM (
         SELECT photo.city, post_id, ROW_NUMBER() OVER (PARTITION BY city ORDER BY RAND()) AS row_num
         FROM photo
     ) as temp
-    WHERE row_num = 1;`
+    WHERE row_num = 1;` 
   ).then(result=>result.map(row=>row.id));
 
   },
   async getPostByPolygon(cityType:CityType){
     const {polygon,markerCount} = cityType;
-    return await this.createQueryBuilder('photo').where(`ST_Within(photo.coordinate, ST_GeomFromText(:polygon, 4326))`, { polygon }).limit(markerCount).getMany();
+    return await this.query(`SELECT distinct post_id
+    FROM photo
+    WHERE photo_order = 0 and ST_Within(coordinate,ST_GeomFromText('${polygon}', 4326))
+    LIMIT ${markerCount};`).then(result=>result.map(row=>row.post_id));
+    //.then(result=>result.map(row=>row.post_id));
+//    return await this.createQueryBuilder('photo').where(`ST_Within(photo.coordinate, ST_GeomFromText(:polygon, 4326))`, { polygon }).limit(markerCount).select("id").getMany();
   } 
 });

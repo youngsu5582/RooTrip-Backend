@@ -16,18 +16,32 @@ export class CreatePostDto {
   public routes : number[];
 
 }
-export interface RegionType {
-  viewType: "region";
+export class ViewType{
+  @IsString()
+  viewType: string;
 }
 
-export interface CityType {
+export class RegionType extends ViewType{
+  @IsString()
+  viewType: "region";
+
+}
+
+export class CityType extends ViewType {
+  @IsString()
   viewType: "city";
-  polygon: string;
-  markerCount : number;
+  @IsString()
+  polygon?: string;
+  @IsNumber()
+  markerCount ?: number;
   
 }
-export type GetPostsDto = RegionType | CityType;
-
+ 
+export class GetPostsDto {
+  public viewType : ViewType;
+  public visibility : string;
+  
+}
 
 
 
