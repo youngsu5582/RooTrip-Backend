@@ -12,8 +12,7 @@ export function createResponseForm<T> (data: T, message?: string):  Try<T> {
 }
 
 export function createErrorForm<T extends ERROR>(data : T,metadata?:any) : Catch<T> {
-  
   if(isDevelopment && metadata)
     logger.info(metadata);
   return data;
-}
+} 
