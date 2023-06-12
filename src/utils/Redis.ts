@@ -68,20 +68,31 @@ export async function checkPostViews(postId:string,userId:string){
   }
 }
 export async function increasePostViews(postId:string,userId:string){
+  const storage = `todayPosts`;
+  const key = `postViews:${postId}`;
   try{
     const redisClient = createClient();
-    redisClient.connect();
-    const key = `postViews:${postId}`;
     await redisClient.pfAdd(key,userId);
-    //Redis 의 pfAdd & pfCount 를 사용할 시 , 중복 Check를 할 필요가 없는거 같아 주석.
-    // const log = `postViewed:${userId}`;
-    // await redisClient.sAdd(log,postId);
-    return redisClient.disconnect();
-    
+    await redisClient.sAdd(storage,postId);
+    return redisClient.quit();
   }
   catch{
     throw Error
   }
+}
+export async function deletePostViews(postId:string){
+  const storage = `todayPosts`;
+  const key = `postViews:${postId}`;
+  try{
+    const redisClient = createClient();
+    await redisClient.del(key);
+    await redisClient.sRem(storage,postId);
+    return redisClient.quit();
+  }
+  catch{
+    throw Error
+  }
+
 }
 export async function getPostViews(postId:string){
   try{
@@ -109,13 +120,14 @@ export async function deleteAllPostViews(keys:string[]){
   }
 }
 export async function getAllPostViews(){
+  let keys =[];
   try{
+    const storage = `todayPosts`;
     const redisClient = createClient();
-    const pattern ="postViews:*";
     redisClient.connect();
-    const result = await redisClient.keys(pattern);
+    keys = await redisClient.sMembers(storage);
     redisClient.disconnect();
-    return result;
+    return keys;
   }
   catch{
     throw Error

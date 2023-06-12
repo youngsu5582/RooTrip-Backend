@@ -5,7 +5,7 @@ import { PostRepository } from "../repositories/PostRepository";
 import { Post} from "../entities/index";
 import typia from "typia";
 import { POST_DELETE_FAILED } from "../errors/post-error";
-import { checkPostViews, getPostViews, increasePostViews } from "../utils/Redis";
+import { checkPostViews, deletePostViews, getPostViews, increasePostViews } from "../utils/Redis";
 import { CommentRepository, FollowerRepository, TripRepository } from "../repositories";
 
 @Service()
@@ -45,6 +45,7 @@ export class PostService {
   public async deletePost(postId: string) {
     try{
       await this.postRepository.delete(postId);
+      await deletePostViews(postId);
       return true;
     }
     catch{
