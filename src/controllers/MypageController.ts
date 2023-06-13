@@ -57,7 +57,8 @@ export class MypageController {
     try {
       const userId = req.user.jwtPayload.userId;
       const nickname = updateNicknameDto.nickname;
-      await this._mypageService.changeNickname(userId, nickname);
+      console.log(nickname)
+      const aa = await this._mypageService.changeNickname(userId, nickname);
       return createResponseForm(undefined);
     }
     catch {
@@ -78,6 +79,7 @@ export class MypageController {
     try {
       const userId = req.user.jwtPayload.userId;
       const gender = updateGenderDto.gender;
+      console.log(gender);
       await this._mypageService.changeGender(userId, gender);
       return createResponseForm(undefined);
     }
@@ -121,7 +123,7 @@ export class MypageController {
   }
 
   @HttpCode(201)
-  @Post("/activity/upload_post")
+  @Post("/activity/upload-post")
   @UseBefore(checkAccessToken)
   @OpenAPI({
     description: "사용자가 작성한 게시글들을 보여줍니다."
@@ -138,7 +140,7 @@ export class MypageController {
   }
 
   @HttpCode(201)
-  @Post("/account/personal_info/change_password")
+  @Post("/account/personal-info/change-password")
   @UseBefore(checkAccessToken)
   @OpenAPI({
     description: "사용자의 비밀번호를 수정합니다."
@@ -159,7 +161,7 @@ export class MypageController {
   }
 
   @HttpCode(201)
-  @Post("/account/personal_info/withdrawal")
+  @Post("/account/personal-info/withdrawal")
   @UseBefore(checkAccessToken)
   @OpenAPI({
     description: "회원탈퇴를 합니다."

@@ -1,3 +1,4 @@
+import { profile } from "winston";
 import { GenderType } from "../common";
 import { ProfileDto } from "../dtos/ProfileDto";
 import Profile from "../entities/Profile";
@@ -23,10 +24,26 @@ export const ProfileRepository = database.getRepository(Profile).extend({
   async getProfileImageByUserId(userId:string){
     return await this.findOne({where:{userId},select:["profileImage"]}).then(profile=>profile.profileImage);
   },
-  async updateNickname(id: string, nickname: string) {
-    return await this.update(id, {nickname: nickname});
+  async updateNickname(userId: string, nickname: string) {
+    const profile = await this.createQueryBuilder()
+    .where("user_id = :user_id", { user_id: userId })
+    .getOne();
+
+    if (profile) {
+      profile.nickname = nickname;
+      await this.save(profile);
+    }
+    return profile;
   },
-  async updateGender(id: string, gender: GenderType) {
-    return await this.update(id, {gender: gender});
+  async updateGender(userId: string, gender: GenderType) {
+    const profile = await this.createQueryBuilder()
+    .where("user_id = :user_id", { user_id: userId })
+    .getOne();
+
+    if (profile) {
+      profile.gender = gender;
+      await this.save(profile);
+    }
+    return profile;
   },
 })

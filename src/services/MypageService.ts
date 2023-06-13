@@ -60,12 +60,12 @@ export class MypageService {
 
   public async likedPostList(userId: string) {
     const likedList = await this._likeRepository.getPostList(userId);
-    return await this._postRepository.getPostsByIds(likedList);
+    return await this._postRepository.getPostsInfoByIds(likedList);
   }
 
   public async savedTripList(userId: string) {
     const trip = await this._tripRepository.getSavedTrip(userId);
-    return await this._postRepository.getPostsByIds(trip);
+    return await this._postRepository.getPostsInfoByIds(trip);
   }
 
   public async uploadPostList(userId: string) {
