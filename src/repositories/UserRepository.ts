@@ -11,9 +11,6 @@ export const UserRepository = database.getRepository(User).extend({
   async deleteRefreshTokenById(id: string) {
     return await this.update(id, { refreshToken: undefined });
   },
-  async updatePassword(id: string) {
-    return await this.findOne({where:{id}});
-  },
   async withdrawal(id: string) {
     return await this.delete(id);
   }

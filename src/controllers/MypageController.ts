@@ -57,8 +57,7 @@ export class MypageController {
     try {
       const userId = req.user.jwtPayload.userId;
       const nickname = updateNicknameDto.nickname;
-      console.log(nickname)
-      const aa = await this._mypageService.changeNickname(userId, nickname);
+      await this._mypageService.changeNickname(userId, nickname);
       return createResponseForm(undefined);
     }
     catch {
@@ -79,7 +78,6 @@ export class MypageController {
     try {
       const userId = req.user.jwtPayload.userId;
       const gender = updateGenderDto.gender;
-      console.log(gender);
       await this._mypageService.changeGender(userId, gender);
       return createResponseForm(undefined);
     }

@@ -14,7 +14,7 @@ export const PostRepository = database.getRepository(Post).extend({
     return await this.find({where:{id:In(postIds)},select:["id"]})
   },
   async getPostsInfoByIds(postIds:string[]) {
-    return await this.find({where:{id:In(postIds)}});
+    return await this.find({where:{id:In(postIds)},relations:["user","photos"]});
   },
   async checkUserIdByPostId(userId: string, postId: string) {
     return Boolean(

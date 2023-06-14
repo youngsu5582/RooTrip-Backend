@@ -6,6 +6,7 @@ import {
   ManyToMany,
   OneToOne,
   JoinColumn,
+  BeforeUpdate,
 } from "typeorm";
 import Post from "./Post";
 import Profile from "./Profile";
@@ -23,7 +24,7 @@ export default class User extends defaultColumn {
   @Column({ nullable: true, type: String })
   password: string | null;
 
-
+  private originalPassword: string;
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
@@ -44,13 +45,13 @@ export default class User extends defaultColumn {
   @Column({name:"profile_id",nullable:true})
   profileId:string;
 
+  @BeforeUpdate()
   @BeforeInsert()
   async hashPassword() {
     if (this.password) {
       this.password = hashSync(this.password, 10);
     }
   }
-
 
   async comparePassword(unencryptedPassword: string) {
     return compareSync(unencryptedPassword, this.password!);

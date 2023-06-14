@@ -1,4 +1,3 @@
-import { profile } from "winston";
 import { GenderType } from "../common";
 import { ProfileDto } from "../dtos/ProfileDto";
 import Profile from "../entities/Profile";
@@ -32,6 +31,8 @@ export const ProfileRepository = database.getRepository(Profile).extend({
     if (profile) {
       profile.nickname = nickname;
       await this.save(profile);
+
+      
     }
     return profile;
   },

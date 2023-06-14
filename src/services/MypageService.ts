@@ -41,7 +41,7 @@ export class MypageService {
 
   public async changePassword(userId: string, newPassword: string) {
     try {
-      const user = await this._userRepository.updatePassword(userId);
+      const user = await this._userRepository.getById(userId);
       if (user) {
         user.password = newPassword;
         const result = await this._userRepository.save(user);
