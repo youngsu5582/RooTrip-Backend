@@ -15,7 +15,7 @@ export default class Profile extends defaultColumn {
     @JoinColumn({name:"user_id"})
     user: User;
 
-    @Column({nullable:true,type:String,default:""})
+    @Column({nullable:true,default:"",length:500})
     profileImage:string;
 
     @Column({nullable:true,type:String,default:""})

@@ -27,7 +27,7 @@ export class MypageController {
   @Post("/account/profile")
   @UseBefore(checkAccessToken)
   @OpenAPI({
-    description: "사용자의 프로필 사진을 조회합니다."
+    description: "사용자의 프로필을 조회합니다."
   })
   public async getProfile(@Req() req: Request) {
     try {
@@ -41,10 +41,10 @@ export class MypageController {
   }
 
   @HttpCode(201)
-  @Post("/account/edit/profile/image")
+  @Post("/account/edit/profile")
   @UseBefore(checkAccessToken)
   @OpenAPI({
-    description: "사용자의 프로필 사진을을 등록합니다."
+    description: "사용자의 프로필을 변경합니다."
   })
   public async uploadProfileImage(
     @Req() req: Request,
@@ -52,8 +52,8 @@ export class MypageController {
   ) {
     try {
       const userId = req.user.jwtPayload.userId;
-      await this._mypageService.uploadProfileImage(userId, profileDto);
-      return createResponseForm(undefined);
+      const profile = await this._mypageService.uploadProfileImage(userId, profileDto);
+      return createResponseForm(profile);
     }
     catch{
       return createErrorForm(typia.random<PROFILE_IMAGE_UPLOAD_FAILED>());
