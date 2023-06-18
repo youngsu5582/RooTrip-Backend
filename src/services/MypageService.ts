@@ -75,4 +75,8 @@ export class MypageService {
   public async deleteUser(userId: string) {
     return await this._userRepository.withdrawal(userId);
   }
+
+  public async getProfile(userId: string) {
+    return await this._profileRepository.getByUserId(userId);
+  }
 }

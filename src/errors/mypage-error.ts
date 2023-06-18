@@ -39,3 +39,8 @@ export interface WITHDRAWL_FAILED extends ERROR {
   status: false;
   message: "회원탈퇴를 진핼할 수 없습니다.";
 }
+
+export interface GET_PROFILE_FAILED extends ERROR {
+  stsuts: false;
+  message: "프로필을 가져올 수 없습니다.";
+}
